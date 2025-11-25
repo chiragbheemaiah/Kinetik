@@ -1,0 +1,428 @@
+Chapter 8.3 ? Top Use Cases per Account
+Objective (8.3 module)
+For each account (e.g., Citibank, State of Texas, BBVA):
+1. Take:
+o A global usecase taxonomy (Tier 1 & Tier 2, with definitions).
+o The account?s operating units / buying centers from Chapter 6 outputs.
+o The account?s organizational profile JSON (including strategic priorities & IT initiatives).
+2. Use an LLM to:
+o Score all (or a filtered subset of) Tier2 use cases across 3 configurable axes (X?s), e.g.:
+* client_value_innovation
+* strategic_alignment
+* axis_3 (placeholder ? name & definition configurable).
+o Compute an overall impact score for each use case.
+o Select the top N (start with 10) globally for the account.
+o Map each selected use case to:
+* Relevant operating units / buying centers.
+* The organizational priorities it supports.
+o Return fully structured JSON suitable for downstream use (heatmap, reporting, etc.).
+The pipeline should be transparent and inspectable, with rationales tied back to the org profile, to support a ?reasonableness check? by humans. 
+
+Target environment & execution model
+AWS runtime
+Requirements for the dev:
+* Runtime: Python 3.10+ on an EC2 instance (consistent with current EC2 usage mentioned in the transcript). 
+* Script entrypoint: chapter_8_3_usecase_selector.py
+* Trigger:
+o Initially: CLI/manual run (e.g. python chapter_8_3_usecase_selector.py --account Citi).
+o Later: can be wired into CI/CD or a scheduled cron on EC2.
+* Configuration:
+o .env or AWS SSM Parameter Store for:
+* OPENAI_API_KEY
+* Model names & parameters
+* Default topN use cases (e.g. 10)
+* Paths to shared data (taxonomy, org profiles, Chapter 6 outputs)
+o A config.yaml for business config elements:
+* Scoring axes names + definitions.
+* Default aggregation formula (e.g. weighted sum).
+File layout (suggested)
+Inside the BMC RevOps repo (currently ?playpen? on AWS; later rename to something more clientfriendly): 
+bmc_revops/
+  chapter_6/
+    outputs/
+      {account_id}_operating_units.json
+  chapter_8/
+    8_3_usecase_selector/
+      chapter_8_3_usecase_selector.py
+      config.yaml
+      models.py         # Pydantic schemas
+      prompts.py        # system / developer / user templates
+      openai_client.py  # thin wrapper around OpenAI Responses API
+      data/
+        taxonomy_tiers.xlsx             # global Tier1/Tier2 taxonomy
+        taxonomy_tiers_definitions.xlsx # detailed use-case definitions (300+)
+      inputs/
+        org_profiles/
+          {account_id}_org_profile.json   # existing detailed org/ops JSON
+      outputs/
+        {account_id}_8_3_usecases.json
+        {account_id}_8_3_validation_report.json (optional)
+
+Model selection strategy
+You asked specifically about GPT5.1, o3, GPT4.1 mini. Here?s a pragmatic approach:
+3.1. Recommended default
+Primary reasoning model: gpt-5.1
+* GPT5.1 is the current flagship for complex reasoning and multistep/agentic tasks with configurable reasoning effort. (OpenAI Platform)
+* OpenAI?s guide explicitly suggests using GPT5.1 for tasks you might previously have used o3 for, with better quality and efficiency. (OpenAI Platform)
+Supporting model: gpt-5-mini or gpt-4.1-mini
+* Use for cheap summarization / preprocessing:
+o gpt-5-mini: costoptimized reasoning/chat; good balance of speed vs capability. (OpenAI Platform)
+o gpt-4.1-mini: very good at instruction following & tool calling with low latency; but OpenAI now recommends starting with GPT5 mini for most new work. (OpenAI Platform)
+Optional: o3 / o3-pro
+* Only if:
+o You do sidebyside evaluation and find o3 consistently gives materially better reasoning on the ranking task.
+* But note: GPT5.1 is generally expected to outperform o3 for most reasoning workloads, with configurable reasoning effort. (OpenAI Platform)
+Concrete model plan
+* Stage A (Org profile summarization): gpt-5-mini (or gpt-4.1-mini if you prefer to keep 4.1).
+* Stage B (Usecase scoring & ranking): gpt-5.1 with reasoning.effort = "medium" or "high".
+* Optional Stage C (LLM-as-judge sanity check): gpt-5.1 or o3 to score quality of Stage B outputs vs input profile.
+
+Data inputs & outputs
+Inputs
+1. Usecase taxonomy
+o Source: Excel file(s) with:
+* Tier 1 category ID, name, and description.
+* Tier 2 use case ID, name, and detailed description (ideally ~1?3 paragraphs).
+o Requirement:
+* Developer converts to internal Python objects / DataFrames.
+* Each Tier2 use case must have a stable ID like UC_FINANCIAL_CRIME_MONITORING.
+2. Operating units / buying centers per account (Chapter 6 output) 
+o Source: JSON per account, e.g.:
+o {
+o   "account_id": "CITI",
+o   "operating_units": [
+o     {
+o       "id": "OU_RETAIL_BANKING",
+o       "name": "US Retail Banking",
+o       "description": "Consumer banking across US branches...",
+o       "segment": "Retail Banking"
+o     },
+o     ...
+o   ]
+o }
+o This is not rediscovered; it?s imported from Chapter 6.
+3. Organizational & Operations Profile JSON 
+o From David?s earlier pipeline, located under /batch_outputs currently.
+o Script should assume fields like:
+o {
+o   "account_id": "CITI",
+o   "strategic_priorities": [...],
+o   "it_strategic_initiatives": [...],
+o   "risk_and_regulatory_drivers": [...],
+o   "ops_pain_points": [...],
+o   "raw_source_citations": [...]
+o }
+o Stage A will collapse this into a compact, structured summary dedicated to the selection task.
+4. Config for scoring axes
+o Example in config.yaml:
+o scoring_axes:
+o   - id: client_value_innovation
+o     label: "Client value & innovation"
+o     description: "How much this use case could improve client outcomes or create new value propositions."
+o     weight: 0.4
+o   - id: strategic_alignment
+o     label: "Strategic alignment"
+o     description: "How strongly this use case supports the organization?s stated priorities and IT strategic initiatives."
+o     weight: 0.4
+o   - id: axis_3
+o     label: "TBD third axis"
+o     description: "Placeholder dimension; editable by SME."
+o     weight: 0.2
+o top_n_usecases: 10
+Outputs
+Main output file (per account): outputs/{account_id}_8_3_usecases.json
+Shape (highlevel):
+{
+  "account_id": "CITI",
+  "generated_at": "2025-11-25T18:45:00Z",
+  "model": "gpt-5.1",
+  "version": "8.3.0",
+  "config": {
+    "top_n": 10,
+    "scoring_axes": [...]
+  },
+  "usecases_ranked": [
+    {
+      "tier2_id": "UC_FINANCIAL_CRIME_MONITORING",
+      "tier2_name": "...",
+      "tier1_id": "T1_RISK",
+      "tier1_name": "Risk & Compliance",
+      "scores": {
+        "client_value_innovation": 0.91,
+        "strategic_alignment": 0.88,
+        "axis_3": 0.77,
+        "overall_impact": 0.87
+      },
+      "rationales": {
+        "client_value_innovation": "...",
+        "strategic_alignment": "...",
+        "axis_3": "...",
+        "overall_summary": "..."
+      },
+      "linked_operating_units": [
+        {
+          "operating_unit_id": "OU_RETAIL_BANKING",
+          "relationship_rationale": "..."
+        }
+      ],
+      "linked_org_priorities": [
+        {
+          "priority_id": "SP_DIGITAL_TRANSFORMATION",
+          "relationship_rationale": "..."
+        }
+      ]
+    }
+  ],
+  "input_references": {
+    "taxonomy_version": "2025-10-01",
+    "org_profile_source": "batch_outputs/CITI_profile_v3.json",
+    "operating_units_source": "chapter_6/outputs/CITI_operating_units.json"
+  }
+}
+Optional validation report file per account:
+* Contains:
+o Any missing mappings.
+o Unusually low dispersion in scores.
+o Simple heuristics (e.g., if many use cases have scores > 0.9 in all axes, flag as ?overconfident?).
+
+LLM call scaffolding
+To make this robust and inspectable, use a multistage scaffold:
+Stage A ? Org profile summarization (cheap model)
+Goal: Turn verbose org profile JSON into a structured, compact ?strategy lens? the reasoning model can easily use.
+Model: gpt-5-mini (or gpt-4.1-mini). (OpenAI Platform)
+System prompt (Stage A):
+You are an enterprise strategy analyst.
+Given a detailed organizational profile for a single account, extract and summarize the information that is most relevant to choosing highimpact digital and AI use cases.
+User content: pass the raw org profile JSON + short instructions. For example:
+Task: Summarize this organizational profile into a compact structure we can feed into another AI model to rank potential digital and AI use cases.
+Focus on:
+? Strategic business priorities
+? IT/digital transformation initiatives
+? Operational pain points
+? Regulatory / risk drivers
+? Any explicit mentions of analytics, AI, automation, customer experience, or modernization.
+Return JSON matching this schema:
+{
+  "account_id": "string",
+  "strategic_priorities": [ { "id": "string", "title": "string", "summary": "string" } ],
+  "it_initiatives": [ { "id": "string", "title": "string", "summary": "string" } ],
+  "key_pain_points": [ { "id": "string", "summary": "string" } ],
+  "regulatory_drivers": [ { "id": "string", "summary": "string" } ]
+}
+Developer should enforce schema via Structured Outputs / response_format with JSON Schema for that shape. (OpenAI Platform)
+Stage B ? Usecase scoring & ranking (primary reasoning step)
+Model: gpt-5.1 with reasoning.effort "medium" initially; allow config to bump to "high" for tough accounts. (OpenAI Platform)
+Input context: we pass:
+1. Summarized org profile (Stage A output).
+2. Operating units / buying centers for the account.
+3. Usecase taxonomy (Tier 1 & 2) ? either entire set or a filtered subset (e.g., only Tier2 in relevant Tier1s, if prefiltering makes sense).
+4. Configured scoring axes (IDs, labels, descriptions, weights).
+5.2.1. System prompt (Stage B)
+Example template (developer to keep in prompts.py):
+You are a senior enterprise architect and innovation consultant.
+Your task is to take a global catalog of digital and AI use cases and identify the most impactful ones for a specific account.
+You must:
+1. Understand the account?s strategic priorities and IT initiatives.
+2. Evaluate each candidate Tier2 use case along a fixed set of scoring axes.
+3. Compute an overall impact score per use case.
+4. Select the top N use cases with the highest potential for client value and innovation, ensuring each is welljustified.
+5. Map each selected use case to relevant operating units and to the priorities it supports.
+Always respond strictly in the JSON schema provided in the developer instructions. Do not include natural language outside the JSON.
+5.2.2. Developer message (schema + instructions)
+This is where you specify exact JSON schema via response_format={"type":"json_schema",...,"strict":true}. (OpenAI Platform)
+Example highlevel schema (Pydantic or raw JSON Schema):
+# models.py (Pydantic style)
+from pydantic import BaseModel
+from typing import List, Dict
+
+class AxisScore(BaseModel):
+    axis_id: str        # e.g., "client_value_innovation"
+    score: float        # 0.0 - 1.0
+    rationale: str
+
+class OperatingUnitLink(BaseModel):
+    operating_unit_id: str
+    relationship_rationale: str
+
+class PriorityLink(BaseModel):
+    priority_id: str
+    relationship_rationale: str
+
+class UseCaseAssessment(BaseModel):
+    tier2_id: str
+    tier2_name: str
+    tier1_id: str
+    tier1_name: str
+    axis_scores: List[AxisScore]
+    overall_impact: float
+    overall_rationale: str
+    linked_operating_units: List[OperatingUnitLink]
+    linked_org_priorities: List[PriorityLink]
+
+class UseCaseRankingOutput(BaseModel):
+    account_id: str
+    top_n_requested: int
+    axis_definitions: List[Dict[str, str]]
+    considered_usecases: int
+    usecases_ranked: List[UseCaseAssessment]
+In the developer prompt you:
+1. Embed a concise description of the schema.
+2. Embed:
+o top_n_requested
+o The axes including ID, label, description, and weights.
+3. Include rules like:
+o Scores must be in [0, 1].
+o overall_impact must be the weighted sum of axes (use weights from config; we will recompute serverside).
+o usecases_ranked must be sorted by overall_impact descending; truncation to topN happens in the model.
+5.2.3. User message (Stage B)
+Template:
+Account name: {account_name}
+Account ID: {account_id}
+1. Account strategy and context
+{summarized_org_profile_json}
+2. Operating units / buying centers
+{operating_units_json}
+3. Usecase taxonomy (Tier 1 and Tier 2)
+You are given a global catalog of Tier1 and Tier2 use cases. Each Tier2 use case includes an ID, name, Tier1 parent, and description.
+{taxonomy_subset_json}
+4. Scoring axes
+You must evaluate each candidate use case using these axes:
+{scoring_axes_json}
+5. Your task
+1. For each Tier2 use case, decide whether it is meaningfully relevant to this account?s strategy and operating units.
+2. For relevant use cases, assign scores for each axis (0?1) and a brief rationale referencing the relevant parts of the account profile.
+3. Compute overall_impact as the weighted sum of axes.
+4. Select the top {top_n} use cases by overall_impact.
+5. For each selected use case, identify:
+o The operating units that would own or benefit from it.
+o The strategic priorities or IT initiatives it most directly supports.
+6. Return a JSON object that conforms to the schema in the developer instructions.
+Use concise rationales; 1?3 sentences per rationale is sufficient.
+Stage C ? Optional sanity check / evaluation
+Model: gpt-5.1 or o3.
+* Input:
+o The same summarized profile.
+o The list of topN use cases the pipeline produced.
+* Task:
+o Flag any use cases where:
+* No obvious connection to stated priorities.
+* All axes scores are within 0.1 of each other (suspicious uniform scoring).
+* A high score is justified with vague rationale (?seems important?, ?generic modernization?).
+* Output schema: list of issues with severity and suggestions.
+
+Python + OpenAI API details
+Use the Responses API
+Per OpenAI guidance, reasoning models and GPT5.1 work best with the Responses API, not legacy chat completions. (OpenAI Platform)
+Minimal wrapper (pseudocode):
+# openai_client.py
+from openai import OpenAI
+client = OpenAI()
+
+def call_openai_structured(model: str, system_prompt: str, developer_instructions: str,
+                           user_input: str, json_schema: dict,
+                           reasoning_effort: str | None = None):
+    params = {
+        "model": model,
+        "input": [
+            {"role": "system", "content": system_prompt},
+            {"role": "developer", "content": developer_instructions},
+            {"role": "user", "content": user_input},
+        ],
+        "response_format": {
+            "type": "json_schema",
+            "json_schema": {
+                "name": "UseCaseRankingOutput",
+                "schema": json_schema,
+                "strict": True
+            }
+        },
+        "text": {"verbosity": "medium"},
+    }
+    if reasoning_effort is not None:
+        params["reasoning"] = {"effort": reasoning_effort}
+
+    resp = client.responses.create(**params)
+    return resp.output[0].content[0].text  # parse to dict in caller
+Main script flow (pseudocode)
+def main(account_id: str):
+    cfg = load_config("config.yaml")
+
+    taxonomy = load_taxonomy("data/taxonomy_tiers_definitions.xlsx")
+    operating_units = load_operating_units(f"chapter_6/outputs/{account_id}_operating_units.json")
+    org_profile = load_org_profile(f"inputs/org_profiles/{account_id}_org_profile.json")
+
+    # Stage A: summarization
+    summarized_profile = summarize_org_profile_with_llm(
+        org_profile,
+        model="gpt-5-mini",  # or gpt-4.1-mini
+    )
+
+    # Optionally pre-filter taxonomy (e.g. by sector)
+    taxonomy_subset = filter_taxonomy_for_account(taxonomy, summarized_profile)
+
+    # Stage B: ranking
+    ranking_json = rank_usecases_with_llm(
+        account_id=account_id,
+        summarized_profile=summarized_profile,
+        operating_units=operating_units,
+        taxonomy_subset=taxonomy_subset,
+        scoring_axes=cfg["scoring_axes"],
+        top_n=cfg["top_n_usecases"],
+        model="gpt-5.1",
+        reasoning_effort="medium",
+    )
+
+    validate_and_save_output(account_id, ranking_json, cfg)
+
+    # Optional Stage C: evaluation
+    eval_report = evaluate_ranking_with_llm(
+        account_id, summarized_profile, ranking_json, model="gpt-5.1"
+    )
+    save_eval_report(account_id, eval_report)
+Developer should:
+* Implement validate_and_save_output to:
+o Recompute overall_impact from axis scores + weights and compare.
+o Ensure ID references exist in taxonomy / operating units / priority list.
+o Log warnings if inconsistencies found.
+
+Prompt strategy & best practices
+Ground rules for the dev when authoring prompts:
+1. Keep system prompts stable and generic
+o System = role & objective.
+o Developer = schema, constraints, scoring logic.
+o User = accountspecific data & task wording.
+2. Use structured outputs instead of heavy formatting instructions
+o Rely on JSON Schema & strict: true instead of threatening the model to ?output valid JSON or else?. (OpenAI Platform)
+3. Explicitly define scoring axes
+o Each axis should have:
+* A onesentence definition.
+* Examples of ?high? vs ?low? scores (just 1?2 bullet examples per axis in the developer prompt).
+4. Encourage reference to source
+o In rationales, ask the model to reference the ID or title of the priority/initiative it?s using (?SP_DIGITAL_TRANSFORMATION?) instead of page numbers.
+5. Token discipline
+o If org profiles are very long, summarization (Stage A) is not optional.
+o The taxonomy subset should be trimmed if necessary:
+* Option 1: filter by sector / industry.
+* Option 2: preask a cheaper model to shortlist candidate Tier1 categories.
+6. Determinism & repeatability
+o Use a low temperature (e.g. temperature = 0.2) where allowed.
+o Keep prompts versioned (e.g., PROMPT_VERSION = "8.3.0" stored in config).
+
+Evaluation & SME review hooks
+Requirements for evaluation (per transcript discussion): 
+1. Reasonableness tests (implemented in Python):
+o At least 70% of topN use cases should clearly map to at least one strategic priority or initiative (link list nonempty).
+o Flag any use case with:
+* All axes scores within 0.1 of each other.
+* Vague rationales (e.g. length < 20 chars or generic phrases via regex like ?very important for modernization?).
+2. SMEfriendly artifacts:
+o Optionally autogenerate a simple Markdown/HTML report:
+* Table of topN use cases with scores.
+* Their rationales, truncated to ~2 lines.
+* Pointers to org priorities.
+3. Test accounts:
+o Implement script so it?s easy to run:
+* --account CITI, --account STATE_OF_TEXAS, --account BBVA
+o Keep a tiny harness script or notebook for sidebyside comparison across models (gpt-5.1 vs o3 vs gpt-4.1).
+
+
