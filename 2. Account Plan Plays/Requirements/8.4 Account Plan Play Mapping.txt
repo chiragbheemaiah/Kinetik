@@ -1,0 +1,505 @@
+Below are three scripts you can drop into an AWS environment (Lambda, ECS, EC2, etc.). They assume:
+* Your PPT account plan file lives in a data/ folder (e.g. data/Citigroup FY26 Account Plan Full.pptx). 
+* You?ve set OPENAI_API_KEY as an environment variable.
+* You?ll install dependencies:
+pip install openai python-pptx pydantic
+I?ll keep the JSON shape consistent across scripts and preserve ppt_source_file and source for traceability back to the PPT.
+
+1?? Extract use cases from the PPT with OpenAI
+File: extract_use_cases_from_ppt.py
+This script:
+* Reads the PPT in data/.
+* Sends its text to the OpenAI API.
+* Gets back a structured list of use cases.
+* Writes data/use_cases_raw.json with traceability fields.
+#!/usr/bin/env python
+"""
+extract_use_cases_from_ppt.py
+
+Reads an account plan PowerPoint from the data folder,
+calls the OpenAI API to extract use cases, and writes
+them to a JSON file suitable for further mapping.
+
+Expected env vars:
+  OPENAI_API_KEY   - your OpenAI API key (required)
+  OPENAI_MODEL     - optional, default "gpt-4o-2024-08-06"
+  DATA_DIR         - optional, default "data"
+  ACCOUNT_PLAN_PPT - optional, default "Citigroup FY26 Account Plan Full.pptx"
+  OUTPUT_JSON      - optional, default "use_cases_raw.json"
+"""
+
+import json
+import os
+from pathlib import Path
+from typing import List
+
+from openai import OpenAI
+from pydantic import BaseModel
+from pptx import Presentation
+
+
+class UseCase(BaseModel):
+    """Schema for one extracted use case (LLM output)."""
+    use_case_title: str
+    description: str
+    slide_numbers: List[int]
+
+
+class UseCaseList(BaseModel):
+    """Wrapper so we can parse a list of use cases."""
+    use_cases: List[UseCase]
+
+
+def extract_ppt_text(ppt_path: Path) -> str:
+    """Flatten PPT text slide-by-slide into a single string."""
+    prs = Presentation(str(ppt_path))
+    slide_chunks: List[str] = []
+
+    for i, slide in enumerate(prs.slides, start=1):
+        shape_texts: List[str] = []
+        for shape in slide.shapes:
+            if hasattr(shape, "text"):
+                text = (shape.text or "").strip()
+                if text:
+                    shape_texts.append(text)
+        if shape_texts:
+            slide_chunks.append(f"Slide {i}:\n" + "\n".join(shape_texts))
+
+    return "\n\n".join(slide_chunks)
+
+
+def main() -> None:
+    data_dir = Path(os.getenv("DATA_DIR", "data"))
+    ppt_filename = os.getenv(
+        "ACCOUNT_PLAN_PPT", "Citigroup FY26 Account Plan Full.pptx"
+    )
+    ppt_path = data_dir / ppt_filename
+    output_json = data_dir / os.getenv("OUTPUT_JSON", "use_cases_raw.json")
+
+    if not ppt_path.exists():
+        raise FileNotFoundError(f"Account plan PPT not found: {ppt_path}")
+
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")
+
+    print(f"Reading PPT from: {ppt_path}")
+    ppt_text = extract_ppt_text(ppt_path)
+
+    # NOTE: for very large decks you may want to truncate or chunk ppt_text
+    # before sending to the API.
+
+    system_prompt = (
+        "You are extracting business and IT 'use cases' from a PowerPoint "
+        "account plan for selling mainframe systems software into a large bank.\n\n"
+        "Definition of 'use case': a concrete scenario where the bank applies "
+        "technology to achieve a specific business or operational outcome.\n"
+        "Examples include:\n"
+        "- AI-Powered Risk Ops Automation (AML/KYC)\n"
+        "- Mainframe Modernization via Broadcom Takeout\n"
+        "- CA7/Autosys Replacement with Control-M\n\n"
+        "Instructions:\n"
+        "- Focus on use cases involving mainframe, automation, AI, observability, "
+        "  DevX, security, Control-M / workload automation, data governance, "
+        "  regulatory/reporting, and cloud/hybrid modernization.\n"
+        "- Group duplicate or near-duplicate ideas into one use case.\n"
+        "- Provide concise but specific titles and 1?3 sentence descriptions.\n"
+        "- Identify slide numbers where each use case appears or is clearly implied.\n"
+        "- DO NOT include generic sales motions (e.g. 'identify champions'); "
+        "  only real technology use cases."
+    )
+
+    user_prompt = (
+        "Extract all distinct use cases from the following account plan text.\n\n"
+        "Return JSON ONLY, conforming to this structure:\n"
+        "{\n"
+        '  "use_cases": [\n'
+        "    {\n"
+        '      "use_case_title": str,\n'
+        '      "description": str,\n'
+        '      "slide_numbers": [int, ...]\n'
+        "    },\n"
+        "    ...\n"
+        "  ]\n"
+        "}\n\n"
+        "Account plan text follows:\n\n"
+        f"{ppt_text}"
+    )
+
+    client = OpenAI()
+
+    response = client.responses.parse(
+        model=model_name,
+        input=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+        text_format=UseCaseList,
+    )
+
+    parsed: UseCaseList = response.output_parsed
+
+    records = []
+    for idx, uc in enumerate(parsed.use_cases, start=1):
+        records.append(
+            {
+                "id": idx,
+                "use_case_title": uc.use_case_title,
+                "description": uc.description,
+                "slide_numbers": uc.slide_numbers,
+                # Traceability to PPT:
+                "ppt_source_file": ppt_path.name,
+                "source": "Account Plan PPT",
+            }
+        )
+
+    output_json.parent.mkdir(parents=True, exist_ok=True)
+    with output_json.open("w", encoding="utf-8") as f:
+        json.dump(records, f, indent=2, ensure_ascii=False)
+
+    print(f"Wrote {len(records)} use cases ? {output_json}")
+
+
+if __name__ == "__main__":
+    main()
+
+2?? Map use cases to innovation themes (Tier 1 & Tier 2)
+File: map_innovation_themes.py
+This script:
+* Reads data/use_cases_raw.json.
+* Gives the model your innovation theme taxonomy (Tier 1 / Tier 2).
+* Asks it to assign tier_1 and tier_2 for each use case.
+* Writes data/use_cases_with_themes.json with those fields added.
+You can either:
+* Hardcode a small taxonomy (as below), or
+* Replace INNOVATION_TAXONOMY with data loaded from your T1T2 Use Case Taxonomy sheet.
+#!/usr/bin/env python
+"""
+map_innovation_themes.py
+
+Takes raw use cases JSON and maps each use case to:
+  - tier_1 (e.g. AI, Automation, Risk & Compliance)
+  - tier_2 (sub-theme from your taxonomy)
+
+Traceability fields like ppt_source_file and source are preserved.
+
+Expected env vars:
+  OPENAI_API_KEY - your OpenAI API key (required)
+  OPENAI_MODEL   - optional, default "gpt-4o-2024-08-06"
+  INPUT_JSON     - optional, default "data/use_cases_raw.json"
+  OUTPUT_JSON    - optional, default "data/use_cases_with_themes.json"
+"""
+
+import json
+import os
+from pathlib import Path
+from typing import List
+
+from openai import OpenAI
+from pydantic import BaseModel
+
+
+# ---------------------------------------------------------------------------
+# Replace / extend this with your taxonomy, or load it from Excel/CSV.
+# ---------------------------------------------------------------------------
+INNOVATION_TAXONOMY = [
+    {
+        "tier_1": "AI",
+        "tier_2": "AI for Data & Analytics",
+        "definition": "ML/GenAI for analytics, fraud, forecasting, natural language insights, etc.",
+    },
+    {
+        "tier_1": "AI",
+        "tier_2": "AI Risk & Governance",
+        "definition": "Model risk, governance, fairness, compliance, auditability for AI/ML.",
+    },
+    {
+        "tier_1": "Automation",
+        "tier_2": "Data Pipeline Management",
+        "definition": "End-to-end orchestration and automation of data flows and pipelines.",
+    },
+    {
+        "tier_1": "Automation",
+        "tier_2": "Dev & Platform Automation",
+        "definition": "CI/CD, infrastructure-as-code, platform automation.",
+    },
+    {
+        "tier_1": "Modernization",
+        "tier_2": "Mainframe Modernization",
+        "definition": "Modernize and extend mainframe into hybrid cloud, replace legacy tooling.",
+    },
+    {
+        "tier_1": "Risk & Compliance",
+        "tier_2": "Regulatory Reporting & Evidence",
+        "definition": "Automated reporting, ESG, audit evidence, regulator-facing outputs.",
+    },
+    {
+        "tier_1": "Risk & Compliance",
+        "tier_2": "Operational Risk & Controls",
+        "definition": "Controls automation, dashboards, operational risk in IT and business processes.",
+    },
+    # ...drop in the rest of your taxonomy as needed...
+]
+
+
+class ThemeAssignment(BaseModel):
+    """Theme mapping for a single use case (LLM output)."""
+    id: int
+    tier_1: str
+    tier_2: str
+
+
+class ThemeAssignments(BaseModel):
+    """Wrapper Pydantic model for structured outputs."""
+    assignments: List[ThemeAssignment]
+
+
+def main() -> None:
+    input_path = Path(os.getenv("INPUT_JSON", "data/use_cases_raw.json"))
+    output_path = Path(os.getenv("OUTPUT_JSON", "data/use_cases_with_themes.json"))
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")
+
+    if not input_path.exists():
+        raise FileNotFoundError(f"Input JSON not found: {input_path}")
+
+    with input_path.open("r", encoding="utf-8") as f:
+        use_cases = json.load(f)
+
+    client = OpenAI()
+
+    taxonomy_lines = []
+    for t in INNOVATION_TAXONOMY:
+        taxonomy_lines.append(
+            f"- Tier 1: {t['tier_1']} | Tier 2: {t['tier_2']} | {t['definition']}"
+        )
+    taxonomy_text = "\n".join(taxonomy_lines)
+
+    use_case_lines = []
+    for uc in use_cases:
+        # The extractor assigns "id"; if absent, fall back to list index.
+        uc_id = uc.get("id")
+        if uc_id is None:
+            # fallback to position
+            uc_id = len(use_case_lines) + 1
+            uc["id"] = uc_id
+        title = uc.get("use_case_title", "")
+        desc = uc.get("description", "")
+        use_case_lines.append(
+            f"{uc_id}. {title} :: {desc}"
+        )
+
+    use_cases_text = "\n".join(use_case_lines)
+
+    system_prompt = (
+        "You are mapping banking & mainframe-related use cases to a 2-level "
+        "innovation theme taxonomy (Tier 1, Tier 2).\n\n"
+        "Rules:\n"
+        "- For EACH use case, choose exactly ONE Tier 1 and ONE Tier 2.\n"
+        "- Only use combinations from the allowed taxonomy below.\n"
+        "- Prefer the most specific Tier 2 based on the description.\n"
+        "- If multiple could apply, choose the best primary fit.\n"
+    )
+
+    user_prompt = (
+        f"Allowed innovation taxonomy (Tier 1 / Tier 2):\n"
+        f"{taxonomy_text}\n\n"
+        "Use cases to classify (id. title :: description):\n"
+        f"{use_cases_text}\n\n"
+        "Return JSON ONLY in this structure:\n"
+        "{\n"
+        '  "assignments": [\n'
+        "    {\"id\": int, \"tier_1\": str, \"tier_2\": str},\n"
+        "    ...\n"
+        "  ]\n"
+        "}\n"
+    )
+
+    response = client.responses.parse(
+        model=model_name,
+        input=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+        text_format=ThemeAssignments,
+    )
+
+    parsed: ThemeAssignments = response.output_parsed
+
+    # Build lookup {id -> (tier_1, tier_2)}
+    theme_by_id = {a.id: a for a in parsed.assignments}
+
+    # Merge themes back into the original records
+    for uc in use_cases:
+        uc_id = uc.get("id")
+        if uc_id in theme_by_id:
+            assignment = theme_by_id[uc_id]
+            uc["tier_1"] = assignment.tier_1
+            uc["tier_2"] = assignment.tier_2
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8") as f:
+        json.dump(use_cases, f, indent=2, ensure_ascii=False)
+
+    print(f"Mapped {len(theme_by_id)} use cases to innovation themes ? {output_path}")
+
+
+if __name__ == "__main__":
+    main()
+
+3?? Map use cases to the use case / operating-unit chessboard
+File: map_chessboard.py
+This script:
+* Reads data/use_cases_with_themes.json (or use_cases_raw.json if you prefer).
+* Asks the model to assign a chessboard_row (operating unit) per use case.
+* Writes data/use_cases_with_themes_and_chessboard.json, preserving traceability.
+I?ve pre-populated a few operating units that align with your Citigroup plan; you can extend this list.
+#!/usr/bin/env python
+"""
+map_chessboard.py
+
+Maps each use case to a chessboard row (operating unit),
+e.g., Infrastructure & Operations, US Personal Banking, etc.
+
+Traceability fields (ppt_source_file, source) are preserved.
+
+Expected env vars:
+  OPENAI_API_KEY - your OpenAI API key (required)
+  OPENAI_MODEL   - optional, default "gpt-4o-2024-08-06"
+  INPUT_JSON     - optional, default "data/use_cases_with_themes.json"
+  OUTPUT_JSON    - optional, default "data/use_cases_with_themes_and_chessboard.json"
+"""
+
+import json
+import os
+from pathlib import Path
+from typing import List
+
+from openai import OpenAI
+from pydantic import BaseModel
+
+P
+# Allowed chessboard rows / operating units.
+# Extend this list to match your full operating matrix.
+CHESSBOARD_ROWS = [
+    "Infrastructure & Operations",
+    "US Personal Banking (incl. Wealth)",
+    "Banking",
+    "Regions / Other",
+    "Other / Unclear",
+]
+
+
+class ChessboardAssignment(BaseModel):
+    """Chessboard mapping for a single use case (LLM output)."""
+    id: int
+    chessboard_row: str
+
+
+class ChessboardAssignments(BaseModel):
+    assignments: List[ChessboardAssignment]
+
+
+def main() -> None:
+    input_path = Path(os.getenv("INPUT_JSON", "data/use_cases_with_themes.json"))
+    output_path = Path(
+        os.getenv("OUTPUT_JSON", "data/use_cases_with_themes_and_chessboard.json")
+    )
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")
+
+    if not input_path.exists():
+        raise FileNotFoundError(f"Input JSON not found: {input_path}")
+
+    with input_path.open("r", encoding="utf-8") as f:
+        use_cases = json.load(f)
+
+    client = OpenAI()
+
+    chessboard_text = "\n".join(f"- {row}" for row in CHESSBOARD_ROWS)
+
+    use_case_lines = []
+    for uc in use_cases:
+        uc_id = uc.get("id")
+        if uc_id is None:
+            uc_id = len(use_case_lines) + 1
+            uc["id"] = uc_id
+        title = uc.get("use_case_title", "")
+        desc = uc.get("description", "")
+        tier1 = uc.get("tier_1", "")
+        tier2 = uc.get("tier_2", "")
+        use_case_lines.append(
+            f"{uc_id}. {title} :: {desc} "
+            f"(tier_1={tier1}, tier_2={tier2})"
+        )
+
+    use_cases_text = "\n".join(use_case_lines)
+
+    system_prompt = (
+        "You are mapping banking IT use cases onto an account plan chessboard. "
+        "Each row corresponds to a high-level operating unit.\n\n"
+        "Rules:\n"
+        "- For EACH use case, choose exactly ONE chessboard row.\n"
+        "- Only use values from the allowed list below.\n"
+        "- Base your choice on the use-case title, description, and (if present) "
+        "  its innovation theme (tier_1/tier_2).\n"
+        "- If it obviously spans several areas, select the primary one. "
+        "  If unclear, use 'Other / Unclear'."
+    )
+
+    user_prompt = (
+        f"Allowed chessboard rows (operating-unit rows):\n"
+        f"{chessboard_text}\n\n"
+        "Use cases to classify (id. title :: description (tier_1, tier_2)):\n"
+        f"{use_cases_text}\n\n"
+        "Return JSON ONLY in this structure:\n"
+        "{\n"
+        '  "assignments": [\n'
+        '    {"id": int, "chessboard_row": str},\n'
+        "    ...\n"
+        "  ]\n"
+        "}\n"
+    )
+
+    response = client.responses.parse(
+        model=model_name,
+        input=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ],
+        text_format=ChessboardAssignments,
+    )
+
+    parsed: ChessboardAssignments = response.output_parsed
+
+    chessboard_by_id = {a.id: a.chessboard_row for a in parsed.assignments}
+
+    for uc in use_cases:
+        uc_id = uc.get("id")
+        if uc_id in chessboard_by_id:
+            uc["chessboard_row"] = chessboard_by_id[uc_id]
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8") as f:
+        json.dump(use_cases, f, indent=2, ensure_ascii=False)
+
+    print(
+        f"Mapped {len(chessboard_by_id)} use cases to chessboard rows ? {output_path}"
+    )
+
+
+if __name__ == "__main__":
+    main()
+
+How it all fits together
+1. Upload PPT to data/, e.g. data/Citigroup FY26 Account Plan Full.pptx. 
+2. Run extraction:
+3. python extract_use_cases_from_ppt.py
+4. # ? data/use_cases_raw.json
+5. Map to innovation themes:
+6. python map_innovation_themes.py
+7. # ? data/use_cases_with_themes.json
+8. Map to chessboard (operating units):
+9. python map_chessboard.py
+10. # ? data/use_cases_with_themes_and_chessboard.json
+Every record in the final JSON will still include:
+* ppt_source_file ? the PPT filename.
+* source ? "Account Plan PPT".
+So you keep endtoend traceability from the chessboard / theme mapping back to the original Citigroup account plan deck.
+

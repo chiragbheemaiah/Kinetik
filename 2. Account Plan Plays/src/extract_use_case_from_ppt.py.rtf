@@ -1,0 +1,156 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 #!/usr/bin/env python\
+"""\
+extract_use_cases_from_ppt.py\
+\
+Reads an account plan PowerPoint from the data folder,\
+calls the OpenAI API to extract use cases, and writes\
+them to a JSON file suitable for further mapping.\
+\
+Expected env vars:\
+  OPENAI_API_KEY   - your OpenAI API key (required)\
+  OPENAI_MODEL     - optional, default "gpt-4o-2024-08-06"\
+  DATA_DIR         - optional, default "data"\
+  ACCOUNT_PLAN_PPT - optional, default "Citigroup FY26 Account Plan Full.pptx"\
+  OUTPUT_JSON      - optional, default "use_cases_raw.json"\
+"""\
+\
+import json\
+import os\
+from pathlib import Path\
+from typing import List\
+\
+from openai import OpenAI\
+from pydantic import BaseModel\
+from pptx import Presentation\
+\
+\
+class UseCase(BaseModel):\
+    """Schema for one extracted use case (LLM output)."""\
+    use_case_title: str\
+    description: str\
+    slide_numbers: List[int]\
+\
+\
+class UseCaseList(BaseModel):\
+    """Wrapper so we can parse a list of use cases."""\
+    use_cases: List[UseCase]\
+\
+\
+def extract_ppt_text(ppt_path: Path) -> str:\
+    """Flatten PPT text slide-by-slide into a single string."""\
+    prs = Presentation(str(ppt_path))\
+    slide_chunks: List[str] = []\
+\
+    for i, slide in enumerate(prs.slides, start=1):\
+        shape_texts: List[str] = []\
+        for shape in slide.shapes:\
+            if hasattr(shape, "text"):\
+                text = (shape.text or "").strip()\
+                if text:\
+                    shape_texts.append(text)\
+        if shape_texts:\
+            slide_chunks.append(f"Slide \{i\}:\\n" + "\\n".join(shape_texts))\
+\
+    return "\\n\\n".join(slide_chunks)\
+\
+\
+def main() -> None:\
+    data_dir = Path(os.getenv("DATA_DIR", "data"))\
+    ppt_filename = os.getenv(\
+        "ACCOUNT_PLAN_PPT", "Citigroup FY26 Account Plan Full.pptx"\
+    )\
+    ppt_path = data_dir / ppt_filename\
+    output_json = data_dir / os.getenv("OUTPUT_JSON", "use_cases_raw.json")\
+\
+    if not ppt_path.exists():\
+        raise FileNotFoundError(f"Account plan PPT not found: \{ppt_path\}")\
+\
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")\
+\
+    print(f"Reading PPT from: \{ppt_path\}")\
+    ppt_text = extract_ppt_text(ppt_path)\
+\
+    # NOTE: for very large decks you may want to truncate or chunk ppt_text\
+    # before sending to the API.\
+\
+    system_prompt = (\
+        "You are extracting business and IT 'use cases' from a PowerPoint "\
+        "account plan for selling mainframe systems software into a large bank.\\n\\n"\
+        "Definition of 'use case': a concrete scenario where the bank applies "\
+        "technology to achieve a specific business or operational outcome.\\n"\
+        "Examples include:\\n"\
+        "- AI-Powered Risk Ops Automation (AML/KYC)\\n"\
+        "- Mainframe Modernization via Broadcom Takeout\\n"\
+        "- CA7/Autosys Replacement with Control-M\\n\\n"\
+        "Instructions:\\n"\
+        "- Focus on use cases involving mainframe, automation, AI, observability, "\
+        "  DevX, security, Control-M / workload automation, data governance, "\
+        "  regulatory/reporting, and cloud/hybrid modernization.\\n"\
+        "- Group duplicate or near-duplicate ideas into one use case.\\n"\
+        "- Provide concise but specific titles and 1\'963 sentence descriptions.\\n"\
+        "- Identify slide numbers where each use case appears or is clearly implied.\\n"\
+        "- DO NOT include generic sales motions (e.g. 'identify champions'); "\
+        "  only real technology use cases."\
+    )\
+\
+    user_prompt = (\
+        "Extract all distinct use cases from the following account plan text.\\n\\n"\
+        "Return JSON ONLY, conforming to this structure:\\n"\
+        "\{\\n"\
+        '  "use_cases": [\\n'\
+        "    \{\\n"\
+        '      "use_case_title": str,\\n'\
+        '      "description": str,\\n'\
+        '      "slide_numbers": [int, ...]\\n'\
+        "    \},\\n"\
+        "    ...\\n"\
+        "  ]\\n"\
+        "\}\\n\\n"\
+        "Account plan text follows:\\n\\n"\
+        f"\{ppt_text\}"\
+    )\
+\
+    client = OpenAI()\
+\
+    response = client.responses.parse(\
+        model=model_name,\
+        input=[\
+            \{"role": "system", "content": system_prompt\},\
+            \{"role": "user", "content": user_prompt\},\
+        ],\
+        text_format=UseCaseList,\
+    )\
+\
+    parsed: UseCaseList = response.output_parsed\
+\
+    records = []\
+    for idx, uc in enumerate(parsed.use_cases, start=1):\
+        records.append(\
+            \{\
+                "id": idx,\
+                "use_case_title": uc.use_case_title,\
+                "description": uc.description,\
+                "slide_numbers": uc.slide_numbers,\
+                # Traceability to PPT:\
+                "ppt_source_file": ppt_path.name,\
+                "source": "Account Plan PPT",\
+            \}\
+        )\
+\
+    output_json.parent.mkdir(parents=True, exist_ok=True)\
+    with output_json.open("w", encoding="utf-8") as f:\
+        json.dump(records, f, indent=2, ensure_ascii=False)\
+\
+    print(f"Wrote \{len(records)\} use cases \uc0\u8594  \{output_json\}")\
+\
+\
+if __name__ == "__main__":\
+    main()\
+}

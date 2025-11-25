@@ -1,0 +1,143 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2867
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 #!/usr/bin/env python\
+"""\
+map_chessboard.py\
+\
+Maps each use case to a chessboard row (operating unit),\
+e.g., Infrastructure & Operations, US Personal Banking, etc.\
+\
+Traceability fields (ppt_source_file, source) are preserved.\
+\
+Expected env vars:\
+  OPENAI_API_KEY - your OpenAI API key (required)\
+  OPENAI_MODEL   - optional, default "gpt-4o-2024-08-06"\
+  INPUT_JSON     - optional, default "data/use_cases_with_themes.json"\
+  OUTPUT_JSON    - optional, default "data/use_cases_with_themes_and_chessboard.json"\
+"""\
+\
+import json\
+import os\
+from pathlib import Path\
+from typing import List\
+\
+from openai import OpenAI\
+from pydantic import BaseModel\
+\
+\
+# Allowed chessboard rows / operating units.\
+# Extend this list to match your full operating matrix.\
+CHESSBOARD_ROWS = [\
+    "Infrastructure & Operations",\
+    "US Personal Banking (incl. Wealth)",\
+    "Banking",\
+    "Regions / Other",\
+    "Other / Unclear",\
+]\
+\
+\
+class ChessboardAssignment(BaseModel):\
+    """Chessboard mapping for a single use case (LLM output)."""\
+    id: int\
+    chessboard_row: str\
+\
+\
+class ChessboardAssignments(BaseModel):\
+    assignments: List[ChessboardAssignment]\
+\
+\
+def main() -> None:\
+    input_path = Path(os.getenv("INPUT_JSON", "data/use_cases_with_themes.json"))\
+    output_path = Path(\
+        os.getenv("OUTPUT_JSON", "data/use_cases_with_themes_and_chessboard.json")\
+    )\
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")\
+\
+    if not input_path.exists():\
+        raise FileNotFoundError(f"Input JSON not found: \{input_path\}")\
+\
+    with input_path.open("r", encoding="utf-8") as f:\
+        use_cases = json.load(f)\
+\
+    client = OpenAI()\
+\
+    chessboard_text = "\\n".join(f"- \{row\}" for row in CHESSBOARD_ROWS)\
+\
+    use_case_lines = []\
+    for uc in use_cases:\
+        uc_id = uc.get("id")\
+        if uc_id is None:\
+            uc_id = len(use_case_lines) + 1\
+            uc["id"] = uc_id\
+        title = uc.get("use_case_title", "")\
+        desc = uc.get("description", "")\
+        tier1 = uc.get("tier_1", "")\
+        tier2 = uc.get("tier_2", "")\
+        use_case_lines.append(\
+            f"\{uc_id\}. \{title\} :: \{desc\} "\
+            f"(tier_1=\{tier1\}, tier_2=\{tier2\})"\
+        )\
+\
+    use_cases_text = "\\n".join(use_case_lines)\
+\
+    system_prompt = (\
+        "You are mapping banking IT use cases onto an account plan chessboard. "\
+        "Each row corresponds to a high-level operating unit.\\n\\n"\
+        "Rules:\\n"\
+        "- For EACH use case, choose exactly ONE chessboard row.\\n"\
+        "- Only use values from the allowed list below.\\n"\
+        "- Base your choice on the use-case title, description, and (if present) "\
+        "  its innovation theme (tier_1/tier_2).\\n"\
+        "- If it obviously spans several areas, select the primary one. "\
+        "  If unclear, use 'Other / Unclear'."\
+    )\
+\
+    user_prompt = (\
+        f"Allowed chessboard rows (operating-unit rows):\\n"\
+        f"\{chessboard_text\}\\n\\n"\
+        "Use cases to classify (id. title :: description (tier_1, tier_2)):\\n"\
+        f"\{use_cases_text\}\\n\\n"\
+        "Return JSON ONLY in this structure:\\n"\
+        "\{\\n"\
+        '  "assignments": [\\n'\
+        '    \{"id": int, "chessboard_row": str\},\\n'\
+        "    ...\\n"\
+        "  ]\\n"\
+        "\}\\n"\
+    )\
+\
+    response = client.responses.parse(\
+        model=model_name,\
+        input=[\
+            \{"role": "system", "content": system_prompt\},\
+            \{"role": "user", "content": user_prompt\},\
+        ],\
+        text_format=ChessboardAssignments,\
+    )\
+\
+    parsed: ChessboardAssignments = response.output_parsed\
+\
+    chessboard_by_id = \{a.id: a.chessboard_row for a in parsed.assignments\}\
+\
+    for uc in use_cases:\
+        uc_id = uc.get("id")\
+        if uc_id in chessboard_by_id:\
+            uc["chessboard_row"] = chessboard_by_id[uc_id]\
+\
+    output_path.parent.mkdir(parents=True, exist_ok=True)\
+    with output_path.open("w", encoding="utf-8") as f:\
+        json.dump(use_cases, f, indent=2, ensure_ascii=False)\
+\
+    print(\
+        f"Mapped \{len(chessboard_by_id)\} use cases to chessboard rows \uc0\u8594  \{output_path\}"\
+    )\
+\
+\
+if __name__ == "__main__":\
+    main()\
+}
