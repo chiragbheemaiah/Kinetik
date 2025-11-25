@@ -1,0 +1,703 @@
+1. JSON Schemas for response_format
+You?ll typically call the Responses API like this:
+response = client.responses.create(
+    model="gpt-5.1",
+    input=[
+        {"role": "system", "content": SYSTEM_STAGE_B},
+        {"role": "developer", "content": developer_instructions},
+        {"role": "user", "content": user_message},
+    ],
+    response_format={
+        "type": "json_schema",
+        "json_schema": {
+            "name": "UseCaseRankingOutput",
+            "schema": USECASE_RANKING_SCHEMA,  # from below
+            "strict": True
+        }
+    },
+    temperature=0.2,
+    reasoning={"effort": "medium"},
+)
+1.1 Stage A ? Org profile summarization schema
+Schema name: OrgProfileSummary
+JSON Schema (the schema value):
+{
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "description": "Short stable ID for the account (e.g., CITI, STATE_OF_TEXAS)."
+    },
+    "strategic_priorities": {
+      "type": "array",
+      "description": "Key strategic business priorities for the account.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Short ID like SP_DIGITAL_TRANSFORMATION."
+          },
+          "title": {
+            "type": "string",
+            "description": "Human-readable name of the priority."
+          },
+          "summary": {
+            "type": "string",
+            "description": "1?3 sentence description of the priority."
+          }
+        },
+        "required": ["id", "title", "summary"],
+        "additionalProperties": false
+      }
+    },
+    "it_initiatives": {
+      "type": "array",
+      "description": "Major IT / digital transformation initiatives.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "summary": { "type": "string" }
+        },
+        "required": ["id", "title", "summary"],
+        "additionalProperties": false
+      }
+    },
+    "key_pain_points": {
+      "type": "array",
+      "description": "Important operational pain points or challenges.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "summary": { "type": "string" }
+        },
+        "required": ["id", "summary"],
+        "additionalProperties": false
+      }
+    },
+    "regulatory_drivers": {
+      "type": "array",
+      "description": "Key regulatory or risk drivers relevant to the account.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "summary": { "type": "string" }
+        },
+        "required": ["id", "summary"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "account_id",
+    "strategic_priorities",
+    "it_initiatives",
+    "key_pain_points",
+    "regulatory_drivers"
+  ],
+  "additionalProperties": false
+}
+response_format wrapper:
+ORG_PROFILE_SUMMARY_RESPONSE_FORMAT = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "OrgProfileSummary",
+        "schema": ORG_PROFILE_SUMMARY_SCHEMA,  # dict version of JSON above
+        "strict": True,
+    },
+}
+
+1.2 Stage B ? Usecase scoring & ranking schema
+Schema name: UseCaseRankingOutput
+JSON Schema (the schema value):
+{
+  "type": "object",
+  "properties": {
+    "account_id": {
+      "type": "string",
+      "description": "Account ID used for the analysis."
+    },
+    "top_n_requested": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "How many top use cases the caller asked for."
+    },
+    "axis_definitions": {
+      "type": "array",
+      "description": "Definitions of the scoring axes used.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "axis_id": {
+            "type": "string",
+            "description": "Stable ID, e.g., client_value_innovation."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable label."
+          },
+          "description": {
+            "type": "string",
+            "description": "Short description of what this axis measures."
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Relative weight in overall_impact (0?1)."
+          }
+        },
+        "required": ["axis_id", "label", "description", "weight"],
+        "additionalProperties": false
+      }
+    },
+    "considered_usecases": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of Tier2 use cases the model considered before ranking."
+    },
+    "usecases_ranked": {
+      "type": "array",
+      "description": "TopN use cases sorted by overall_impact descending.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "tier2_id": { "type": "string" },
+          "tier2_name": { "type": "string" },
+          "tier1_id": { "type": "string" },
+          "tier1_name": { "type": "string" },
+          "axis_scores": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "axis_id": { "type": "string" },
+                "score": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1,
+                  "description": "Score on this axis from 0 to 1."
+                },
+                "rationale": { "type": "string" }
+              },
+              "required": ["axis_id", "score", "rationale"],
+              "additionalProperties": false
+            }
+          },
+          "overall_impact": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Weighted score across axes (0?1)."
+          },
+          "overall_rationale": {
+            "type": "string",
+            "description": "Short explanation of why this use case is high or low impact for this account."
+          },
+          "linked_operating_units": {
+            "type": "array",
+            "description": "Operating units / buying centers that own or benefit from this use case.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "operating_unit_id": {
+                  "type": "string",
+                  "description": "ID from the Chapter 6 operating_units JSON."
+                },
+                "relationship_rationale": {
+                  "type": "string",
+                  "description": "Why this use case is relevant to this operating unit."
+                }
+              },
+              "required": ["operating_unit_id", "relationship_rationale"],
+              "additionalProperties": false
+            }
+          },
+          "linked_org_priorities": {
+            "type": "array",
+            "description": "Strategic priorities / IT initiatives that this use case most directly supports.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "priority_id": {
+                  "type": "string",
+                  "description": "ID from the summarized org profile (strategic_priorities or it_initiatives)."
+                },
+                "relationship_rationale": { "type": "string" }
+              },
+              "required": ["priority_id", "relationship_rationale"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "tier2_id",
+          "tier2_name",
+          "tier1_id",
+          "tier1_name",
+          "axis_scores",
+          "overall_impact",
+          "overall_rationale",
+          "linked_operating_units",
+          "linked_org_priorities"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "account_id",
+    "top_n_requested",
+    "axis_definitions",
+    "considered_usecases",
+    "usecases_ranked"
+  ],
+  "additionalProperties": false
+}
+response_format wrapper:
+USECASE_RANKING_RESPONSE_FORMAT = {
+    "type": "json_schema",
+    "json_schema": {
+        "name": "UseCaseRankingOutput",
+        "schema": USECASE_RANKING_SCHEMA,  # dict version of JSON above
+        "strict": True,
+    },
+}
+You can add a similar schema later for the optional ?LLM-as-judge? evaluation report if you decide to implement Stage C.
+
+2. Python module skeletons (dropin stubs)
+Assume these live under:
+chapter_8/
+  8_3_usecase_selector/
+    models.py
+    schemas.py
+    prompts.py
+    openai_client.py
+    chapter_8_3_usecase_selector.py
+2.1 models.py ? Pydantic models mirroring schemas
+from __future__ import annotations
+
+from typing import List, Optional
+from pydantic import BaseModel, Field
+
+
+class PriorityItem(BaseModel):
+    id: str
+    title: str
+    summary: str
+
+
+class SimpleItem(BaseModel):
+    id: str
+    summary: str
+
+
+class OrgProfileSummary(BaseModel):
+    account_id: str
+    strategic_priorities: List[PriorityItem]
+    it_initiatives: List[PriorityItem]
+    key_pain_points: List[SimpleItem]
+    regulatory_drivers: List[SimpleItem]
+
+
+class AxisDefinition(BaseModel):
+    axis_id: str
+    label: str
+    description: str
+    weight: float = Field(ge=0, le=1)
+
+
+class AxisScore(BaseModel):
+    axis_id: str
+    score: float = Field(ge=0, le=1)
+    rationale: str
+
+
+class OperatingUnitLink(BaseModel):
+    operating_unit_id: str
+    relationship_rationale: str
+
+
+class PriorityLink(BaseModel):
+    priority_id: str
+    relationship_rationale: str
+
+
+class UseCaseAssessment(BaseModel):
+    tier2_id: str
+    tier2_name: str
+    tier1_id: str
+    tier1_name: str
+    axis_scores: List[AxisScore]
+    overall_impact: float = Field(ge=0, le=1)
+    overall_rationale: str
+    linked_operating_units: List[OperatingUnitLink]
+    linked_org_priorities: List[PriorityLink]
+
+
+class UseCaseRankingOutput(BaseModel):
+    account_id: str
+    top_n_requested: int = Field(ge=1)
+    axis_definitions: List[AxisDefinition]
+    considered_usecases: int = Field(ge=0)
+    usecases_ranked: List[UseCaseAssessment]
+
+
+class RankingIssue(BaseModel):
+    severity: str  # "info" | "warning" | "error"
+    issue_code: str
+    message: str
+    related_usecase_id: Optional[str]
+    suggested_action: str
+
+
+class RankingEvaluationReport(BaseModel):
+    account_id: str
+    summary: str
+    issues: List[RankingIssue]
+
+2.2 prompts.py ? Prompt templates
+These match the strategy we talked through (Stage A summarize, Stage B rank). You can extend as needed.
+SYSTEM_STAGE_A = """\
+You are an enterprise strategy analyst.
+Given a detailed organizational and operations profile for a single account,
+extract and summarize the information that is most relevant to choosing highimpact
+digital and AI use cases.
+
+Return ONLY JSON that matches the OrgProfileSummary schema provided in the
+developer instructions. Do not include any additional commentary.
+"""
+
+DEVELOPER_STAGE_A = """\
+You will be given a raw organizational profile for one account as JSON.
+
+Your job is to compress it into a structured summary for downstream AI models.
+
+Use these rules:
+- Capture only the information that is relevant to selecting highimpact digital and AI use cases.
+- Prefer concrete, specific statements over generic marketing language.
+- Use concise wording; 1?3 sentences per summary field.
+- Create stable IDs for priorities and initiatives using UPPER_SNAKE_CASE.
+
+The output MUST conform to the OrgProfileSummary JSON schema exactly.
+"""
+
+USER_STAGE_A_TEMPLATE = """\
+Account name: {account_name}
+Account ID: {account_id}
+
+Below is the detailed organizational profile JSON for this account.
+Summarize it as described in the task.
+
+```json
+{org_profile_json}
+```"""
+Stage B prompts:
+SYSTEM_STAGE_B = """\
+You are a senior enterprise architect and innovation consultant.
+
+Your task is to take a global catalog of digital and AI use cases and identify the
+most impactful ones for a specific account.
+
+You must:
+1) Understand the account?s strategic priorities and IT initiatives.
+2) Evaluate each candidate Tier2 use case along a fixed set of scoring axes.
+3) Compute an overall impact score per use case.
+4) Select the top N use cases with the highest potential for client value and innovation.
+5) Map each selected use case to relevant operating units and organizational priorities.
+
+Always respond strictly in the UseCaseRankingOutput JSON schema provided in the
+developer instructions. Do not include natural language outside the JSON.
+"""
+
+DEVELOPER_STAGE_B_TEMPLATE = """\
+You are given:
+- A structured summary of the account?s strategic priorities and IT initiatives.
+- A list of operating units (buying centers) for the account.
+- A global taxonomy of Tier1 and Tier2 use cases with descriptions.
+- A list of scoring axes with IDs, humanreadable labels, descriptions, and weights.
+
+Scoring axes:
+```json
+{scoring_axes_json}
+Important rules:
+* For each Tier2 use case, first decide if it is meaningfully relevant to this account.
+* Only include use cases in the output that you consider relevant.
+* For each included use case:
+o Create an AxisScore entry for EACH axis in scoring_axes_json.
+o Scores must be between 0 and 1 inclusive.
+o Provide short, specific rationales that reference relevant priorities, initiatives, or pain points.
+* overall_impact must equal the weighted average of axis scores using the provided weights.
+* The usecases_ranked array MUST be sorted by overall_impact descending.
+* Truncate the list to the top top_n_requested use cases.
+For linked_operating_units:
+* Include each operating_unit_id that would reasonably own, sponsor, or benefit from the use case.
+For linked_org_priorities:
+* Use IDs from strategic_priorities or it_initiatives in the summarized profile.
+* Include only the most directly supported priorities/initiatives (1?4 per use case).
+The output MUST conform exactly to the UseCaseRankingOutput JSON schema.
+"""
+USER_STAGE_B_TEMPLATE = """
+Account name: {account_name}
+Account ID: {account_id}
+Top N requested: {top_n}
+1. Account strategy and context (summarized):
+{summarized_profile_json}
+2. Operating units / buying centers:
+{operating_units_json}
+3. Usecase taxonomy (Tier1 and Tier2):
+{taxonomy_json}
+Your task:
+* Evaluate all Tier2 use cases in the taxonomy_json.
+* Apply the scoring axes from the developer instructions.
+* Return only the top {top_n} use cases in the UseCaseRankingOutput JSON format.
+"""
+
+---
+
+### 2.3 `openai_client.py` ? Thin wrapper around Responses API
+
+```python
+import json
+from typing import Any, Dict
+
+from openai import OpenAI
+
+from .schemas import ORG_PROFILE_SUMMARY_SCHEMA, USECASE_RANKING_SCHEMA
+from . import prompts
+
+client = OpenAI()
+
+
+def _call_structured_json(
+    *,
+    model: str,
+    system_prompt: str,
+    developer_instructions: str,
+    user_input: str,
+    schema_name: str,
+    schema: Dict[str, Any],
+    temperature: float = 0.2,
+    reasoning_effort: str | None = None,
+) -> Dict[str, Any]:
+    """
+    Helper: call OpenAI Responses API with structured JSON output.
+    """
+    params: Dict[str, Any] = {
+        "model": model,
+        "input": [
+            {"role": "system", "content": system_prompt},
+            {"role": "developer", "content": developer_instructions},
+            {"role": "user", "content": user_input},
+        ],
+        "response_format": {
+            "type": "json_schema",
+            "json_schema": {
+                "name": schema_name,
+                "schema": schema,
+                "strict": True,
+            },
+        },
+        "temperature": temperature,
+    }
+    if reasoning_effort is not None:
+        params["reasoning"] = {"effort": reasoning_effort}
+
+    resp = client.responses.create(**params)
+    text = resp.output[0].content[0].text
+    return json.loads(text)
+
+
+def summarize_org_profile(
+    *,
+    model: str,
+    account_name: str,
+    account_id: str,
+    org_profile_json_str: str,
+) -> Dict[str, Any]:
+    user_input = prompts.USER_STAGE_A_TEMPLATE.format(
+        account_name=account_name,
+        account_id=account_id,
+        org_profile_json=org_profile_json_str,
+    )
+    return _call_structured_json(
+        model=model,
+        system_prompt=prompts.SYSTEM_STAGE_A,
+        developer_instructions=prompts.DEVELOPER_STAGE_A,
+        user_input=user_input,
+        schema_name="OrgProfileSummary",
+        schema=ORG_PROFILE_SUMMARY_SCHEMA,
+    )
+
+
+def rank_usecases(
+    *,
+    model: str,
+    reasoning_effort: str,
+    account_name: str,
+    account_id: str,
+    top_n: int,
+    summarized_profile_json_str: str,
+    operating_units_json_str: str,
+    taxonomy_json_str: str,
+    scoring_axes_json_str: str,
+) -> Dict[str, Any]:
+    developer_instructions = prompts.DEVELOPER_STAGE_B_TEMPLATE.format(
+        scoring_axes_json=scoring_axes_json_str
+    )
+    user_input = prompts.USER_STAGE_B_TEMPLATE.format(
+        account_name=account_name,
+        account_id=account_id,
+        top_n=top_n,
+        summarized_profile_json=summarized_profile_json_str,
+        operating_units_json=operating_units_json_str,
+        taxonomy_json=taxonomy_json_str,
+    )
+    return _call_structured_json(
+        model=model,
+        system_prompt=prompts.SYSTEM_STAGE_B,
+        developer_instructions=developer_instructions,
+        user_input=user_input,
+        schema_name="UseCaseRankingOutput",
+        schema=USECASE_RANKING_SCHEMA,
+        reasoning_effort=reasoning_effort,
+    )
+
+2.4 chapter_8_3_usecase_selector.py ? CLI entrypoint on AWS
+This is the script you actually run on the EC2 box.
+"""
+Chapter 8.3 ? Top Use Cases per Account
+
+CLI entrypoint that:
+1) Loads org profile + operating units + taxonomy.
+2) Uses OpenAI models to summarize the org profile (Stage A).
+3) Uses OpenAI models to score and rank use cases (Stage B).
+4) Writes JSON outputs for downstream consumption.
+"""
+
+import argparse
+import json
+from pathlib import Path
+from typing import Any, Dict
+
+import yaml
+
+from . import openai_client
+from .models import OrgProfileSummary, UseCaseRankingOutput
+
+
+def load_yaml(path: Path) -> Dict[str, Any]:
+    with path.open("r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
+
+
+def load_json(path: Path) -> Any:
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_taxonomy(path: Path) -> Dict[str, Any]:
+    """
+    TODO: implement this to read your Tier1 / Tier2 Excel taxonomy
+    and return a JSONserializable structure like:
+
+    {
+      "tier1": [...],
+      "tier2": [
+        {
+          "tier2_id": "...",
+          "tier2_name": "...",
+          "tier1_id": "...",
+          "tier1_name": "...",
+          "description": "..."
+        }
+      ]
+    }
+    """
+    raise NotImplementedError("load_taxonomy() must be implemented for your data format.")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Chapter 8.3 ? Top Use Cases per Account")
+    parser.add_argument("--account-id", required=True, help="Account ID, e.g. CITI or STATE_OF_TEXAS.")
+    parser.add_argument("--account-name", required=True, help="Humanreadable account name.")
+    parser.add_argument("--config", default="config.yaml", help="Path to chapter 8.3 config YAML.")
+    args = parser.parse_args()
+
+    base_dir = Path(__file__).resolve().parent
+    chapter_root = base_dir
+    cfg = load_yaml(Path(args.config))
+
+    account_id = args.account_id
+    account_name = args.account_name
+
+    # Paths ? adjust to your repo layout
+    org_profile_path = chapter_root / "inputs" / "org_profiles" / f"{account_id}_org_profile.json"
+    operating_units_path = Path("..") / "chapter_6" / "outputs" / f"{account_id}_operating_units.json"
+    taxonomy_path = chapter_root / "data" / "taxonomy_tiers_definitions.xlsx"
+
+    org_profile = load_json(org_profile_path)
+    operating_units = load_json(operating_units_path)
+    taxonomy = load_taxonomy(taxonomy_path)
+
+    # Convert to JSON strings for prompts
+    org_profile_json_str = json.dumps(org_profile, ensure_ascii=False, indent=2)
+    operating_units_json_str = json.dumps(operating_units, ensure_ascii=False, indent=2)
+    taxonomy_json_str = json.dumps(taxonomy, ensure_ascii=False, indent=2)
+    scoring_axes_json_str = json.dumps(cfg["scoring_axes"], ensure_ascii=False, indent=2)
+
+    # Stage A ? org profile summarization
+    summary_raw = openai_client.summarize_org_profile(
+        model=cfg.get("stage_a_model", "gpt-5-mini"),   # or "gpt-4.1-mini"
+        account_name=account_name,
+        account_id=account_id,
+        org_profile_json_str=org_profile_json_str,
+    )
+    summary = OrgProfileSummary.model_validate(summary_raw)
+    summarized_profile_json_str = summary.model_dump_json(indent=2, ensure_ascii=False)
+
+    # TODO (optional): filter taxonomy by industry/segment before sending to LLM
+    taxonomy_subset_json_str = taxonomy_json_str
+
+    # Stage B ? usecase scoring and ranking
+    ranking_raw = openai_client.rank_usecases(
+        model=cfg.get("stage_b_model", "gpt-5.1"),
+        reasoning_effort=cfg.get("stage_b_reasoning_effort", "medium"),  # "low" | "medium" | "high"
+        account_name=account_name,
+        account_id=account_id,
+        top_n=cfg.get("top_n_usecases", 10),
+        summarized_profile_json_str=summarized_profile_json_str,
+        operating_units_json_str=operating_units_json_str,
+        taxonomy_json_str=taxonomy_subset_json_str,
+        scoring_axes_json_str=scoring_axes_json_str,
+    )
+    ranking = UseCaseRankingOutput.model_validate(ranking_raw)
+
+    # TODO: validate overall_impact vs axis_scores and log warnings.
+
+    outputs_dir = chapter_root / "outputs"
+    outputs_dir.mkdir(parents=True, exist_ok=True)
+    output_path = outputs_dir / f"{account_id}_8_3_usecases.json"
+
+    with output_path.open("w", encoding="utf-8") as f:
+        json.dump(ranking.model_dump(), f, ensure_ascii=False, indent=2)
+
+    print(f"Wrote 8.3 ranking to {output_path}")
+
+
+if __name__ == "__main__":
+    main()
+
+This should be enough for a dev to:
+* drop files into your Chapter 8.3 folder,
+* wire up taxonomy loading,
+* configure models (gpt-5-mini for Stage A, gpt-5.1 for Stage B, optional o3 for experiments),
+* and run on EC2 with something like:
+python -m chapter_8.8_3_usecase_selector.chapter_8_3_usecase_selector \
+  --account-id CITI \
+  --account-name "Citibank"
+
