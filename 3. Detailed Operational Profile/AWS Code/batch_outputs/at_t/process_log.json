@@ -1,0 +1,11 @@
+{
+  "enterprise": "AT&T",
+  "slug": "at_t",
+  "start_time": "2025-11-09T19:20:43.962823",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/at_t/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/at_t/at_t_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/at_t",
+  "end_time": "2025-11-09T19:20:45.152306",
+  "duration_seconds": 1.189511775970459
+}

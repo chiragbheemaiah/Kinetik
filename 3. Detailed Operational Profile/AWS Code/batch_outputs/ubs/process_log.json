@@ -1,0 +1,11 @@
+{
+  "enterprise": "UBS",
+  "slug": "ubs",
+  "start_time": "2025-11-10T02:31:53.048367",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/ubs/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/ubs/ubs_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/ubs",
+  "end_time": "2025-11-10T02:49:11.323167",
+  "duration_seconds": 1038.2748346328735
+}

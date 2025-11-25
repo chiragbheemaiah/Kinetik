@@ -1,0 +1,11 @@
+{
+  "enterprise": "CitiGroup",
+  "slug": "citigroup",
+  "start_time": "2025-11-09T22:42:28.794235",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/citigroup/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/citigroup/citigroup_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/citigroup",
+  "end_time": "2025-11-09T22:58:25.304094",
+  "duration_seconds": 956.5098996162415
+}

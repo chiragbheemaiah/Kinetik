@@ -1,0 +1,11 @@
+{
+  "enterprise": "Zurich",
+  "slug": "zurich",
+  "start_time": "2025-11-10T03:07:45.469779",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/zurich/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/zurich/zurich_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/zurich",
+  "end_time": "2025-11-10T03:22:57.717087",
+  "duration_seconds": 912.2473459243774
+}

@@ -1,0 +1,11 @@
+{
+  "enterprise": "Desjardins",
+  "slug": "desjardins",
+  "start_time": "2025-11-09T23:16:06.697498",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/desjardins/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/desjardins/desjardins_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/desjardins",
+  "end_time": "2025-11-09T23:32:45.266395",
+  "duration_seconds": 998.568943977356
+}

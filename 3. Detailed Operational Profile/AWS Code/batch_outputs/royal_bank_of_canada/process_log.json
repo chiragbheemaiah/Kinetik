@@ -1,0 +1,11 @@
+{
+  "enterprise": "Royal Bank of Canada",
+  "slug": "royal_bank_of_canada",
+  "start_time": "2025-11-10T01:39:37.334876",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/royal_bank_of_canada/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/royal_bank_of_canada/royal_bank_of_canada_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/royal_bank_of_canada",
+  "end_time": "2025-11-10T01:54:37.413680",
+  "duration_seconds": 900.0788459777832
+}

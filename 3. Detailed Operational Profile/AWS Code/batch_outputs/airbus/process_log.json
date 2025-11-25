@@ -1,0 +1,11 @@
+{
+  "enterprise": "Airbus",
+  "slug": "airbus",
+  "start_time": "2025-11-09T19:20:06.048225",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/airbus/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/airbus/airbus_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/airbus",
+  "end_time": "2025-11-09T19:20:07.231638",
+  "duration_seconds": 1.1834497451782227
+}

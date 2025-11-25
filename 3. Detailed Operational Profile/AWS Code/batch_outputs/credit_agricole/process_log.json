@@ -1,0 +1,11 @@
+{
+  "enterprise": "Credit Agricole",
+  "slug": "credit_agricole",
+  "start_time": "2025-11-09T22:58:25.305516",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/credit_agricole/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/credit_agricole/credit_agricole_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/credit_agricole",
+  "end_time": "2025-11-09T23:16:06.695934",
+  "duration_seconds": 1061.390468120575
+}

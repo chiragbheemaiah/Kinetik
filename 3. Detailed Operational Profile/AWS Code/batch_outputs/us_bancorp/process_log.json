@@ -1,0 +1,11 @@
+{
+  "enterprise": "US Bancorp",
+  "slug": "us_bancorp",
+  "start_time": "2025-11-10T02:49:11.324462",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/us_bancorp/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/us_bancorp/us_bancorp_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/us_bancorp",
+  "end_time": "2025-11-10T03:07:45.468477",
+  "duration_seconds": 1114.1440546512604
+}

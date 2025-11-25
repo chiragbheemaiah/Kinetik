@@ -1,0 +1,11 @@
+{
+  "enterprise": "BNP Paribas",
+  "slug": "bnp_paribas",
+  "start_time": "2025-11-09T22:27:58.478392",
+  "status": "success",
+  "json_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/bnp_paribas/profile_detailed.json",
+  "docx_path": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/bnp_paribas/bnp_paribas_operational_profile.docx",
+  "dir": "/home/ubuntu/playpen/Detailed Operational Profile/batch_outputs/bnp_paribas",
+  "end_time": "2025-11-09T22:42:28.792540",
+  "duration_seconds": 870.3141973018646
+}
