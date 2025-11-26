@@ -1,5 +1,4 @@
 Chapter 8.3 ? Top Use Cases per Account
-Objective (8.3 module)
 For each account (e.g., Citibank, State of Texas, BBVA):
 1. Take:
 o A global usecase taxonomy (Tier 1 & Tier 2, with definitions).

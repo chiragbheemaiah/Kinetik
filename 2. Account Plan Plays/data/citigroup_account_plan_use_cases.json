@@ -1,0 +1,371 @@
+[
+  {
+    "id": 1,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "AI",
+    "tier_2": "AI Risk & Governance",
+    "use_case_title": "AI-Powered Risk Ops Automation (AML/KYC)",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 2,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "AI",
+    "tier_2": "AI for Data & Analytics",
+    "use_case_title": "AI Model Deployment in Financial Controls",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "US Personal Banking (incl. Wealth)"
+  },
+  {
+    "id": 3,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "AI",
+    "tier_2": "AI for Data & Analytics",
+    "use_case_title": "AI Readiness Framework for 150K+ Employees",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 4,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "AI",
+    "tier_2": "AI for Data & Analytics",
+    "use_case_title": "AI/ML Assisted Change Management",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "US Personal Banking (incl. Wealth)"
+  },
+  {
+    "id": 5,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "AI",
+    "tier_2": "AI for Data & Analytics",
+    "use_case_title": "Agentic AI Workflow Orchestration",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 6,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "AI",
+    "tier_2": "AI for Data & Analytics",
+    "use_case_title": "Citi AI Center of Excellence Enablement",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "US Personal Banking (incl. Wealth)"
+  },
+  {
+    "id": 7,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "AI",
+    "tier_2": "AI-Enhanced Engineering & Co-Pilots",
+    "use_case_title": "AMI DevX for Developer Productivity Gains",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 8,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "AI",
+    "tier_2": "AI-Enhanced Engineering & Co-Pilots",
+    "use_case_title": "Agentic AI Co-Pilots for IT Ops",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 9,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Automation",
+    "tier_2": "Data Pipeline Management",
+    "use_case_title": "AMI Code Insight for Secure Code Pipelines",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 10,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Automation",
+    "tier_2": "Data Pipeline Management",
+    "use_case_title": "Agile DevSecOps Pipelines",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 11,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Automation",
+    "tier_2": "Data Pipeline Management",
+    "use_case_title": "CI/CD Process Modernization at Scale",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 12,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Automation",
+    "tier_2": "Data Pipeline Management",
+    "use_case_title": "Data Pipeline Traceability Across Systems",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 13,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Automation",
+    "tier_2": "Dev & Platform Automation",
+    "use_case_title": "Cost Efficiency via Platform Reduction",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "US Personal Banking (incl. Wealth)"
+  },
+  {
+    "id": 14,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Automation",
+    "tier_2": "IT Operations Automation",
+    "use_case_title": "Digital Twin for IT Ops Simulation",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "US Personal Banking (incl. Wealth)"
+  },
+  {
+    "id": 15,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Automation",
+    "tier_2": "Workflow & Process Automation",
+    "use_case_title": NaN,
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Regions / Other"
+  },
+  {
+    "id": 16,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Automation",
+    "tier_2": "Workflow & Process Automation",
+    "use_case_title": "Automated Remediation for Anomaly Detection",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 17,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Modernization",
+    "tier_2": "Cloud Migration & Hybrid Ops",
+    "use_case_title": "AMI Cloud Vault for Encrypted Storage",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 18,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Modernization",
+    "tier_2": "Cloud Migration & Hybrid Ops",
+    "use_case_title": "Cross-Domain Observability for Cloud Migration",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 19,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Modernization",
+    "tier_2": "Cloud Migration & Hybrid Ops",
+    "use_case_title": "Hybrid Cloud Integration for Flexible Orchestration",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 20,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Modernization",
+    "tier_2": "Cloud Migration & Hybrid Ops",
+    "use_case_title": "Multi-Cloud Data Movement Governance",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "US Personal Banking (incl. Wealth)"
+  },
+  {
+    "id": 21,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Modernization",
+    "tier_2": "Cloud Migration & Hybrid Ops",
+    "use_case_title": "Private Cloud Fabric for Sensitive Services",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 22,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Modernization",
+    "tier_2": "Mainframe Modernization",
+    "use_case_title": "CA7/Autosys Replacement with Control-M",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 23,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Modernization",
+    "tier_2": "Mainframe Modernization",
+    "use_case_title": "Cloud-Native Mainframe Interoperability",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 24,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Modernization",
+    "tier_2": "Mainframe Modernization",
+    "use_case_title": "Data Orchestration Across Cloud & Mainframe",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 25,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Modernization",
+    "tier_2": "Mainframe Modernization",
+    "use_case_title": "Mainframe Modernization via Broadcom Takeout",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 26,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Observability",
+    "tier_2": "Hybrid/Cloud Visibility",
+    "use_case_title": "AMI Ops for Observability Modernization",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Banking"
+  },
+  {
+    "id": 27,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Observability",
+    "tier_2": "Hybrid/Cloud Visibility",
+    "use_case_title": "Real-Time Treasury Visibility",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Banking"
+  },
+  {
+    "id": 28,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Orchestration",
+    "tier_2": "IT Systems Orchestration",
+    "use_case_title": "App Rationalization Automation",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 29,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Orchestration",
+    "tier_2": "IT Systems Orchestration",
+    "use_case_title": "Automation to Optimize IT Spend",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 30,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Orchestration",
+    "tier_2": "IT Systems Orchestration",
+    "use_case_title": "Control-M Workload Change Manager Adoption",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 31,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Cyber Resilience & Compliance (incl. Security)",
+    "use_case_title": "Threat Detection & Incident Response (DORA)",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 32,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Cyber Resilience & Compliance (incl. Security)",
+    "use_case_title": "Zero Trust and Fraud Detection Tools",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Banking"
+  },
+  {
+    "id": 33,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Operational Risk & Controls",
+    "use_case_title": "AMI Security for Cyber Resilience Initiatives",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 34,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Operational Risk & Controls",
+    "use_case_title": "BFSI Visibility Enhancement via Compliance Use Cases",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 35,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Operational Risk & Controls",
+    "use_case_title": "Compliance Automation & Validation Dashboards",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 36,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Operational Risk & Controls",
+    "use_case_title": "Jobs-as-Code for Data Compliance Pipelines",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 37,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Operational Risk & Controls",
+    "use_case_title": "Platform-Level Compliance Alignment",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 38,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Operational Risk & Controls",
+    "use_case_title": "Resilience Dashboards for Compliance Officers",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 39,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Regulatory Reporting & Evidence",
+    "use_case_title": "Audit-Ready ESG Reporting",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "US Personal Banking (incl. Wealth)"
+  },
+  {
+    "id": 40,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Regulatory Reporting & Evidence",
+    "use_case_title": "Proactive Risk Reporting to Regulators",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 41,
+    "ppt_source_file": "Citigroup FY26 Account Plan Full.pptx",
+    "tier_1": "Risk & Compliance",
+    "tier_2": "Regulatory Reporting & Evidence",
+    "use_case_title": "Unified Data Governance for Regulatory Compliance",
+    "source": "Citigroup Account Plan",
+    "chessboard_row": "Infrastructure & Operations"
+  }
+]
