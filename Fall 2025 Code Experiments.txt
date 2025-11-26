@@ -1,0 +1,105 @@
+Code Experiment
+
+Buying Center Insights ? Technical Follow-Up Exercise (2?4 Hours)
+Overview
+In this exercise, you will extend an incomplete Python script from Chapter-08-Buying Center Insights and build a small end-to-end workflow that:
+1. Runs inside VS Code from a GitHub repo
+2. Executes on an AWS EC2 instance
+3. Calls the OpenAI API
+4. Produces LLM-generated buying center insights
+5. Evaluates your results and proposes improvements to both code and prompts
+This is intentionally scoped so you can complete it in 2?4 hours.
+
+Scenario
+You are working with a dataset of enterprise buying centers. Your goal is to enrich or analyze these buying centers using LLMs in order to generate one or more strategic insights.
+You will begin with a partially implemented Python script?chapter_08_buying_center_insights.py?that loads data but does not meaningfully call the OpenAI API.
+Choose one primary insight theme below (more if time allows):
+? Option A ? Total Available Wallet
+Estimate qualitative or quantitative spend potential for each buying center.
+? Option B ? Buying Center Potential Heatmap
+Generate a structured score (e.g., 1?5) for each buying center that could be visualized as a heatmap.
+? Option C ? Operational & Organizational Profile
+Generate a compact narrative explaining the buying center?s structure, decision roles, and likely pain points.
+? Option D ? Top 10 / 30 / 50 Buying Centers + C-Suite/SVP Mapping
+Rank buying centers and map C-level / SVP roles to strategic IT initiatives (cloud, cybersecurity, data modernization, cost transformation, AI adoption).
+
+Your Tasks
+1. Repo & Environment Setup (GitHub + VS Code + EC2)
+1. Fork/clone the provided GitHub repo.
+2. Inspect the incomplete script in VS Code.
+3. Spin up or use an existing AWS EC2 instance (Ubuntu preferred).
+4. Pull your repo to EC2.
+5. Install dependencies and export your OpenAI API key:
+export OPENAI_API_KEY="your_key_here"
+Deliverable: Small README section or comment explaining how to run the script on EC2.
+
+2. Extend the Python Script
+Inside chapter_08_buying_center_insights.py, do the following:
+A. Implement at least one OpenAI API call
+Create a function such as:
+def analyze_buying_center(row: dict) -> dict:
+    # Prepare prompt
+    # Call OpenAI API
+    # Return structured JSON result
+B. Design a clear prompt
+Your prompt should:
+* Summarize buying center data concisely
+* Request a strict JSON schema
+* Include fields relevant to the theme you chose
+(e.g., wallet_score, heatmap_level, top_roles, strategic_initiatives, etc.)
+C. Apply the function across the dataset
+You may analyze:
+* All buying centers, or
+* A representative subset (e.g., top 50 by revenue or pipeline)
+D. Save structured output
+Create an output file such as:
+* buying_center_insights.json
+* top_30_buying_centers.csv
+* organizational_profiles.md
+Choose whatever format best fits your insight theme.
+3. Run Your Script on EC2
+Confirm that:
+* OpenAI API calls succeed
+* Output files are generated
+* Errors are handled gracefully (e.g., retry on failure)
+If time permits, test two prompt versions and note the differences.
+4. Evaluate Your Results
+Produce a short write-up (1?2 pages, bullets are fine) covering:
+A. Quality Assessment
+* Did the scores, rankings, or profiles appear realistic?
+* Were the model?s interpretations consistent?
+B. Prompt & Model Behavior
+* Did the model follow your JSON schema?
+* Did it hallucinate or repeat data incorrectly?
+C. Performance & Practicality
+* Did the workflow run quickly enough?
+* How many API calls/tokens were consumed?
+D. Proposed Improvements (Choose at least 2)
+Examples:
+* Add JSON schema validation with Pydantic
+* Introduce caching for repeated buying centers
+* Compare LLM results with simple heuristics (baseline)
+* Move prompts into a separate template file
+* Batch API calls for efficiency
+Deliverable: Add this evaluation to README.md or a separate file such as evaluation.md.
+
+? Expected Deliverables
+Your final GitHub repo should include:
+1. Updated Python Script
+Working code that calls the OpenAI API and generates insights.
+2. Output File(s)
+One or more of:
+* JSON
+* CSV
+* Markdown summaries
+3. Documentation
+* Updated README with:
+o Setup steps
+o How to run locally
+o How to run on EC2
+o Which insight theme(s) you implemented
+4. Thoughtful Evaluation
+Your analysis of results + suggestions for improvement.
+5. Clean Git Commit History
+Meaningful commits (not just ?fix stuff?).
+
