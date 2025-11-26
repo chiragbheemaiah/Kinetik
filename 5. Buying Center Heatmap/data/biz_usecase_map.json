@@ -1,0 +1,1802 @@
+[
+  {
+    "ou": "Ford Global Data Insights & Analytics (GDIA)",
+    "use_cases_top5": [
+      {
+        "tier1": "AI",
+        "tier2": "AI for Data & Analytics",
+        "use_case": "ML/GenAI for analytics, fraud, forecasting, NLP, decisions.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Core to GDIA's mission of building ML models for product, manufacturing, and customer insights, driving strategic analytics and decision-making capabilities."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Data Pipeline Management",
+        "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Critical for managing data pipelines and ensuring data quality and availability for ML and analytics applications."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Data Observability",
+        "use_case": "Data quality/lineage/freshness telemetry.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Critical to monitor and maintain the integrity and freshness of data used in analytics and ML models, reducing operational risks."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI Risk & Governance",
+        "use_case": "Model risk mgmt, governance, fairness, compliance.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Ensures responsible use of AI models, addressing governance and compliance vital to large enterprise data and analytics teams."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "IT Systems Orchestration",
+        "use_case": "Batch/workload orchestration (e.g., Control-M).",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 5
+        },
+        "why": "Enables reliable scheduling and orchestration of ML pipelines and batch analytics workloads, essential for operational stability."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Developer Co-Pilot & AI Enablement",
+    "use_cases_top5": [
+      {
+        "tier1": "AI",
+        "tier2": "Continuous Integration and Continuous Delivery",
+        "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "For Ford Developer Co-Pilot & AI Enablement, enabling AI-enhanced engineering co-pilots directly supports modernizing software development processes. Continuous Integration and Continuous Deployment are core to improving developer productivity, software quality, and release speed"
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI-Augmented Software Development",
+        "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Core to the unit's mission; AI-powered dev acceleration directly impacts productivity and quality, feasible with current tech trends."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI-Enhanced Engineering & Co-Pilots",
+        "use_case": "Dev co-pilots, code insight, test gen, agentic DevOps.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Central to the org's defined scope; deploying AI copilots to assist engineers reduces manual effort and error, with realistic adoption potential."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Dev & Platform Automation",
+        "use_case": "CI/CD, IaC, containers, platform engineering.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Streamlining dev pipelines complements AI co-pilot capabilities, addressing operational bottlenecks with mature tools and processes."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "API/Webhook Orchestration",
+        "use_case": "Expose/consume APIs/webhooks to control flows.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 5
+        },
+        "why": "Enabling dynamic integrations and extensibility is key for scalable AI co-pilot and dev workflows, readily implementable in 12\u201324 months."
+      }
+    ]
+  },
+  {
+    "ou": "Ford AI Governance & Responsible AI Office",
+    "use_cases_top5": [
+      {
+        "tier1": "AI",
+        "tier2": "AI Risk & Governance",
+        "use_case": "Model risk mgmt, governance, fairness, compliance.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Core to office mission; critical for defining AI policies, managing model risks, addressing fairness, and ensuring compliance across AI lifecycle."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Consent Order Remediation & Audit Readiness",
+        "use_case": "Remediate findings, enforce controls, prove adherence.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Vital for operationalizing compliance controls, managing risks timely, and demonstrating policy adherence throughout AI usage."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI-Augmented Software Development",
+        "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "This use case aligns closely with AI Governance and Responsible AI as it supports the development of AI models with embedded governance controls, enabling bias detection, compliance, and quality assurance throughout the model lifecycle, which is central to Ford's AI risk manageme"
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Data Security & Governance",
+        "use_case": "Data protection/masking/governance policies.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Ensures sensitive AI data is secure and governed properly, which is essential for regulatory compliance and bias mitigation."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Operational Risk & Controls",
+        "use_case": "SLA/change/operational risk controls & reporting.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Important for tracking risks and service level performance related to AI models, enabling proactive governance and management."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Intelligent Operations Center (IOC)",
+    "use_cases_top5": [
+      {
+        "tier1": "AI",
+        "tier2": "AIOps & Intelligent Incident Response",
+        "use_case": "AI anomaly detection, alert reduction, incident response.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to IOC's mission to detect anomalies, reduce alerts, and auto-triage incidents, directly improving MTTR and operational efficiency with proven ML applications."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Hybrid/Cloud Visibility",
+        "use_case": "APM/logs/traces/SLOs across hybrid.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Crucial for correlating metrics and traces across hybrid environments to enhance incident response and observability, enabling better anomaly detection and root cause analysis."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Enables streamlined incident handling and operational tasks automation, reducing manual toil and accelerating resolution processes at IOC."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Cross-Functional Orchestration",
+        "use_case": "End-to-end process orchestration spanning IT + business.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Facilitates coordinated workflows and cascading incident responses across systems, improving comprehensive operational effectiveness within Ford IOC."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI-Augmented Software Development",
+        "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Improves developer productivity and software quality, complementary to IOC's emphasis on robust software and faster incident remediation through smarter dev cycles."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Business Process Automation COE",
+    "use_cases_top5": [
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to COE mandate; standardizes and automates finance, HR, dealer ops workflows to reduce manual effort and errors, boosting efficiency and compliance rapidly."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Cross-Functional Orchestration",
+        "use_case": "End-to-end process orchestration spanning IT + business.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Enables holistic automation from front to back office, improving visibility and control, supporting COE\u2019s mission to standardize workflow patterns and governance."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Operational Risk & Controls",
+        "use_case": "SLA/change/operational risk controls & reporting.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Essential for governance of automated processes, ensuring operational risk is controlled and compliant, aligning with COE\u2019s governance and standardization goals."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "API/Webhook Orchestration",
+        "use_case": "Expose/consume APIs/webhooks to control flows.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Integrates automation solutions with existing systems via APIs/webhooks, enhancing bot and workflow interoperability key to scaling automation at Ford."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Data Pipeline Management",
+        "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Supports automated data flows underpinning finance and HR workflows, improving data readiness and quality essential for reliable RPA outcomes."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Data Pipeline Engineering & Orchestration",
+    "use_cases_top5": [
+      {
+        "tier1": "Automation",
+        "tier2": "Data Pipeline Management",
+        "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to building and managing ETL/ELT pipelines, critical for data ingestion, quality and SLA management, with high feasibility due to existing pipelining frameworks."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "IT Systems Orchestration",
+        "use_case": "Batch/workload orchestration (e.g., Control-M).",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Essential for scheduling and orchestrating batch data workflows with SLA and recovery focus, enabling automation and coordination across tasks."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Data Observability",
+        "use_case": "Data quality/lineage/freshness telemetry.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Monitoring data quality, lineage, and freshness is vital to meet SLAs and ensure reliability of pipelines, with growing adoption of observability tools."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Automating handoffs and approvals in data pipeline management reduces manual errors and delays and is feasible to expand within 1-2 years."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Multi-Cloud Workload Orchestration",
+        "use_case": "Coordinate workloads across clouds.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 3
+        },
+        "why": "With pipelines spanning multiple cloud platforms and on-prem, orchestrating cross-cloud workloads supports scalability and SLA fulfillment, though complexity is moderate."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Platform Automation & Toolchain",
+    "use_cases_top5": [
+      {
+        "tier1": "Automation",
+        "tier2": "Dev & Platform Automation",
+        "use_case": "CI/CD, IaC, containers, platform engineering.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to the unit's mission providing reusable CI templates and IaC modules, directly enabling platform engineering and release automation, crucial for reducing toil."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "Continuous Integration and Continuous Delivery",
+        "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Fundamental practice the unit supports and enhances, accelerating software delivery by automating build, test, and deploy pipelines for app teams."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Addresses toil by automating repetitive tasks and approvals across development platforms, enabling higher operational efficiency."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Platform/SRE Modernization",
+        "use_case": "SRE patterns, reliability engineering, toil reduction.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Aligns with goal of reducing toil and improving platform reliability by adopting SRE best practices and engineering principles."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Event-Driven Scheduling",
+        "use_case": "Kafka/events/webhooks as triggers.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Supports release automation and platform engineering by leveraging event-driven mechanisms to orchestrate CI/CD pipelines and infrastructure workflows."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Application Development Studio",
+    "use_cases_top5": [
+      {
+        "tier1": "AI",
+        "tier2": "Continuous Integration and Continuous Delivery",
+        "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "CI/CD is core to modern app development enabling rapid, reliable releases essential for fast iterations and meeting customer expectations."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI-Augmented Software Development",
+        "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "AI-enhanced development accelerates innovation in digital retail, connected vehicle, and mobile apps, improving speed and quality key to competitiveness and time-to-market."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Application Modernization",
+        "use_case": "Refactor/replatform, microservices, containers.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Microservices and containerization underpin highly scalable, modular architectures essential for connected vehicle and mobile app ecosystems."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Dev & Platform Automation",
+        "use_case": "CI/CD, IaC, containers, platform engineering.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Automation in infrastructure as code, container orchestration, and platform engineering supports scalable and consistent application delivery."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "API/Webhook Orchestration",
+        "use_case": "Expose/consume APIs/webhooks to control flows.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 5
+        },
+        "why": "API/webhook orchestration enables integration and real-time interactions essential to connected vehicles and mobile experiences."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Cloud Migration & Hybrid Ops Program",
+    "use_cases_top5": [
+      {
+        "tier1": "Modernization",
+        "tier2": "Cloud Migration & Hybrid Ops",
+        "use_case": "Migrate to cloud/hybrid and operate across estates.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to the program\u2019s mission is migrating workloads to AWS/Azure and managing hybrid plant systems, making this the highest priority and fully feasible within 12-24 months."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Multi-Cloud Workload Orchestration",
+        "use_case": "Coordinate workloads across clouds.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Essential for efficient hybrid ops to coordinate workloads seamlessly across AWS, Azure, and on-prem systems, addressing operational needs and feasible given existing cloud investments."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Dev & Platform Automation",
+        "use_case": "CI/CD, IaC, containers, platform engineering.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Modern platform engineering with CI/CD and containers supports faster and reliable cloud migration and operations, critical for program success and highly achievable soon."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Hybrid/Cloud Visibility",
+        "use_case": "APM/logs/traces/SLOs across hybrid.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Visibility across hybrid environments is needed for reliable operations and monitoring, reducing incidents and operational risk with moderate complexity to implement."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "Continuous Integration and Continuous Delivery",
+        "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 5
+        },
+        "why": "Automating software delivery pipelines aligns with cloud native development best practices, improving quality and speed, and is highly feasible given available tools and skilled teams."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Legacy Application Modernization Initiative",
+    "use_cases_top5": [
+      {
+        "tier1": "Modernization",
+        "tier2": "Application Modernization",
+        "use_case": "Refactor/replatform, microservices, containers.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Core to decomposing monoliths, containerizing services, and modernizing legacy apps critical for Ford Pro, Blue, and Credit systems."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "Continuous Integration and Continuous Delivery",
+        "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Enables faster, reliable software delivery, critical for refactoring applications and containerized microservices adoption."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Dev & Platform Automation",
+        "use_case": "CI/CD, IaC, containers, platform engineering.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Automates containerized deployments and platform engineering key to modernizing legacy applications and operationalizing microservices."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Cloud Migration & Hybrid Ops",
+        "use_case": "Migrate to cloud/hybrid and operate across estates.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Supports migration of legacy apps to cloud/hybrid environments, essential for modern scalable operations and infrastructure agility."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI-Augmented Software Development",
+        "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Enhances developer productivity and quality in refactoring and modernizing legacy codebases, aiding modernization efforts."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Mainframe Modernization Office",
+    "use_cases_top5": [
+      {
+        "tier1": "Modernization",
+        "tier2": "Application Modernization",
+        "use_case": "Refactor/replatform, microservices, containers.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Core to the unit's mission to replatform legacy COBOL/IMS systems by adopting modern architectures, enabling API/event exposure and modernization impact across finance and supply chain."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "API/Webhook Orchestration",
+        "use_case": "Expose/consume APIs/webhooks to control flows.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Exposing mainframe functions as APIs/webhooks is critical to unlocking legacy system value and enabling hybrid integration, key for modernization success."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Mainframe Monitoring",
+        "use_case": "z/OS, CICS, IMS, DB2 performance/health.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Critical to ensure ongoing reliability and health of legacy mainframe systems during and after modernization efforts, directly impacting operational risk."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Event-Driven Scheduling",
+        "use_case": "Kafka/events/webhooks as triggers.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Leveraging event streams and APIs for integration and triggering workflows is essential for modern mainframe event-driven modernization and operational agility."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Dev & Platform Automation",
+        "use_case": "CI/CD, IaC, containers, platform engineering.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Implementing continuous integration and platform automation improves software delivery speed and quality, enabling effective modernization of mainframe applications."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Cloud & Hybrid Observability Services",
+    "use_cases_top5": [
+      {
+        "tier1": "Observability",
+        "tier2": "Hybrid/Cloud Visibility",
+        "use_case": "APM/logs/traces/SLOs across hybrid.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to providing end-to-end telemetry and unified visibility for Kubernetes, cloud, and on-prem environments, which the unit specializes in. High strategic importance and strong feasibility within 12-24 months."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Cloud Migration & Hybrid Ops",
+        "use_case": "Migrate to cloud/hybrid and operate across estates.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Supports hybrid/cloud observability by enabling migration and unified operations across estates, critical for cloud/hybrid visibility and telemetry expansion."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AIOps & Intelligent Incident Response",
+        "use_case": "AI anomaly detection, alert reduction, incident response.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Enhancing incident detection and response with AI addresses operational pain by reducing alert fatigue and improving reliability in observability."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "SLO/Cost (FinOps) Observability",
+        "use_case": "SLO tracking with cost/FinOps telemetry.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "SLO and cost telemetry tightly integrate with observability, supporting reliability engineering and cost optimization for hybrid/cloud workloads."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Multi-Cloud Workload Orchestration",
+        "use_case": "Coordinate workloads across clouds.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Supports hybrid/cloud environments by orchestrating workloads across multiple clouds for unified observability and efficient operations."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Data Quality & Observability Guild",
+    "use_cases_top5": [
+      {
+        "tier1": "Observability",
+        "tier2": "Data Observability",
+        "use_case": "Data quality/lineage/freshness telemetry.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to Ford's data monitoring strategy with direct focus on freshness, lineage, schema drift, and SLA breaches, making this highly strategic, urgent, and feasible within 12\u201324 months."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Data Pipeline Management",
+        "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Automating data pipelines including quality gates is essential to improve timeliness and quality of data delivery, reducing manual errors and operational friction."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Operational Risk & Controls",
+        "use_case": "SLA/change/operational risk controls & reporting.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Monitoring SLA adherence and operational risk is critical to maintain business continuity and compliance, aligning with the guild's observability focus."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AIOps & Intelligent Incident Response",
+        "use_case": "AI anomaly detection, alert reduction, incident response.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Using AI to detect anomalies and reduce alert noise improves operational efficiency and proactive incident handling relevant to observability challenges."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Data Security & Governance",
+        "use_case": "Data protection/masking/governance policies.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Ensuring data governance and protection supports compliance and trust in data observability, making it an important complementary use case."
+      }
+    ]
+  },
+  {
+    "ou": "Ford FinOps & SLO Analytics",
+    "use_cases_top5": [
+      {
+        "tier1": "Observability",
+        "tier2": "SLO/Cost (FinOps) Observability",
+        "use_case": "SLO tracking with cost/FinOps telemetry.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to tracking service levels and cost simultaneously, enabling decision making on cost/performance trade-offs, critical for Ford FinOps & SLO Analytics success."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Infrastructure Optimization",
+        "use_case": "Cost/right-size, storage optimization, FinOps hooks.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Automating right-sizing and storage optimization directly reduces costs and improves efficiency, key for operational pain points in cloud spend management."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Hybrid/Cloud Visibility",
+        "use_case": "APM/logs/traces/SLOs across hybrid.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Visibility into performance and reliability across hybrid cloud environments complements FinOps by surfacing actionable telemetry and supports SLO and cost management."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Platform/SRE Modernization",
+        "use_case": "SRE patterns, reliability engineering, toil reduction.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Incorporating SRE best practices enhances reliability and reduces manual toil, aligning well with SLO focus and operational excellence goals."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AIOps & Intelligent Incident Response",
+        "use_case": "AI anomaly detection, alert reduction, incident response.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 4,
+          "feasibility": 3
+        },
+        "why": "AI-driven anomaly detection and alert reduction improve incident response efficiency, enhancing observability and reducing noise in monitoring systems."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Enterprise IT Orchestration Services",
+    "use_cases_top5": [
+      {
+        "tier1": "Automation",
+        "tier2": "IT Operations Automation",
+        "use_case": "Runbooks, patching, backups, maintenance.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to automating cross-system runbooks and maintenance workflows ensuring system reliability and reducing manual intervention in IT operations."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Cross-Functional Orchestration",
+        "use_case": "End-to-end process orchestration spanning IT + business.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Coordinates deployments across plants and IT, critical for streamlining cross-system and cross-team orchestration that spans operational and business functions."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "API/Webhook Orchestration",
+        "use_case": "Expose/consume APIs/webhooks to control flows.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Enables flexible, event-driven integration between systems and components essential for IT orchestration workflows and automation at scale."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Automating IT change workflows and approval processes reduces manual effort and accelerates response times necessary for enterprise IT orchestration."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "IT Systems Orchestration",
+        "use_case": "Batch/workload orchestration (e.g., Control-M).",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Critical for scheduling and coordinating batch jobs and workloads across systems, matching the unit\u2019s needs for orchestrated automation across IT and plant deployments."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Event Scheduling Platform",
+    "use_cases_top5": [
+      {
+        "tier1": "Orchestration",
+        "tier2": "Event-Driven Scheduling",
+        "use_case": "Kafka/events/webhooks as triggers.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Kafka-triggered jobs are core to the platform's event-driven scheduling, enabling highly responsive and scalable telemetry processing flows."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "IT Systems Orchestration",
+        "use_case": "Batch/workload orchestration (e.g., Control-M).",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Batch and workload orchestration ensures effective coordination and scheduling of telemetry processing micro-batches across distributed systems."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Application Modernization",
+        "use_case": "Refactor/replatform, microservices, containers.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Modernizing via microservices and containers supports scalable deployments and improves maintainability of event-driven telemetry pipelines."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Data Pipeline Management",
+        "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Automating data ingestion and quality controls is vital for telemetry processing accuracy and operational efficiency."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Data Observability",
+        "use_case": "Data quality/lineage/freshness telemetry.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Observability into data quality and freshness is critical to ensure timely and accurate telemetry insights and to prevent downstream issues."
+      }
+    ]
+  },
+  {
+    "ou": "Ford API & Webhook Orchestration Team",
+    "use_cases_top5": [
+      {
+        "tier1": "Orchestration",
+        "tier2": "API/Webhook Orchestration",
+        "use_case": "Expose/consume APIs/webhooks to control flows.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core function managing partner and dealer webhooks, ensuring reliable API and webhook interactions with idempotency, retries, and routing policies."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Event-Driven Scheduling",
+        "use_case": "Kafka/events/webhooks as triggers.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Using events/webhooks as triggering mechanisms supports responsive orchestration, critical to real-time partner and dealer communications."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Cross-Functional Orchestration",
+        "use_case": "End-to-end process orchestration spanning IT + business.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Integrating API/webhook orchestration into broader enterprise processes improves operational efficiency and cross-team coordination."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Automation of workflows related to API/webhook handling can reduce manual intervention and errors, enhancing scalability."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "SLO/Cost (FinOps) Observability",
+        "use_case": "SLO tracking with cost/FinOps telemetry.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Monitoring service level objectives and costs tied to API/webhook orchestration is essential for performance and financial optimization."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Cyber Defense & Compliance",
+    "use_cases_top5": [
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Consent Order Remediation & Audit Readiness",
+        "use_case": "Remediate findings, enforce controls, prove adherence.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to unit mandate, critical to addressing vulnerabilities and ensuring regulatory compliance with achievable adoption within 12\u201324 months."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AIOps & Intelligent Incident Response",
+        "use_case": "AI anomaly detection, alert reduction, incident response.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Enhances threat detection and incident response, directly reducing operational pain with realistic feasibility given AI capabilities."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Cyber Resilience & Compliance (incl. Security)",
+        "use_case": "Zero Trust, PAM, DR/BCP, policy enforcement.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Foundational security for cyber resilience and compliance, directly addresses urgent risks, with feasible implementation in the near term."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Operational Risk & Controls",
+        "use_case": "SLA/change/operational risk controls & reporting.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Vital for operational risk management, improving control and reporting to meet compliance demands with high feasibility."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Regulatory Reporting & Evidence",
+        "use_case": "Automate data/controls/evidence for CCAR/DFAST/Basel.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Automating compliance workflows reduces manual effort, increases accuracy and speeds regulatory adherence, feasible with current automation tech."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Regulatory Reporting & Evidence Office",
+    "use_cases_top5": [
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Consent Order Remediation & Audit Readiness",
+        "use_case": "Remediate findings, enforce controls, prove adherence.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Core to producing and validating audit artifacts; critical for SOX, emissions, and safety reporting compliance with centralized evidence control."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Data Observability",
+        "use_case": "Data quality/lineage/freshness telemetry.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Ensuring data quality and lineage is essential for trustworthy evidence and accurate regulatory reporting; observability supports audit artifacts integrity."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Operational Risk & Controls",
+        "use_case": "SLA/change/operational risk controls & reporting.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Managing operational risk and controls reporting is vital to maintain audit readiness and regulatory compliance within the office."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Regulatory Reporting & Evidence",
+        "use_case": "Automate data/controls/evidence for CCAR/DFAST/Basel.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Automation of control data and evidence production reduces manual workload, increases accuracy, and accelerates regulatory report delivery."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Cross-Functional Orchestration",
+        "use_case": "End-to-end process orchestration spanning IT + business.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Orchestrating processes from data collection to evidence production improves control testing efficiency and aligns IT-business workflows."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Data Security & Governance Council",
+    "use_cases_top5": [
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Data Security & Governance",
+        "use_case": "Data protection/masking/governance policies.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Core to council's mission setting policies on data protection, masking, and governance ensures secure data handling and compliance with regulations."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Cyber Resilience & Compliance (incl. Security)",
+        "use_case": "Zero Trust, PAM, DR/BCP, policy enforcement.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 3
+        },
+        "why": "Key to securing data access and resilience against cyber threats aligning with council\u2019s governance responsibilities."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Consent Order Remediation & Audit Readiness",
+        "use_case": "Remediate findings, enforce controls, prove adherence.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Essential for closing compliance gaps, enforcing governance controls, and demonstrating adherence to policies in a timely manner."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Operational Risk & Controls",
+        "use_case": "SLA/change/operational risk controls & reporting.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Supports operational risk management and reporting which underpin governance and risk controls critical to data security."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Data Observability",
+        "use_case": "Data quality/lineage/freshness telemetry.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Visibility into data lineage and quality supports governance forums in effective stewardship and compliance assurance."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Connected Vehicle Insights AI",
+    "use_cases_top5": [
+      {
+        "tier1": "Automation",
+        "tier2": "Data Pipeline Management",
+        "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Efficient ingestion and processing of vehicle telemetry and customer data is critical for timely insights and model accuracy."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI for Data & Analytics",
+        "use_case": "ML/GenAI for analytics, fraud, forecasting, NLP, decisions.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Core predictive modeling on vehicle telemetry and customer data to optimize services and uptime directly relies on advanced ML/GenAI analytics capabilities."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Data Observability",
+        "use_case": "Data quality/lineage/freshness telemetry.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Monitoring data quality and freshness ensures reliability and trust in predictive models, critical to vehicle uptime optimization."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI Risk & Governance",
+        "use_case": "Model risk mgmt, governance, fairness, compliance.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Ensuring model governance and compliance is key to maintain regulatory compliance and trustworthiness in AI insights."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Event-Driven Scheduling",
+        "use_case": "Kafka/events/webhooks as triggers.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Event-driven processing of vehicle telemetry supports real-time responsiveness and scalable predictive service workflows."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Intelligent Incident Response",
+    "use_cases_top5": [
+      {
+        "tier1": "AI",
+        "tier2": "AIOps & Intelligent Incident Response",
+        "use_case": "AI anomaly detection, alert reduction, incident response.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Core to Intelligent Incident Response using ML to detect anomalies, reduce alerts, and automate incident processes, highly relevant and urgent, with strong feasibility given current AI capabilities."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Automating workflows and IT operations supports intelligent incident response through faster resolution and reduced manual intervention, highly feasible with current automation tools."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Hybrid/Cloud Visibility",
+        "use_case": "APM/logs/traces/SLOs across hybrid.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Monitoring hybrid IT and plant systems is crucial to ensure visibility for proactive incident detection and diagnosis, enabling intelligent incident response and operational continuity."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Cross-Functional Orchestration",
+        "use_case": "End-to-end process orchestration spanning IT + business.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Coordinating workflows between IT and business processes supports incident response effectiveness and remediation, critical for integrated operations in industrial environments."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI for Data & Analytics",
+        "use_case": "ML/GenAI for analytics, fraud, forecasting, NLP, decisions.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Use of ML and AI analytics enhances anomaly detection and decision-making in incident response, enabling predictive insights and smarter remediations."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Manufacturing Workflow Automation",
+    "use_cases_top5": [
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to automating approvals, quality gates, logistics workflows end-to-end, addressing critical operational pain with high feasibility and strategic impact."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Cross-Functional Orchestration",
+        "use_case": "End-to-end process orchestration spanning IT + business.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Seamless orchestration across IT and business processes is strategic to align manufacturing operations and streamline workflows, reducing delays and errors."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Data Pipeline Management",
+        "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Automating data ingestion and quality validation is key to trustworthy manufacturing data pipelines, supporting process automation and operational efficiency."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Event-Driven Scheduling",
+        "use_case": "Kafka/events/webhooks as triggers.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Using event-driven triggers enables real-time workflow automation and agile response in manufacturing supply chain and quality gates."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Cloud Migration & Hybrid Ops",
+        "use_case": "Migrate to cloud/hybrid and operate across estates.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Modernizing by migrating workflows and automation layers to cloud or hybrid environments increases scalability, agility, and integration capability over 12\u201324 months."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Infrastructure Efficiency & Optimization",
+    "use_cases_top5": [
+      {
+        "tier1": "Automation",
+        "tier2": "Infrastructure Optimization",
+        "use_case": "Cost/right-size, storage optimization, FinOps hooks.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to reducing infrastructure costs by automating right-sizing and storage optimization, aligning perfectly with the unit's goal to improve performance and cost efficiency."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "IT Operations Automation",
+        "use_case": "Runbooks, patching, backups, maintenance.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Automating operational tasks like patching and backups reduces manual toil and operational risks, improving efficiency and reliability of infrastructure."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Multi-Cloud Workload Orchestration",
+        "use_case": "Coordinate workloads across clouds.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Essential for managing hybrid and multi-cloud environments to optimize resource placement and utilization at Ford, supporting infrastructure scalability and flexibility."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Cloud Migration & Hybrid Ops",
+        "use_case": "Migrate to cloud/hybrid and operate across estates.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Supports cloud adoption to modernize infrastructure, enabling enhanced elasticity and cost optimization critical to infrastructure efficiency initiatives."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Hybrid/Cloud Visibility",
+        "use_case": "APM/logs/traces/SLOs across hybrid.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Visibility into performance and service-level metrics across hybrid environments helps identify optimization opportunities and bottlenecks, improving operational efficiency."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Digital Product Engineering Hub",
+    "use_cases_top5": [
+      {
+        "tier1": "Automation",
+        "tier2": "Dev & Platform Automation",
+        "use_case": "CI/CD, IaC, containers, platform engineering.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Continuous integration and delivery pipelines are critical for fast, reliable software delivery for Ford\u2019s digital products. This will reduce operational pain related to release delays and improve deployment quality."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI-Augmented Software Development",
+        "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "AI-augmented software development is key to accelerating delivery and improving the quality of apps and services Ford delivers to customers, dealers, and vehicles. It aligns closely with the unit\u2019s goals for modernization and innovation."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Hybrid/Cloud Visibility",
+        "use_case": "APM/logs/traces/SLOs across hybrid.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Full-stack observability for hybrid and cloud environments is essential to detect and resolve issues early, ensuring performance and reliability of the digital product ecosystem."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Cloud Migration & Hybrid Ops",
+        "use_case": "Migrate to cloud/hybrid and operate across estates.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Cloud migration is core to modern app architectures powering customer, dealer, and vehicle experiences, enabling scalability, agility, and cost efficiencies."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Automating workflows and approvals reduces manual errors and accelerates processes in software engineering and business operations, improving efficiency and responsiveness."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Platform Reliability Modernization",
+    "use_cases_top5": [
+      {
+        "tier1": "Modernization",
+        "tier2": "Platform/SRE Modernization",
+        "use_case": "SRE patterns, reliability engineering, toil reduction.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to evolving SRE practices that directly improve platform reliability and reduce manual toil, crucial for system uptime and operational efficiency."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Dev & Platform Automation",
+        "use_case": "CI/CD, IaC, containers, platform engineering.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Modern DevOps practices like CI/CD and IaC are essential to enable fast, reliable deployments and infrastructure management aligning with modernization goals."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "IT Operations Automation",
+        "use_case": "Runbooks, patching, backups, maintenance.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Automating operational runbooks and maintenance tasks reduces incident response time and manual errors, improving recovery and platform reliability."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "SLO/Cost (FinOps) Observability",
+        "use_case": "SLO tracking with cost/FinOps telemetry.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Tracking reliability targets (SLOs) with cost telemetry supports balancing reliability improvements within budget constraints, aiding operational decision-making."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Hybrid/Cloud Visibility",
+        "use_case": "APM/logs/traces/SLOs across hybrid.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Visibility across hybrid environments is key to identifying and resolving incidents promptly, directly enhancing reliability and operational insights."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Mainframe Monitoring Services",
+    "use_cases_top5": [
+      {
+        "tier1": "Observability",
+        "tier2": "Mainframe Monitoring",
+        "use_case": "z/OS, CICS, IMS, DB2 performance/health.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to the unit's function, monitoring key mainframe systems with transaction tracing is critical for uptime and performance; existing expertise ensures high feasibility."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "IT Operations Automation",
+        "use_case": "Runbooks, patching, backups, maintenance.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Automating mainframe operational tasks reduces manual toil and errors, improving responsiveness and reliability, with high feasibility leveraging existing process knowledge."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "IT Systems Orchestration",
+        "use_case": "Batch/workload orchestration (e.g., Control-M).",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Coordinating mainframe batch workloads is vital for performance and SLAs; orchestration offers operational efficiency with realistic adoption in 1-2 years."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AIOps & Intelligent Incident Response",
+        "use_case": "AI anomaly detection, alert reduction, incident response.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 3
+        },
+        "why": "Utilizing AI for alert noise reduction and incident automation would greatly enhance 24x7 monitoring efficiency, though adoption involves integration complexity."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Operational Risk & Controls",
+        "use_case": "SLA/change/operational risk controls & reporting.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Ensuring SLA adherence and operational risk tracking is important for service quality and compliance; feasible with current monitoring data and tooling."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Multi-Cloud Workload Orchestrator",
+    "use_cases_top5": [
+      {
+        "tier1": "Orchestration",
+        "tier2": "Multi-Cloud Workload Orchestration",
+        "use_case": "Coordinate workloads across clouds.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to orchestrating workload scheduling and mobility across AWS, Azure, and on-prem clusters, essential for hybrid cloud efficiency and central to Ford's multi-cloud strategy."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "IT Systems Orchestration",
+        "use_case": "Batch/workload orchestration (e.g., Control-M).",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 5
+        },
+        "why": "Critical for managing batch jobs and workload scheduling, improving operational automation and efficiency in multi-cloud contexts."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Cloud Migration & Hybrid Ops",
+        "use_case": "Migrate to cloud/hybrid and operate across estates.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Supports the hybrid cloud migration and ongoing operations key to workload mobility and multi-cloud orchestration strategies."
+      },
+      {
+        "tier1": "Automation",
+        "tier2": "Dev & Platform Automation",
+        "use_case": "CI/CD, IaC, containers, platform engineering.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 5
+        },
+        "why": "Enables automation of platform and development processes essential for scalable multi-cloud workload deployment and management."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "API/Webhook Orchestration",
+        "use_case": "Expose/consume APIs/webhooks to control flows.",
+        "scores": {
+          "strategic_relevance": 3,
+          "operational_pain": 3,
+          "feasibility": 5
+        },
+        "why": "API/webhook orchestration facilitates flexible integration and real-time control necessary for effective multi-cloud workload scheduling and mobility."
+      }
+    ]
+  },
+  {
+    "ou": "Ford Operational Risk & Controls Office",
+    "use_cases_top5": [
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Consent Order Remediation & Audit Readiness",
+        "use_case": "Remediate findings, enforce controls, prove adherence.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Core to their function in control design/testing and issues management; critical for compliance and risk mitigation; feasible given existing processes and priorities."
+      },
+      {
+        "tier1": "AI",
+        "tier2": "AI Risk & Governance",
+        "use_case": "Model risk mgmt, governance, fairness, compliance.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "This use case directly supports the core responsibilities of Risk & Controls Office in managing risk assessments, compliance, and governance, which are strategic and operational priorities for Ford's operational risk management. Adoption feasibility is high given established fram"
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Operational Risk & Controls",
+        "use_case": "SLA/change/operational risk controls & reporting.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Ensures operational risks are monitored and reported accurately; important to maintain governance and continuous oversight within operations and technology."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Regulatory Reporting & Evidence",
+        "use_case": "Automate data/controls/evidence for CCAR/DFAST/Basel.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 3
+        },
+        "why": "Automating controls and evidence collection reduces manual effort and errors; applicable to compliance-driven assessments and reporting with moderate feasibility."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Data Observability",
+        "use_case": "Data quality/lineage/freshness telemetry.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 3,
+          "feasibility": 4
+        },
+        "why": "Improves data reliability and trust needed for accurate risk assessments and compliance; helps pinpoint control weaknesses; feasible with mature data monitoring tools."
+      }
+    ]
+  },
+  {
+    "ou": "Centralized IT / Operations Shared Services",
+    "use_cases_top5": [
+      {
+        "tier1": "Automation",
+        "tier2": "Workflow & Process Automation",
+        "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 5
+        },
+        "why": "Centralized IT operations benefit greatly from automating repetitive workflows to boost efficiency, reduce errors, and lower operational costs with broad feasibility across enterprise shared services."
+      },
+      {
+        "tier1": "Risk & Compliance",
+        "tier2": "Cyber Resilience & Compliance (incl. Security)",
+        "use_case": "Zero Trust, PAM, DR/BCP, policy enforcement.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Ensuring cybersecurity, disaster recovery, and policy enforcement is fundamental for enterprise-wide IT shared services to protect critical assets and comply with regulations; urgency and strategic need are very high."
+      },
+      {
+        "tier1": "Modernization",
+        "tier2": "Cloud Migration & Hybrid Ops",
+        "use_case": "Migrate to cloud/hybrid and operate across estates.",
+        "scores": {
+          "strategic_relevance": 5,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Cloud migration is crucial to modernizing shared services, enabling scalability and cost optimization, and is a strategic priority with strong feasibility in a 12-24 month horizon."
+      },
+      {
+        "tier1": "Observability",
+        "tier2": "Hybrid/Cloud Visibility",
+        "use_case": "APM/logs/traces/SLOs across hybrid.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 5,
+          "feasibility": 4
+        },
+        "why": "Observability of hybrid environments is critical for proactive IT operations and incident prevention in centralized shared services, directly addressing operational pain with mature toolsets available."
+      },
+      {
+        "tier1": "Orchestration",
+        "tier2": "Cross-Functional Orchestration",
+        "use_case": "End-to-end process orchestration spanning IT + business.",
+        "scores": {
+          "strategic_relevance": 4,
+          "operational_pain": 4,
+          "feasibility": 4
+        },
+        "why": "Orchestrating integrated IT and business processes centrally improves operational agility and reduces manual coordination, a strategic capability with moderate complexity but realistic adoption timelines."
+      }
+    ]
+  }
+]

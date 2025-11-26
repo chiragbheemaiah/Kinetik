@@ -1,0 +1,135 @@
+{
+  "company": "Ford",
+  "taxonomy": {
+    "level1": [
+      "AI",
+      "Automation",
+      "Modernization",
+      "Observability",
+      "Orchestration",
+      "Risk & Compliance"
+    ],
+    "level2": [
+      {
+        "name": "AI for Data & Analytics",
+        "parent_level1": "AI"
+      },
+      {
+        "name": "AI-Enhanced Engineering & Co-Pilots",
+        "parent_level1": "AI"
+      },
+      {
+        "name": "AI Risk & Governance",
+        "parent_level1": "AI"
+      },
+      {
+        "name": "Continuous Integration and Continuous Delivery",
+        "parent_level1": "AI"
+      },
+      {
+        "name": "AI-Augmented Software Development",
+        "parent_level1": "AI"
+      },
+      {
+        "name": "AIOps & Intelligent Incident Response",
+        "parent_level1": "AI"
+      },
+      {
+        "name": "Workflow & Process Automation",
+        "parent_level1": "Automation"
+      },
+      {
+        "name": "Data Pipeline Management",
+        "parent_level1": "Automation"
+      },
+      {
+        "name": "IT Operations Automation",
+        "parent_level1": "Automation"
+      },
+      {
+        "name": "Dev & Platform Automation",
+        "parent_level1": "Automation"
+      },
+      {
+        "name": "Infrastructure Optimization",
+        "parent_level1": "Automation"
+      },
+      {
+        "name": "Application Development / Software Engineering",
+        "parent_level1": "Modernization"
+      },
+      {
+        "name": "Cloud Migration & Hybrid Ops",
+        "parent_level1": "Modernization"
+      },
+      {
+        "name": "Application Modernization",
+        "parent_level1": "Modernization"
+      },
+      {
+        "name": "Mainframe Modernization",
+        "parent_level1": "Modernization"
+      },
+      {
+        "name": "Platform / SRE Modernization",
+        "parent_level1": "Modernization"
+      },
+      {
+        "name": "Hybrid / Cloud Visibility",
+        "parent_level1": "Observability"
+      },
+      {
+        "name": "Mainframe Monitoring",
+        "parent_level1": "Observability"
+      },
+      {
+        "name": "Data Observability",
+        "parent_level1": "Observability"
+      },
+      {
+        "name": "SLO / Cost (FinOps) Observability",
+        "parent_level1": "Observability"
+      },
+      {
+        "name": "IT Systems Orchestration",
+        "parent_level1": "Orchestration"
+      },
+      {
+        "name": "Cross-Functional Orchestration",
+        "parent_level1": "Orchestration"
+      },
+      {
+        "name": "Event-Driven Scheduling",
+        "parent_level1": "Orchestration"
+      },
+      {
+        "name": "Multi-Cloud Workload Orchestration",
+        "parent_level1": "Orchestration"
+      },
+      {
+        "name": "API / Webhook Orchestration",
+        "parent_level1": "Orchestration"
+      },
+      {
+        "name": "Regulatory Reporting & Evidence",
+        "parent_level1": "Risk & Compliance"
+      },
+      {
+        "name": "Cyber Resilience & Compliance (incl. Security)",
+        "parent_level1": "Risk & Compliance"
+      },
+      {
+        "name": "Consent Order Remediation & Audit Readiness",
+        "parent_level1": "Risk & Compliance"
+      },
+      {
+        "name": "Data Security & Governance",
+        "parent_level1": "Risk & Compliance"
+      },
+      {
+        "name": "Operational Risk & Controls",
+        "parent_level1": "Risk & Compliance"
+      }
+    ]
+  }
+}

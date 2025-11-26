@@ -1,249 +1,373 @@
-Below is a developer-ready requirements document describing the changes needed to the JSON ?scaffold/outline? used to generate the 8.1 Detailed Operational & Organizational Profile. It is derived from the provided transcript. 
+8.1. Overview
+Module: Buying Center Insights ? Module 8.1
+Purpose of JSON:
+* Drive LLM calls that produce a detailed ?Enterprise Operational & Organizational Profile? (8.1 deliverable).
+* The JSON is not for human reading; it is a machine-facing scaffold that defines:
+o Sections and subsections
+o Output format types (text, tables, org charts, leadership snapshots, transcript analyses)
+o Constraints (word counts, limits like ?top 10?, etc.)
+o Specific instructions for the LLM about sources and level of detail. 
+Problem with current JSON:
+* Over-reliance on generic 700?900 word narrative outputs.
+* Insufficient tables, org charts, and structured leadership profiles.
+* Inconsistent coverage (e.g., only 2?3 executives rather than 50?100).
+* Some sections? content/sequence are misaligned with actual needs. 
+Goal:
+Update the JSON so that each section:
+* Requests the right output type (table, org chart, narrative, etc.).
+* Has explicit row/column definitions and limits (e.g., ?top 10 initiatives?).
+* Uses clear, specific prompts that reliably produce usable downstream inputs for further LLM calls.
 
-Requirements Document: Updates to Org & Operational Profile JSON Scaffold (Module 8.1)
-1. Purpose
-Update the JSON scaffold that drives LLM profile generation so outputs are:
-* Less generic narrative and more structured, data-rich deliverables (tables, diagrams, org charts).
-* Reorganized to reflect a new section sequence and merged/removed sections.
-* Expanded where missing depth (executive profiling, IT org detail, strategic initiatives).
-* Explicit about output format and counts (e.g., ?top 10 initiatives,? ?top 100 executives?).
-The JSON is not for human reading; it feeds downstream LLM calls, so length is acceptable. 
+2. JSON Design Requirements
+2.1. Common schema for each subsection
+Every subsection object in the JSON should, at minimum, support:
+* id: string (e.g., "1.6")
+* title: string
+* description: high-level intent (for humans)
+* llm_prompt: concrete instructions to the LLM
+* output_type: enum, one of:
+o "text_narrative"
+o "table"
+o "org_chart"
+o "leadership_profiles"
+o "transcript_analysis"
+* constraints (object), optional keys:
+o word_count_min / word_count_max (for narratives)
+o max_items (e.g., top 10, top 20)
+o levels_of_hierarchy (for org charts)
+* table_definition (for output_type = "table"):
+o columns: array of { "name": string, "description": string }
+* org_chart_definition (for output_type = "org_chart"):
+o levels: integer (e.g., 3 levels deep including top leader)
+o include_names: boolean (always true here)
+o include_titles: boolean
+* leadership_profile_schema (for output_type = "leadership_profiles"):
+o List of fields (see ?4.3 & ?7.1)
+* source_guidance: textual guidance for the LLM regarding typical sources (10-K, earnings call transcripts, analyst reports, etc.).
+Developer should ensure this schema is reusable so new sections or changes are easy to add.
 
-2. Global JSON / Prompting Changes
-2.1 Replace default narrative word counts with output specs
-Current issue: Many sections specify ?700?900 words,? producing generic text.
-Requirement: For each section/subsection, replace or augment word-count guidance with:
-* Expected output type: narrative, table, diagram, org_chart, or mixed.
-* Minimum structure rules: column headers for tables, node requirements for charts, etc.
-* Explicit item counts: ?top 10,? ?top 20,? ?top 50,? ?top 100,? etc.
-2.2 Mixed-media outputs are mandatory
-The scaffold must request outputs as a blend of:
-* Numeric/data tables
-* Revenue/segment tables
-* Strategic initiative tables
-* Partner tables
-* Org charts with named roles reported in a tree/diagram format
-2.3 Consistency for executive profiles
-Executive ?leadership snapshot? prompts must be standardized to always return the same fields.
+3. Global Structural Changes
+1. Keep the overall ?14 section? concept but restructure/merge sections as follows (details in ?4??12):
+o Combine Section 4 (Workforce) and Section 6 (Location Footprint) into a new Section 4: ?Workforce and Location.? 
+o Combine Section 7 (IT Infrastructure) and Section 8 (IT Applications) into a single unified IT section (keep as Section 7, fold 8 into 7). 
+o Combine Section 13 (Governance) into Section 1, while deleting some governance subsections (see ?10).
+2. Introduce a new subsection 5.7 under Section 5 for mainframe systems software partners.
+3. Keep Section numbering consistent (1?14), but adjust subsection IDs and titles accordingly.
 
-3. Section-Level Structural Changes (Renumbering / Merges / Deletes)
-3.1 Combine and reorder sections
-1. Governance (#13) is merged into Section #1 and simplified.
-2. Workforce (#4) and Location Footprint (#6) are merged into a new Section #4: Workforce & Location.
-3. IT Applications (#8) is merged into IT Infrastructure (#7).
-4. Section #12 title changes from ?Recent Developments? to ?Earnings & Analyst Comments / Transcripts?.
-5. Section #14 remains but must be rewritten because current output fails.
-3.2 Delete/move specific subsections
-* From old #6 Location Footprint:
-o Delete: 6.2, 6.3, 6.4, 6.5, 6.6
-o Move: 6.1 ?Global hubs? ? new 4.7 under Workforce & Location.
-* From #9 Data Governance & Management:
-o Remove: 9.3 and 9.4
-* From #10 IT Organization:
-o Remove: 10.3 Security & compliance
-o Remove: 10.4 Project delivery & governance
-o Remove: 10.5 Talent & capability development
-* From #13 Governance (now merged into #1):
-o Eliminate: 13.5 and 13.6 (transcript says ?13.6 through 13.5?; interpret as removing these tail subsections).
+4. Section 1 ? Strategy, Governance, and Strategic Initiatives
+4.1. General
+* Section 1 already has subsections 1.1?1.7; we will keep the overall section but update content and merge Governance (Section 13) here.
+* All subsections should have clear prompts and appropriate output_type instead of generic 700?900 word narratives. 
+4.2. 1.6 Strategic Initiatives
+Current issue: Too generic narrative; doesn?t provide initiative-level detail.
+New requirements:
+* output_type: "table"
+* constraints.max_items: 10
+* llm_prompt (intent):
+o ?Identify the top 10 enterprise-level strategic initiatives. For each, provide initiative name, description, sponsoring executive(s), primary business unit(s), target outcomes/metrics, time horizon, and current status.?
+* table_definition.columns should include at least:
+o Initiative Name
+o Description
+o Sponsoring Executive(s)
+o Primary Business Unit(s)
+o Target Outcomes / KPIs
+o Time Horizon (e.g., 2024?2026)
+o Current Status (e.g., planning, pilot, scaled)
+4.3. 1.7 Strategic Technology Initiatives Aligned to Strategy
+Current issue: Also generic; needs alignment to initiatives in 1.6 and table-based. 
+New requirements:
+* output_type: "table"
+* constraints.max_items: 10
+* llm_prompt intent:
+o ?Identify the top 10 strategic technology initiatives that directly support the strategic initiatives in 1.6. For each, show which business initiative it supports.?
+* table_definition.columns at least:
+o Technology Initiative Name
+o Linked Strategic Initiative(s) (from 1.6)
+o Description
+o Primary Technology Domain (e.g., analytics, mainframe modernization)
+o Sponsoring IT/Business Owner(s)
+o Key Vendors/Partners
+o Stage / Status
+4.4. Incorporating Governance (former Section 13)
+Requirements:
+* Move remaining Governance subsections from Section 13 into Section 1.
+* Remove extraneous governance subsections (developer: drop any existing 13.3?13.6 or equivalent that were flagged to delete). 
+* Ensure new governance subsections under Section 1:
+o Use concise narrative and/or table formats.
+o Focus on decision-making bodies, committees, and accountability structure relevant to strategic initiatives.
 
-4. Detailed Requirements by Section
-Section 1: Enterprise Strategy & Governance (updated; absorbs #13)
-1.1?1.7 keep numbering but update formats
-* 1.6 Strategic Initiatives
-o Output: Table (NOT narrative).
-o Content rules:
-* Identify top 10 strategic initiatives/projects.
-* Each row: initiative name, objective, business unit owner, timeframe, status, measurable impacts.
-* 1.7 Strategic Technology Initiatives aligned to strategy
-o Output: Table.
-o Content rules:
-* Identify top 10 technology initiatives explicitly aligned to the strategic initiatives above.
-* Each row: tech initiative, mapped strategic initiative(s), platform/tech area, IT owner, business sponsor, status.
-Governance content merged from old #13
-* Move remaining governance subsections into Section 1 as new 1.x items.
-* Simplify: fewer subsections; focus on key governance structures only.
-* Output: Narrative + small tables if appropriate.
+5. Section 2 ? Revenue Reporting
+5.1. 2.1 & 2.2 ? Revenue by Reporting Segment and Lines of Business
+Current issue: 700?900 word narrative; needs structured tables. 
+New requirements:
+* output_type: "table"
+* llm_prompt intent:
+o ?Using latest available public financial data, generate a table of prior fiscal year revenue by reporting segment, and within each segment list the lines of business with their revenue. Totals must roll up correctly to segment and total enterprise revenue.?
+* table_definition.columns should include:
+o Reporting Segment Name
+o Line of Business Name
+o Fiscal Year (YYYY)
+o Line of Business Revenue (absolute)
+o Segment Revenue (absolute; repeated or via subtotal rows)
+o % of Segment Revenue
+o % of Total Enterprise Revenue
+5.2. 2.3 ? Revenue by Geography
+New requirements:
+* Change output_type from "text_narrative" to "table". 
+* llm_prompt intent:
+o ?Generate a table of revenue by geography and operating unit for the prior fiscal year.?
+* table_definition.columns:
+o Geography (e.g., region/country)
+o Operating Unit / Segment
+o Fiscal Year
+o Revenue
+o % of Total Revenue
 
-Section 2: Revenue Reporting (format overhaul)
-Current issue: narrative output.
-New requirement: all subsections shift to table-driven outputs.
-2.1 Revenue by Reporting Segment
-* Output: Table.
-* Content rules:
-o Prior fiscal year revenue by reporting segment.
-o Include sub-lines of business under each segment.
-o Provide totals from line of business ? segment ? enterprise.
-2.2 Revenue by Line of Business
-* Output: Table (can be same or a linked table).
-* Content rules:
-o Explicit last fiscal year revenue for each line of business.
-o Must roll up consistently to enterprise total.
-2.3 Revenue by Geography
-* Output: Table.
-* Content rules:
-o Revenue by operating unit and geography.
-o Show region totals and enterprise roll-up.
+6. Section 3 ? Organizational Structure & Leadership Snapshots
+6.1. Org Charts (3.1, 3.2, 3.3, etc.)
+Current issue: Narrative; needs diagrammatic org charts across C-suite and down 2 levels. 
+New requirements:
+* Subsections 3.1?3.3 (or equivalent) should have:
+o output_type: "org_chart"
+o org_chart_definition.levels: 3 (C-suite leader ? direct reports ? level 3 leaders)
+o org_chart_definition.include_names = true; include_titles = true
+o llm_prompt intent:
+* ?Produce an org chart showing functions, departments, and leaders for [Org scope: e.g., enterprise, business units, etc.]. Include C-suite, one level down, and level 3 leaders (direct reports of level 2).?
+6.2. 3.7 ? Leadership Snapshots
+Current issue: Returns only 2?3 profiles; inconsistent; missing boards, schools, hobbies, charities. 
+New requirements:
+* output_type: "leadership_profiles"
+* constraints.max_items: 100 (aim for top 50?100 executives).
+* llm_prompt intent:
+o ?Generate structured leadership profiles for the top 50?100 executives at the company.?
+* leadership_profile_schema (fields):
+o Full Name
+o Current Title
+o Organizational Unit
+o Reporting Line (who they report to)
+o Boards Served On
+o Educational Background (schools, degrees)
+o Hobbies / Personal Interests
+o Charities / Non-profits Involvement
+o Notable Career Milestones
+* The JSON should optionally allow passing in a predefined list of executives for profiling.
 
-Section 3: Organizational Structure (major expansion)
-3.0 Overall Org Structure
-* Output: Diagram/org-chart spec (NOT narrative).
-* Must include actual named leaders, not just functions.
-3.1?3.3 and 3.13 etc. (all org sub-sections)
-* Output: Org charts for each called-out organization.
-* Depth rules:
-o C-suite level
-o Level 2 (direct reports)
-o Level 3 (major departments + top leaders)
-3.7 Leadership Snapshots
-* Output: Structured list/table of executive profiles.
-* Count: Top 100 executives enterprise-wide.
-* Profile fields to require consistently:
-o Name, title, org/BU, reporting line
-o Career background & tenure
-o Boards served on
-o Schools/universities
-o Hobbies / charities / outside interests
-* Note: Prompt should explicitly instruct model to seek/return a full list, not 2?3 examples.
+7. Section 4 ? Workforce and Location (Merged 4 & 6)
+7.1. Structural change
+* Create a new Section 4: ?Workforce and Location? that merges:
+o Previous Section 4 (Workforce)
+o Previous Section 6 (Location Footprint) 
+* Delete subsections 6.2?6.6 (or equivalent IDs).
+* Move previous 6.1 ?Global Hubs? to become 4.7 ?Global Hubs.?
+7.2. 4.7 ? Global Hubs
+New requirements:
+* output_type: "table"
+* constraints.max_items: 20 (top 20 locations)
+* llm_prompt intent:
+o ?List the top 20 global locations (hubs), including major departments and functions present, and total employees located at each hub.?
+* table_definition.columns:
+o Location (City, Country)
+o Region
+o Major Departments/Functions Located There
+o Approx. Number of Employees
+o Notes (e.g., HQ, regional HQ, R&D center)
 
-Section 4 (new): Workforce & Location (merge old #4 and #6)
-4.1?4.6 Workforce (retain/adjust as needed)
-* Ensure workforce questions remain, but may add table requirements where useful.
-4.7 Global Hubs (from old 6.1)
-* Output: Table.
-* Content rules:
-o Top 20 global locations
-o For each: location, employee count, major departments/functions present, strategic importance.
+8. Section 5 ? Strategic Technology Partners
+8.1. 5.0 Overview & 5.1?5.6 Categories
+Current issue: Highly generic overview; needs tables listing partners and initiatives. 
+New requirements:
+* 5.0 Overview:
+o output_type: "text_narrative" plus summary of partners.
+o llm_prompt intent:
+* ?Summarize the top 3?5 strategic technology partners overall across categories 5.1?5.6 and highlight the key initiatives they are responsible for deploying.?
+* 5.1?5.6:
+o output_type: "table"
+o constraints.max_items: 5 per category (top 5 partners).
+o llm_prompt intent per category:
+* ?Identify the top 5 partners in [category] and list the key initiatives and roles they play.?
+o table_definition.columns:
+* Partner Name
+* Category (mirrors 5.1?5.6)
+* Key Initiatives / Projects
+* Business Units / Functions Supported
+* Strategic Importance / Role
+* Notable Technologies / Products
+8.2. New 5.7 ? Mainframe Systems Software
+New requirements:
+* Add subsection 5.7: ?Mainframe Systems Software Partners.? 
+* output_type: "table"
+* llm_prompt intent:
+o ?List the primary mainframe systems software partners (e.g., BMC, IBM, Broadcom and others), their software products, and the key initiatives they support.?
+* table_definition.columns:
+o Partner Name
+o Key Mainframe Software Product(s)
+o Use Cases / Initiatives Supported
+o Mainframe Platform(s) Used
+o Notes / Integration With Other Systems
 
-Section 5: Strategic Technology Partners (refine and add 5.7)
-5.0 Overview
-* Must summarize top 3?5 partners overall and key initiatives they enable.
-5.1?5.6 Partner Categories
-* Output: Narrative + Table.
-* Table rules:
-o For each category, list top 5 partners.
-o Columns: partner, category fit, key products/services, initiatives supported, relationship depth.
-5.7 NEW: Mainframe Systems Software Partners
-* Output: Table + brief narrative.
-* Must include examples such as BMC, IBM, Broadcom and other relevant mainframe vendors.
+9. Section 7 ? IT Infrastructure & Section 8 ? IT Applications (Merged)
+9.1. Structural change
+* Combine Section 8 into Section 7:
+o Section 7 remains ?IT Infrastructure & Applications? (or similar).
+o Subsections previously under Section 8 should be re-mapped under 7 and simplified into existing infrastructure categories. 
+9.2. 7.1 ? IT Infrastructure Overview
+Current issue: Not providing value at current word count.
+New requirements:
+* output_type: "text_narrative"
+* constraints.word_count_min: ~800; word_count_max: ~1500 (adjust as needed)
+* llm_prompt intent:
+o ?Provide a specific and structured definition of the company?s strategic IT architecture. Explicitly call out:
+* Data processing layers
+* Mainframe systems and their roles
+* Key infrastructure components (network, storage, compute, security layers, etc.)
+* How these components interoperate.?
+9.3. Applications (former Section 8)
+New requirements:
+* Fold application categories into simplified subsections under Section 7 (e.g., 7.x).
+* Each application category should:
+o Define whether output is a table or text_narrative.
+o Emphasize alignment with infrastructure components defined above (e.g., ?core transaction processing,? ?analytics/BI,? ?customer-facing apps?).
 
-Section 7 (merged): IT Infrastructure + Applications
-7.1 Overview
-* Replace generic narrative with explicit architecture breakdown.
-Output: Structured narrative + component tables.
-Content rules:
-* Define enterprise strategic IT architecture components.
-* Must explicitly call out:
-o Data processing stack
-o Mainframe systems & integration with cloud
-o Core compute, storage, network, security layers
-o Platform patterns (hybrid/multi-cloud, edge, etc.)
-Former Section 8 content
-* Remove redundant application category subsections.
-* Incorporate key application categories inside Section 7 as a simplified subset aligned to infrastructure layers.
+10. Section 9 ? Data Governance and Management
+10.1. Remove 9.3 and 9.4
+* Delete subsections 9.3 and 9.4 entirely from the JSON scaffold. 
+10.2. 9.2 ? Data Platforms
+New requirements:
+* output_type: "text_narrative" (optionally plus table)
+* llm_prompt intent:
+o ?Describe the data platforms in use and any initiatives aimed at providing seamless data availability between cloud platforms and mainframe platforms.?
+10.3. 9.5 ? Analytics and AI
+New requirements:
+* Increase the word count and initiative detail:
+o constraints.word_count_min: ~1200; word_count_max: ~2000.
+* llm_prompt intent:
+o ?Detail analytics and AI capabilities and specific initiatives underway, including objectives, technologies used, data dependencies, and alignment with enterprise strategy.?
 
-Section 9: Data Governance & Management (simplify + expand)
-* Remove: 9.3, 9.4.
-* 9.2 Data Platforms
-o Add explicit prompt to surface initiatives enabling seamless data availability between cloud and mainframe platforms.
-* 9.5 Analytics & AI
-o Expand depth via higher word count and/or table of initiatives.
-o Focus on active analytics/AI programs, platforms, and owners.
+11. Section 10 ? IT Organization
+11.1. 10.1 ? Global IT Leadership
+Current issue: Narrative; needs structured list + profiles. 
+New requirements:
+* output_type: "leadership_profiles"
+* constraints.max_items: 50 (top 50 IT executives).
+* llm_prompt intent:
+o ?Identify the top 50 executives within the IT organization and produce detailed leadership profiles using the same structure as Section 3 leadership snapshots.?
+* Reuse leadership_profile_schema from Section 3.
+11.2. Remove 10.3?10.5
+* Delete subsections:
+o 10.3 Security and Compliance
+o 10.4 Project Delivery and Governance
+o 10.5 Talent and Capability Development
+11.3. 10.6 ? Centralized vs. Decentralized IT
+New requirements:
+* output_type: "text_narrative" + optional "table".
+* llm_prompt intent:
+o ?Explain the centralized vs. decentralized IT operating model. Include:
+* Narrative explanation of what is centralized and decentralized.
+* Detailed breakdown by department and function.?
+* If table is used, columns:
+o Department / Function
+o Centralized or Decentralized (or Hybrid)
+o Primary Location (if centralized)
+o Key Responsibilities
+11.4. 10.7 ? Centralized IT and Shared Services
+New requirements:
+* output_type: "text_narrative" + "table".
+* Expand word count and detail:
+o constraints.word_count_min: ~1500; word_count_max: ~2500.
+* llm_prompt intent:
+o ?Detail centralized IT and shared services departments and functions, including where the centralized work occurs.?
+* Table columns:
+o Department / Function
+o Central/Shared Service Location
+o Scope of Work
+o Supported Business Units
+11.5. 10.8 ? Business Unit?Aligned IT
+New requirements:
+* output_type: "text_narrative" + "table".
+* constraints.word_count_min: 1500; word_count_max: 2500. 
+* llm_prompt intent:
+o ?Describe business-unit aligned IT departments and functions. For each BU/operating unit, show what operations and work occur.?
+* Table columns:
+o Business Unit / Operating Unit
+o IT Department / Function
+o Key Responsibilities / Operations
+o Relationship to Central IT
 
-Section 10: IT Organization (refactor + expand leadership + centralization detail)
-10.1 Global IT Leadership
-* Output: Table/list of top 50 IT executives.
-* Then require full leadership profiles matching the structure used in Section 3 snapshots.
-Remove subsections
-* Delete 10.3?10.5 as listed in ?3.2.
-10.6 Centralized vs Decentralized IT
-* Output: Narrative + Table.
-* Table rules:
-o Break down IT departments/functions.
-o Indicate which are centralized vs BU-aligned/decentralized.
-o Include where centralized work occurs.
-10.7 Centralized IT & Shared Services
-* Output: Expanded narrative + Table.
-* Word count: increase substantially (no specific number given; set higher than old default).
-* Table rules: explicit inventory of centralized functions, scope, locations, leadership owners.
-10.8 BU-Aligned IT Departments
-* Output: Narrative + Table.
-* Word count: 1500?2500 words plus a table.
-* Table rules: for each BU/operating unit, list IT functions performed, key leaders, and remit.
+12. Section 11 ? Innovation Themes and Strategic Initiatives
+Current issue: Word count OK, but needs tables per theme. 
+New requirements:
+* Retain existing narrative word counts.
+* For 11.1?11.8, add:
+o output_type: "table" (or "text_narrative_and_table" if you support combined).
+* llm_prompt intent per theme:
+o ?List all initiatives that fit within this innovation theme and detail leaders, actions underway, and challenges.?
+* table_definition.columns:
+o Initiative Name
+o Theme (11.x)
+o Lead Executive(s)
+o Current Key Actions
+o Key Challenges / Risks
+o Expected Outcomes
 
-Section 11: Innovation Themes & Strategic Initiatives (add tables)
-* Narrative word counts acceptable, but add tables for each theme.
-11.1?11.8
-* Output: For each subsection:
-o Narrative summary
-o Table of initiatives under that theme
-* Table rules:
-o Initiative name
-o Key leaders/owners
-o Actions underway
-o Challenges/risks
-o Expected outcomes/metrics
+13. Section 12 ? Earnings and Analysts Comments and Transcripts
+Current issue: Mis-titled, weak word count instructions, not leveraging transcripts and analyst reports. 
+New requirements:
+* Rename Section 12 title to:
+?Earnings and Analysts Comments and Transcripts.?
+* Subsections should use:
+o output_type: "transcript_analysis" and/or "text_narrative" + "table".
+* llm_prompt intent:
+o ?Attempt to retrieve and analyze:
+* Earnings call transcripts (management and analyst Q&A).
+* Analyst reports published within 60 days after an earnings announcement.
+* Extract the most recent comments and questions from analysts as well as management responses.
+* Synthesize what these sources indicate about:
+* Latest strategic initiatives
+* IT initiatives aligned to strategic initiatives.?
+* Include table definitions where useful:
+o Example table:
+* Source Type (Earnings Call / Analyst Report)
+* Date
+* Key Topic / Initiative
+* Analyst Concern / Question
+* Management Response Summary
+* Implications for Strategy / IT
 
-Section 12 (renamed): Earnings & Analyst Comments / Transcripts
-Rename section title accordingly.
-Major behavior change:
-* Increase word counts substantially (exact values TBD in JSON).
-* Prompt must:
-1. Retrieve and analyze earnings call transcripts when available.
-2. Extract analyst Q&A and commentary.
-3. Identify analyst reports within 60 days post-earnings.
-4. Summarize latest developments in strategic + IT initiatives from these sources.
-Output: Narrative + extracted bullet/table of key analyst themes and cited initiatives.
+14. Section 13 ? Governance (Merged into Section 1)
+As covered in ?4.4:
+* Remove Section 13 as a separate top-level section.
+* Move remaining relevant governance content into Section 1.
+* Delete subsections marked for removal (13.3?13.6 or equivalent).
 
-Section 14: Organizational Charts for Key Functions (rewrite for proper tree output)
-Current failure: returns links or shallow text.
-Requirement:
-* For each org defined in 14.1?14.6:
-o Output: Tree/diagram spec showing:
-* Function/department head
-* Direct reports (Level 2)
-* Second-level reports (Level 3)
-o Must include:
-* Org/unit names
-* Person names and titles at each node
+15. Section 14 ? Functional Org Charts
+Current issue: Returns external links or 3-paragraph narratives; needs tree-style org charts for each defined function. 
+New requirements:
+* For each of 14.1?14.6:
+o output_type: "org_chart"
+o org_chart_definition.levels: 3 (Top leader ? their direct reports ? second-level reports).
+o org_chart_definition.include_names = true, include_titles = true.
+* llm_prompt intent per function:
+o ?Produce a tree-diagram style org chart for [function/department], showing:
+* Overall leader (top of tree).
+* Direct reports (level 1).
+* Level 2 under each leader.
+* For each node: organization/department name and the person in that position.?
 
-5. Acceptance Criteria
-1. Format compliance
-o Sections requiring tables produce tables with specified columns.
-o Sections requiring org charts/diagrams return structured tree data (not prose or outbound links).
-2. Count compliance
-o Section 1.6/1.7: exactly ~10 items each unless data unavailable.
-o Section 3.7: ~100 enterprise executives.
-o Section 10.1: ~50 IT executives.
-o Section 4.7: top ~20 hubs.
-o Section 5 tables: top ~5 per category.
-3. Content depth
-o Executive snapshots include boards/schools/hobbies/charities.
-o IT infrastructure overview explicitly discusses data processing + mainframe components.
-o Data platforms covers cloud?mainframe data initiatives.
-o Earnings/analyst section references recent transcripts/reports and ties back to strategy/IT initiatives.
-4. Structural consistency
-o Merged/removed sections no longer appear in JSON.
-o Renumbered sections align with new order.
-o Old subsections marked for deletion are absent.
-
-6. Implementation Notes for Developer
-* Treat JSON as a prompt schema, not just an outline.
-* Each node should support fields like:
-o title
-o purpose
-o output_type (enum)
-o word_count_guidance (optional)
-o item_count_target (optional)
-o table_schema (if output_type includes table)
-o diagram_schema (if output_type includes diagram/org_chart)
-o prompt_text (LLM instruction)
-* Ensure downstream code consuming JSON can handle mixed output types.
-
-7. Post-Update Testing
-After implementing JSON updates, test with a handful of accounts to verify:
-* Tables render as intended.
-* Org charts return full multi-level trees with names.
-* Executive profile counts are met.
-* Sections merged/removed behave correctly.
-
+16. Testing & Acceptance Criteria
+The updated JSON should be considered complete when:
+1. Validation:
+o JSON validates against the agreed schema (IDs, titles, output_type, prompts, constraints).
+2. Coverage:
+o All 14 sections are present.
+o Required merges and deletions (4+6, 7+8, 1+13, removed subsections) are implemented.
+3. Format specificity:
+o All previously generic narrative sections have explicit output_type and, where needed, table_definition, org_chart_definition, or leadership_profile_schema.
+4. LLM test runs:
+o Run the scaffold against a handful of test accounts.
+o Verify that:
+* Section 1.6 and 1.7 return usable initiative-level tables.
+* Section 2 returns numeric tables that roll up correctly.
+* Sections 3 & 10 return 50?100 leadership profiles, not just a few.
+* Sections 4, 5, 7, 11, 12, and 14 return appropriately structured tables/org charts and analyses rather than generic prose. 
+If you?d like, next step I can draft a sample JSON snippet (e.g., for Sections 1 and 2) using this schema so a developer has a concrete implementation example.
 

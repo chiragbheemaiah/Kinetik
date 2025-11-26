@@ -1,0 +1,187 @@
+{
+  "top_30": [
+    {
+      "agency": "Ford Global Data Insights & Analytics (GDIA)",
+      "level1": "AI",
+      "level2": "AI for Data & Analytics",
+      "notes": "Builds ML models and analytics for product, manufacturing, and customer insights. Operates feature stores and MLOps pipelines."
+    },
+    {
+      "agency": "Ford Developer Co-Pilot & AI Enablement",
+      "level1": "AI",
+      "level2": "AI-Enhanced Engineering & Co-Pilots",
+      "notes": "Rolls out AI pair-programming, code assistants, and chat copilots. Curates models and guardrails for engineering."
+    },
+    {
+      "agency": "Ford AI Governance & Responsible AI Office",
+      "level1": "AI",
+      "level2": "AI Risk & Governance",
+      "notes": "Defines AI policies, model risk controls, and bias testing. Oversees compliance and model lifecycle approvals."
+    },
+    {
+      "agency": "Ford Intelligent Operations Center (IOC)",
+      "level1": "AI",
+      "level2": "AIOps & Intelligent Incident Response",
+      "notes": "Applies ML to detect anomalies and auto-triage incidents. Correlates logs, metrics, and traces to cut MTTR."
+    },
+    {
+      "agency": "Ford Business Process Automation COE",
+      "level1": "Automation",
+      "level2": "Workflow & Process Automation",
+      "notes": "Delivers RPA/BPM for finance, HR, and dealer ops. Standardizes bots, workflow patterns, and governance."
+    },
+    {
+      "agency": "Ford Data Pipeline Engineering & Orchestration",
+      "level1": "Automation",
+      "level2": "Data Pipeline Management",
+      "notes": "Builds and manages ETL/ELT pipelines for vehicle, plant, and commerce data. Ensures SLAs and recovery."
+    },
+    {
+      "agency": "Ford Platform Automation & Toolchain",
+      "level1": "Automation",
+      "level2": "Dev & Platform Automation",
+      "notes": "Provides reusable CI templates, IaC modules, and release automation. Reduces toil across app teams."
+    },
+    {
+      "agency": "Ford Application Development Studio",
+      "level1": "Modernization",
+      "level2": "Application Development / Software Engineering",
+      "notes": "Builds digital retail, connected vehicle, and mobile apps. Uses modern frameworks, APIs, and microservices."
+    },
+    {
+      "agency": "Ford Cloud Migration & Hybrid Ops Program",
+      "level1": "Modernization",
+      "level2": "Cloud Migration & Hybrid Ops",
+      "notes": "Moves workloads to AWS/Azure and manages hybrid plant systems. Delivers landing zones and ops patterns."
+    },
+    {
+      "agency": "Ford Legacy Application Modernization Initiative",
+      "level1": "Modernization",
+      "level2": "Application Modernization",
+      "notes": "Decomposes monoliths and containerizes services. Refactors core apps for Ford Pro, Blue, and Credit."
+    },
+    {
+      "agency": "Ford Mainframe Modernization Office",
+      "level1": "Modernization",
+      "level2": "Mainframe Modernization",
+      "notes": "Replatforms COBOL/IMS finance and supply-chain systems. Exposes functions via APIs and event streams."
+    },
+    {
+      "agency": "Ford Cloud & Hybrid Observability Services",
+      "level1": "Observability",
+      "level2": "Hybrid / Cloud Visibility",
+      "notes": "Provides end-to-end telemetry for Kubernetes, cloud, and on-prem. Unified logs, metrics, traces, and RUM."
+    },
+    {
+      "agency": "Ford Data Quality & Observability Guild",
+      "level1": "Observability",
+      "level2": "Data Observability",
+      "notes": "Monitors data freshness, lineage, and schema drift. Alerts on SLA breaches for key datasets."
+    },
+    {
+      "agency": "Ford FinOps & SLO Analytics",
+      "level1": "Observability",
+      "level2": "SLO / Cost (FinOps) Observability",
+      "notes": "Tracks SLOs and error budgets alongside cloud spend. Drives right-sizing and cost/perf trade-offs."
+    },
+    {
+      "agency": "Ford Enterprise IT Orchestration Services",
+      "level1": "Orchestration",
+      "level2": "IT Systems Orchestration",
+      "notes": "Automates cross-system runbooks and change workflows. Coordinates deployments across plants and IT."
+    },
+    {
+      "agency": "Ford Event Scheduling Platform",
+      "level1": "Orchestration",
+      "level2": "Event-Driven Scheduling",
+      "notes": "Runs Kafka-triggered jobs and streaming micro-batch flows. Powers telemetry processing and updates."
+    },
+    {
+      "agency": "Ford API & Webhook Orchestration Team",
+      "level1": "Orchestration",
+      "level2": "API / Webhook Orchestration",
+      "notes": "Manages partner and dealer webhooks and callbacks. Ensures idempotency, retries, and routing policies."
+    },
+    {
+      "agency": "Ford Cyber Defense & Compliance",
+      "level1": "Risk & Compliance",
+      "level2": "Cyber Resilience & Compliance (incl. Security)",
+      "notes": "Delivers threat detection, vuln mgmt, and incident response. Implements regulatory security controls."
+    },
+    {
+      "agency": "Ford Regulatory Reporting & Evidence Office",
+      "level1": "Risk & Compliance",
+      "level2": "Regulatory Reporting & Evidence",
+      "notes": "Produces audit artifacts for SOX, emissions, and safety. Centralizes evidence and control testing."
+    },
+    {
+      "agency": "Ford Data Security & Governance Council",
+      "level1": "Risk & Compliance",
+      "level2": "Data Security & Governance",
+      "notes": "Sets data classification, encryption, and access policies. Oversees stewardship and governance forums."
+    }
+  ],
+  "next_50": [
+    {
+      "agency": "Ford Connected Vehicle Insights AI",
+      "level1": "AI",
+      "level2": "AI for Data & Analytics",
+      "notes": "Builds predictive models on vehicle telemetry and customer data to optimize services and uptime."
+    },
+    {
+      "agency": "Ford Intelligent Incident Response",
+      "level1": "AI",
+      "level2": "AIOps & Intelligent Incident Response",
+      "notes": "Uses ML for anomaly detection, alert correlation, and auto-remediation across IT and plant systems."
+    },
+    {
+      "agency": "Ford Manufacturing Workflow Automation",
+      "level1": "Automation",
+      "level2": "Workflow & Process Automation",
+      "notes": "Automates approvals, quality gates, and logistics workflows end-to-end in manufacturing and supply."
+    },
+    {
+      "agency": "Ford Infrastructure Efficiency & Optimization",
+      "level1": "Automation",
+      "level2": "Infrastructure Optimization",
+      "notes": "Automates right-sizing, scaling, and placement of compute/storage to reduce cost and improve performance."
+    },
+    {
+      "agency": "Ford Digital Product Engineering Hub",
+      "level1": "Modernization",
+      "level2": "Application Development / Software Engineering",
+      "notes": "Delivers modern apps, microservices, and APIs for customer, dealer, and vehicle experiences."
+    },
+    {
+      "agency": "Ford Platform Reliability Modernization",
+      "level1": "Modernization",
+      "level2": "Platform / SRE Modernization",
+      "notes": "Evolves SRE practices, IaC, and incident playbooks to improve reliability and recovery."
+    },
+    {
+      "agency": "Ford Mainframe Monitoring Services",
+      "level1": "Observability",
+      "level2": "Mainframe Monitoring",
+      "notes": "24x7 monitoring of z/OS, CICS, and DB2 with transaction tracing and performance metrics."
+    },
+    {
+      "agency": "Ford Multi-Cloud Workload Orchestrator",
+      "level1": "Orchestration",
+      "level2": "Multi-Cloud Workload Orchestration",
+      "notes": "Orchestrates scheduling and mobility of workloads across AWS, Azure, and on-prem clusters."
+    },
+    {
+      "agency": "Ford Operational Risk & Controls Office",
+      "level1": "Risk & Compliance",
+      "level2": "Operational Risk & Controls",
+      "notes": "Runs control design/testing, issues management, and risk assessments across technology and operations."
+    },
+    {
+      "agency": "Centralized IT / Operations Shared Services",
+      "level1": "Operations",
+      "level2": "Shared Services",
+      "notes": "Enterprise-wide IT & operations shared services (centralized)."
+    }
+  ],
+  "final_20": []
+}

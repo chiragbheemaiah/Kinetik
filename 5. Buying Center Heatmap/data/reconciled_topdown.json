@@ -1,0 +1,1175 @@
+{
+  "company": "Ford",
+  "topdown_rows": [
+    "Ford Blue",
+    "Ford Model e",
+    "Ford Pro",
+    "Ford Next",
+    "Ford Credit"
+  ],
+  "theme_columns": [
+    "AI",
+    "Automation",
+    "Modernization",
+    "Observability",
+    "Orchestration",
+    "Risk & Compliance"
+  ],
+  "units": [
+    {
+      "ou": "Ford Global Data Insights & Analytics (GDIA)",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "ML/GenAI for analytics, fraud, forecasting, NLP, decisions.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Core to GDIA's mission of building ML models for product, manufacturing, and customer insights, driving strategic analytics and decision-making capabilities."
+        },
+        {
+          "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Critical for managing data pipelines and ensuring data quality and availability for ML and analytics applications."
+        },
+        {
+          "use_case": "Data quality/lineage/freshness telemetry.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Critical to monitor and maintain the integrity and freshness of data used in analytics and ML models, reducing operational risks."
+        },
+        {
+          "use_case": "Model risk mgmt, governance, fairness, compliance.",
+          "theme": "AI",
+          "score": 4.0,
+          "why": "Ensures responsible use of AI models, addressing governance and compliance vital to large enterprise data and analytics teams."
+        },
+        {
+          "use_case": "Batch/workload orchestration (e.g., Control-M).",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Enables reliable scheduling and orchestration of ML pipelines and batch analytics workloads, essential for operational stability."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Developer Co-Pilot & AI Enablement",
+      "row": "Ford Model e",
+      "items": [
+        {
+          "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "For Ford Developer Co-Pilot & AI Enablement, enabling AI-enhanced engineering co-pilots directly supports modernizing software development processes. Continuous Integration and Continuous Deployment are core to improving developer productivity, software quality, and release speed"
+        },
+        {
+          "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Core to the unit's mission; AI-powered dev acceleration directly impacts productivity and quality, feasible with current tech trends."
+        },
+        {
+          "use_case": "Dev co-pilots, code insight, test gen, agentic DevOps.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Central to the org's defined scope; deploying AI copilots to assist engineers reduces manual effort and error, with realistic adoption potential."
+        },
+        {
+          "use_case": "CI/CD, IaC, containers, platform engineering.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Streamlining dev pipelines complements AI co-pilot capabilities, addressing operational bottlenecks with mature tools and processes."
+        },
+        {
+          "use_case": "Expose/consume APIs/webhooks to control flows.",
+          "theme": "Orchestration",
+          "score": 3.0,
+          "why": "Enabling dynamic integrations and extensibility is key for scalable AI co-pilot and dev workflows, readily implementable in 12\u201324 months."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.64,
+        "reason": "Enterprise AI developer tooling aligns with Ford's centralized software platform under Model e, which leads software engineering and digital capabilities across vehicle programs."
+      }
+    },
+    {
+      "ou": "Ford AI Governance & Responsible AI Office",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Model risk mgmt, governance, fairness, compliance.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Core to office mission; critical for defining AI policies, managing model risks, addressing fairness, and ensuring compliance across AI lifecycle."
+        },
+        {
+          "use_case": "Remediate findings, enforce controls, prove adherence.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Vital for operationalizing compliance controls, managing risks timely, and demonstrating policy adherence throughout AI usage."
+        },
+        {
+          "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "This use case aligns closely with AI Governance and Responsible AI as it supports the development of AI models with embedded governance controls, enabling bias detection, compliance, and quality assurance throughout the model lifecycle, which is central to Ford's AI risk manageme"
+        },
+        {
+          "use_case": "Data protection/masking/governance policies.",
+          "theme": "Risk & Compliance",
+          "score": 4.0,
+          "why": "Ensures sensitive AI data is secure and governed properly, which is essential for regulatory compliance and bias mitigation."
+        },
+        {
+          "use_case": "SLA/change/operational risk controls & reporting.",
+          "theme": "Risk & Compliance",
+          "score": 3.0,
+          "why": "Important for tracking risks and service level performance related to AI models, enabling proactive governance and management."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Intelligent Operations Center (IOC)",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "AI anomaly detection, alert reduction, incident response.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Core to IOC's mission to detect anomalies, reduce alerts, and auto-triage incidents, directly improving MTTR and operational efficiency with proven ML applications."
+        },
+        {
+          "use_case": "APM/logs/traces/SLOs across hybrid.",
+          "theme": "Observability",
+          "score": 5.0,
+          "why": "Crucial for correlating metrics and traces across hybrid environments to enhance incident response and observability, enabling better anomaly detection and root cause analysis."
+        },
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Enables streamlined incident handling and operational tasks automation, reducing manual toil and accelerating resolution processes at IOC."
+        },
+        {
+          "use_case": "End-to-end process orchestration spanning IT + business.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Facilitates coordinated workflows and cascading incident responses across systems, improving comprehensive operational effectiveness within Ford IOC."
+        },
+        {
+          "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+          "theme": "AI",
+          "score": 3.0,
+          "why": "Improves developer productivity and software quality, complementary to IOC's emphasis on robust software and faster incident remediation through smarter dev cycles."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Business Process Automation COE",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Core to COE mandate; standardizes and automates finance, HR, dealer ops workflows to reduce manual effort and errors, boosting efficiency and compliance rapidly."
+        },
+        {
+          "use_case": "End-to-end process orchestration spanning IT + business.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Enables holistic automation from front to back office, improving visibility and control, supporting COE\u2019s mission to standardize workflow patterns and governance."
+        },
+        {
+          "use_case": "SLA/change/operational risk controls & reporting.",
+          "theme": "Risk & Compliance",
+          "score": 4.0,
+          "why": "Essential for governance of automated processes, ensuring operational risk is controlled and compliant, aligning with COE\u2019s governance and standardization goals."
+        },
+        {
+          "use_case": "Expose/consume APIs/webhooks to control flows.",
+          "theme": "Orchestration",
+          "score": 3.0,
+          "why": "Integrates automation solutions with existing systems via APIs/webhooks, enhancing bot and workflow interoperability key to scaling automation at Ford."
+        },
+        {
+          "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+          "theme": "Automation",
+          "score": 3.0,
+          "why": "Supports automated data flows underpinning finance and HR workflows, improving data readiness and quality essential for reliable RPA outcomes."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Data Pipeline Engineering & Orchestration",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Core to building and managing ETL/ELT pipelines, critical for data ingestion, quality and SLA management, with high feasibility due to existing pipelining frameworks."
+        },
+        {
+          "use_case": "Batch/workload orchestration (e.g., Control-M).",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Essential for scheduling and orchestrating batch data workflows with SLA and recovery focus, enabling automation and coordination across tasks."
+        },
+        {
+          "use_case": "Data quality/lineage/freshness telemetry.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Monitoring data quality, lineage, and freshness is vital to meet SLAs and ensure reliability of pipelines, with growing adoption of observability tools."
+        },
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 3.0,
+          "why": "Automating handoffs and approvals in data pipeline management reduces manual errors and delays and is feasible to expand within 1-2 years."
+        },
+        {
+          "use_case": "Coordinate workloads across clouds.",
+          "theme": "Orchestration",
+          "score": 3.0,
+          "why": "With pipelines spanning multiple cloud platforms and on-prem, orchestrating cross-cloud workloads supports scalability and SLA fulfillment, though complexity is moderate."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Platform Automation & Toolchain",
+      "row": "Ford Model e",
+      "items": [
+        {
+          "use_case": "CI/CD, IaC, containers, platform engineering.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Core to the unit's mission providing reusable CI templates and IaC modules, directly enabling platform engineering and release automation, crucial for reducing toil."
+        },
+        {
+          "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Fundamental practice the unit supports and enhances, accelerating software delivery by automating build, test, and deploy pipelines for app teams."
+        },
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Addresses toil by automating repetitive tasks and approvals across development platforms, enabling higher operational efficiency."
+        },
+        {
+          "use_case": "SRE patterns, reliability engineering, toil reduction.",
+          "theme": "Modernization",
+          "score": 4.0,
+          "why": "Aligns with goal of reducing toil and improving platform reliability by adopting SRE best practices and engineering principles."
+        },
+        {
+          "use_case": "Kafka/events/webhooks as triggers.",
+          "theme": "Orchestration",
+          "score": 3.0,
+          "why": "Supports release automation and platform engineering by leveraging event-driven mechanisms to orchestrate CI/CD pipelines and infrastructure workflows."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.64,
+        "reason": "DevOps platform (CI/CD, IaC, platform engineering) enabling software delivery aligns with Ford Model e\u2019s software/digital engineering ownership for vehicle and services platforms."
+      }
+    },
+    {
+      "ou": "Ford Application Development Studio",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "CI/CD is core to modern app development enabling rapid, reliable releases essential for fast iterations and meeting customer expectations."
+        },
+        {
+          "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "AI-enhanced development accelerates innovation in digital retail, connected vehicle, and mobile apps, improving speed and quality key to competitiveness and time-to-market."
+        },
+        {
+          "use_case": "Refactor/replatform, microservices, containers.",
+          "theme": "Modernization",
+          "score": 5.0,
+          "why": "Microservices and containerization underpin highly scalable, modular architectures essential for connected vehicle and mobile app ecosystems."
+        },
+        {
+          "use_case": "CI/CD, IaC, containers, platform engineering.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automation in infrastructure as code, container orchestration, and platform engineering supports scalable and consistent application delivery."
+        },
+        {
+          "use_case": "Expose/consume APIs/webhooks to control flows.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "API/webhook orchestration enables integration and real-time interactions essential to connected vehicles and mobile experiences."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Cloud Migration & Hybrid Ops Program",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Migrate to cloud/hybrid and operate across estates.",
+          "theme": "Modernization",
+          "score": 5.0,
+          "why": "Core to the program\u2019s mission is migrating workloads to AWS/Azure and managing hybrid plant systems, making this the highest priority and fully feasible within 12-24 months."
+        },
+        {
+          "use_case": "Coordinate workloads across clouds.",
+          "theme": "Orchestration",
+          "score": 5.0,
+          "why": "Essential for efficient hybrid ops to coordinate workloads seamlessly across AWS, Azure, and on-prem systems, addressing operational needs and feasible given existing cloud investments."
+        },
+        {
+          "use_case": "CI/CD, IaC, containers, platform engineering.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Modern platform engineering with CI/CD and containers supports faster and reliable cloud migration and operations, critical for program success and highly achievable soon."
+        },
+        {
+          "use_case": "APM/logs/traces/SLOs across hybrid.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Visibility across hybrid environments is needed for reliable operations and monitoring, reducing incidents and operational risk with moderate complexity to implement."
+        },
+        {
+          "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+          "theme": "AI",
+          "score": 4.0,
+          "why": "Automating software delivery pipelines aligns with cloud native development best practices, improving quality and speed, and is highly feasible given available tools and skilled teams."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Legacy Application Modernization Initiative",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Refactor/replatform, microservices, containers.",
+          "theme": "Modernization",
+          "score": 5.0,
+          "why": "Core to decomposing monoliths, containerizing services, and modernizing legacy apps critical for Ford Pro, Blue, and Credit systems."
+        },
+        {
+          "use_case": "Continuous Integration and Continuous Deployment (or Continuous Delivery) \u2014 a set of modern software development practices designed to improve the speed, quality, and reliability of software delivery.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Enables faster, reliable software delivery, critical for refactoring applications and containerized microservices adoption."
+        },
+        {
+          "use_case": "CI/CD, IaC, containers, platform engineering.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automates containerized deployments and platform engineering key to modernizing legacy applications and operationalizing microservices."
+        },
+        {
+          "use_case": "Migrate to cloud/hybrid and operate across estates.",
+          "theme": "Modernization",
+          "score": 4.0,
+          "why": "Supports migration of legacy apps to cloud/hybrid environments, essential for modern scalable operations and infrastructure agility."
+        },
+        {
+          "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+          "theme": "AI",
+          "score": 3.0,
+          "why": "Enhances developer productivity and quality in refactoring and modernizing legacy codebases, aiding modernization efforts."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Mainframe Modernization Office",
+      "row": "Ford Blue",
+      "items": [
+        {
+          "use_case": "Refactor/replatform, microservices, containers.",
+          "theme": "Modernization",
+          "score": 5.0,
+          "why": "Core to the unit's mission to replatform legacy COBOL/IMS systems by adopting modern architectures, enabling API/event exposure and modernization impact across finance and supply chain."
+        },
+        {
+          "use_case": "Expose/consume APIs/webhooks to control flows.",
+          "theme": "Orchestration",
+          "score": 5.0,
+          "why": "Exposing mainframe functions as APIs/webhooks is critical to unlocking legacy system value and enabling hybrid integration, key for modernization success."
+        },
+        {
+          "use_case": "z/OS, CICS, IMS, DB2 performance/health.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Critical to ensure ongoing reliability and health of legacy mainframe systems during and after modernization efforts, directly impacting operational risk."
+        },
+        {
+          "use_case": "Kafka/events/webhooks as triggers.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Leveraging event streams and APIs for integration and triggering workflows is essential for modern mainframe event-driven modernization and operational agility."
+        },
+        {
+          "use_case": "CI/CD, IaC, containers, platform engineering.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Implementing continuous integration and platform automation improves software delivery speed and quality, enabling effective modernization of mainframe applications."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.55,
+        "reason": "Enterprise IT modernizing legacy mainframe systems supporting core, legacy Ford operations aligns with Ford Blue\u2019s traditional, incumbent business rather than Ford Model e, Pro, Next, or Credit."
+      }
+    },
+    {
+      "ou": "Ford Cloud & Hybrid Observability Services",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "APM/logs/traces/SLOs across hybrid.",
+          "theme": "Observability",
+          "score": 5.0,
+          "why": "Core to providing end-to-end telemetry and unified visibility for Kubernetes, cloud, and on-prem environments, which the unit specializes in. High strategic importance and strong feasibility within 12-24 months."
+        },
+        {
+          "use_case": "Migrate to cloud/hybrid and operate across estates.",
+          "theme": "Modernization",
+          "score": 5.0,
+          "why": "Supports hybrid/cloud observability by enabling migration and unified operations across estates, critical for cloud/hybrid visibility and telemetry expansion."
+        },
+        {
+          "use_case": "AI anomaly detection, alert reduction, incident response.",
+          "theme": "AI",
+          "score": 4.0,
+          "why": "Enhancing incident detection and response with AI addresses operational pain by reducing alert fatigue and improving reliability in observability."
+        },
+        {
+          "use_case": "SLO tracking with cost/FinOps telemetry.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "SLO and cost telemetry tightly integrate with observability, supporting reliability engineering and cost optimization for hybrid/cloud workloads."
+        },
+        {
+          "use_case": "Coordinate workloads across clouds.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Supports hybrid/cloud environments by orchestrating workloads across multiple clouds for unified observability and efficient operations."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Data Quality & Observability Guild",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Data quality/lineage/freshness telemetry.",
+          "theme": "Observability",
+          "score": 5.0,
+          "why": "Core to Ford's data monitoring strategy with direct focus on freshness, lineage, schema drift, and SLA breaches, making this highly strategic, urgent, and feasible within 12\u201324 months."
+        },
+        {
+          "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automating data pipelines including quality gates is essential to improve timeliness and quality of data delivery, reducing manual errors and operational friction."
+        },
+        {
+          "use_case": "SLA/change/operational risk controls & reporting.",
+          "theme": "Risk & Compliance",
+          "score": 4.0,
+          "why": "Monitoring SLA adherence and operational risk is critical to maintain business continuity and compliance, aligning with the guild's observability focus."
+        },
+        {
+          "use_case": "AI anomaly detection, alert reduction, incident response.",
+          "theme": "AI",
+          "score": 3.0,
+          "why": "Using AI to detect anomalies and reduce alert noise improves operational efficiency and proactive incident handling relevant to observability challenges."
+        },
+        {
+          "use_case": "Data protection/masking/governance policies.",
+          "theme": "Risk & Compliance",
+          "score": 3.0,
+          "why": "Ensuring data governance and protection supports compliance and trust in data observability, making it an important complementary use case."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford FinOps & SLO Analytics",
+      "row": "Ford Model e",
+      "items": [
+        {
+          "use_case": "SLO tracking with cost/FinOps telemetry.",
+          "theme": "Observability",
+          "score": 5.0,
+          "why": "Core to tracking service levels and cost simultaneously, enabling decision making on cost/performance trade-offs, critical for Ford FinOps & SLO Analytics success."
+        },
+        {
+          "use_case": "Cost/right-size, storage optimization, FinOps hooks.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Automating right-sizing and storage optimization directly reduces costs and improves efficiency, key for operational pain points in cloud spend management."
+        },
+        {
+          "use_case": "APM/logs/traces/SLOs across hybrid.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Visibility into performance and reliability across hybrid cloud environments complements FinOps by surfacing actionable telemetry and supports SLO and cost management."
+        },
+        {
+          "use_case": "SRE patterns, reliability engineering, toil reduction.",
+          "theme": "Modernization",
+          "score": 4.0,
+          "why": "Incorporating SRE best practices enhances reliability and reduces manual toil, aligning well with SLO focus and operational excellence goals."
+        },
+        {
+          "use_case": "AI anomaly detection, alert reduction, incident response.",
+          "theme": "AI",
+          "score": 3.0,
+          "why": "AI-driven anomaly detection and alert reduction improve incident response efficiency, enhancing observability and reducing noise in monitoring systems."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.61,
+        "reason": "Central cloud cost and SLO engineering function aligns with Model e\u2019s software/digital platform ownership supporting engineering across Ford, rather than vehicle lines, commercial, ventures, or Ford Credit."
+      }
+    },
+    {
+      "ou": "Ford Enterprise IT Orchestration Services",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Runbooks, patching, backups, maintenance.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Core to automating cross-system runbooks and maintenance workflows ensuring system reliability and reducing manual intervention in IT operations."
+        },
+        {
+          "use_case": "End-to-end process orchestration spanning IT + business.",
+          "theme": "Orchestration",
+          "score": 5.0,
+          "why": "Coordinates deployments across plants and IT, critical for streamlining cross-system and cross-team orchestration that spans operational and business functions."
+        },
+        {
+          "use_case": "Expose/consume APIs/webhooks to control flows.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Enables flexible, event-driven integration between systems and components essential for IT orchestration workflows and automation at scale."
+        },
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automating IT change workflows and approval processes reduces manual effort and accelerates response times necessary for enterprise IT orchestration."
+        },
+        {
+          "use_case": "Batch/workload orchestration (e.g., Control-M).",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Critical for scheduling and coordinating batch jobs and workloads across systems, matching the unit\u2019s needs for orchestrated automation across IT and plant deployments."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Event Scheduling Platform",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Kafka/events/webhooks as triggers.",
+          "theme": "Orchestration",
+          "score": 5.0,
+          "why": "Kafka-triggered jobs are core to the platform's event-driven scheduling, enabling highly responsive and scalable telemetry processing flows."
+        },
+        {
+          "use_case": "Batch/workload orchestration (e.g., Control-M).",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Batch and workload orchestration ensures effective coordination and scheduling of telemetry processing micro-batches across distributed systems."
+        },
+        {
+          "use_case": "Refactor/replatform, microservices, containers.",
+          "theme": "Modernization",
+          "score": 4.0,
+          "why": "Modernizing via microservices and containers supports scalable deployments and improves maintainability of event-driven telemetry pipelines."
+        },
+        {
+          "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automating data ingestion and quality controls is vital for telemetry processing accuracy and operational efficiency."
+        },
+        {
+          "use_case": "Data quality/lineage/freshness telemetry.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Observability into data quality and freshness is critical to ensure timely and accurate telemetry insights and to prevent downstream issues."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford API & Webhook Orchestration Team",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Expose/consume APIs/webhooks to control flows.",
+          "theme": "Orchestration",
+          "score": 5.0,
+          "why": "Core function managing partner and dealer webhooks, ensuring reliable API and webhook interactions with idempotency, retries, and routing policies."
+        },
+        {
+          "use_case": "Kafka/events/webhooks as triggers.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Using events/webhooks as triggering mechanisms supports responsive orchestration, critical to real-time partner and dealer communications."
+        },
+        {
+          "use_case": "End-to-end process orchestration spanning IT + business.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Integrating API/webhook orchestration into broader enterprise processes improves operational efficiency and cross-team coordination."
+        },
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 3.0,
+          "why": "Automation of workflows related to API/webhook handling can reduce manual intervention and errors, enhancing scalability."
+        },
+        {
+          "use_case": "SLO tracking with cost/FinOps telemetry.",
+          "theme": "Observability",
+          "score": 3.0,
+          "why": "Monitoring service level objectives and costs tied to API/webhook orchestration is essential for performance and financial optimization."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Cyber Defense & Compliance",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Remediate findings, enforce controls, prove adherence.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Core to unit mandate, critical to addressing vulnerabilities and ensuring regulatory compliance with achievable adoption within 12\u201324 months."
+        },
+        {
+          "use_case": "AI anomaly detection, alert reduction, incident response.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Enhances threat detection and incident response, directly reducing operational pain with realistic feasibility given AI capabilities."
+        },
+        {
+          "use_case": "Zero Trust, PAM, DR/BCP, policy enforcement.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Foundational security for cyber resilience and compliance, directly addresses urgent risks, with feasible implementation in the near term."
+        },
+        {
+          "use_case": "SLA/change/operational risk controls & reporting.",
+          "theme": "Risk & Compliance",
+          "score": 4.0,
+          "why": "Vital for operational risk management, improving control and reporting to meet compliance demands with high feasibility."
+        },
+        {
+          "use_case": "Automate data/controls/evidence for CCAR/DFAST/Basel.",
+          "theme": "Risk & Compliance",
+          "score": 4.0,
+          "why": "Automating compliance workflows reduces manual effort, increases accuracy and speeds regulatory adherence, feasible with current automation tech."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Regulatory Reporting & Evidence Office",
+      "row": "Ford Credit",
+      "items": [
+        {
+          "use_case": "Remediate findings, enforce controls, prove adherence.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Core to producing and validating audit artifacts; critical for SOX, emissions, and safety reporting compliance with centralized evidence control."
+        },
+        {
+          "use_case": "Data quality/lineage/freshness telemetry.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Ensuring data quality and lineage is essential for trustworthy evidence and accurate regulatory reporting; observability supports audit artifacts integrity."
+        },
+        {
+          "use_case": "SLA/change/operational risk controls & reporting.",
+          "theme": "Risk & Compliance",
+          "score": 4.0,
+          "why": "Managing operational risk and controls reporting is vital to maintain audit readiness and regulatory compliance within the office."
+        },
+        {
+          "use_case": "Automate data/controls/evidence for CCAR/DFAST/Basel.",
+          "theme": "Risk & Compliance",
+          "score": 4.0,
+          "why": "Automation of control data and evidence production reduces manual workload, increases accuracy, and accelerates regulatory report delivery."
+        },
+        {
+          "use_case": "End-to-end process orchestration spanning IT + business.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Orchestrating processes from data collection to evidence production improves control testing efficiency and aligns IT-business workflows."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.78,
+        "reason": "Focus on regulatory reporting, SOX, and CCAR/DFAST/Basel control evidence aligns with financial regulatory compliance responsibilities typically owned by Ford Credit (finance arm)."
+      }
+    },
+    {
+      "ou": "Ford Data Security & Governance Council",
+      "row": "Ford Model e",
+      "items": [
+        {
+          "use_case": "Data protection/masking/governance policies.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Core to council's mission setting policies on data protection, masking, and governance ensures secure data handling and compliance with regulations."
+        },
+        {
+          "use_case": "Zero Trust, PAM, DR/BCP, policy enforcement.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Key to securing data access and resilience against cyber threats aligning with council\u2019s governance responsibilities."
+        },
+        {
+          "use_case": "Remediate findings, enforce controls, prove adherence.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Essential for closing compliance gaps, enforcing governance controls, and demonstrating adherence to policies in a timely manner."
+        },
+        {
+          "use_case": "SLA/change/operational risk controls & reporting.",
+          "theme": "Risk & Compliance",
+          "score": 4.0,
+          "why": "Supports operational risk management and reporting which underpin governance and risk controls critical to data security."
+        },
+        {
+          "use_case": "Data quality/lineage/freshness telemetry.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Visibility into data lineage and quality supports governance forums in effective stewardship and compliance assurance."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.58,
+        "reason": "Enterprise data security/governance for software and data platforms aligns with Ford Model e\u2019s companywide digital, software, and cybersecurity leadership."
+      }
+    },
+    {
+      "ou": "Ford Connected Vehicle Insights AI",
+      "row": "Ford Pro",
+      "items": [
+        {
+          "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Efficient ingestion and processing of vehicle telemetry and customer data is critical for timely insights and model accuracy."
+        },
+        {
+          "use_case": "ML/GenAI for analytics, fraud, forecasting, NLP, decisions.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Core predictive modeling on vehicle telemetry and customer data to optimize services and uptime directly relies on advanced ML/GenAI analytics capabilities."
+        },
+        {
+          "use_case": "Data quality/lineage/freshness telemetry.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Monitoring data quality and freshness ensures reliability and trust in predictive models, critical to vehicle uptime optimization."
+        },
+        {
+          "use_case": "Model risk mgmt, governance, fairness, compliance.",
+          "theme": "AI",
+          "score": 4.0,
+          "why": "Ensuring model governance and compliance is key to maintain regulatory compliance and trustworthiness in AI insights."
+        },
+        {
+          "use_case": "Kafka/events/webhooks as triggers.",
+          "theme": "Orchestration",
+          "score": 3.0,
+          "why": "Event-driven processing of vehicle telemetry supports real-time responsiveness and scalable predictive service workflows."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.86,
+        "reason": "Focus on telemetry-driven insights to optimize services and vehicle uptime aligns with Ford Pro's connected fleet intelligence and commercial services."
+      }
+    },
+    {
+      "ou": "Ford Intelligent Incident Response",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "AI anomaly detection, alert reduction, incident response.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "Core to Intelligent Incident Response using ML to detect anomalies, reduce alerts, and automate incident processes, highly relevant and urgent, with strong feasibility given current AI capabilities."
+        },
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automating workflows and IT operations supports intelligent incident response through faster resolution and reduced manual intervention, highly feasible with current automation tools."
+        },
+        {
+          "use_case": "APM/logs/traces/SLOs across hybrid.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Monitoring hybrid IT and plant systems is crucial to ensure visibility for proactive incident detection and diagnosis, enabling intelligent incident response and operational continuity."
+        },
+        {
+          "use_case": "End-to-end process orchestration spanning IT + business.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Coordinating workflows between IT and business processes supports incident response effectiveness and remediation, critical for integrated operations in industrial environments."
+        },
+        {
+          "use_case": "ML/GenAI for analytics, fraud, forecasting, NLP, decisions.",
+          "theme": "AI",
+          "score": 3.0,
+          "why": "Use of ML and AI analytics enhances anomaly detection and decision-making in incident response, enabling predictive insights and smarter remediations."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Manufacturing Workflow Automation",
+      "row": "Ford Blue",
+      "items": [
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Core to automating approvals, quality gates, logistics workflows end-to-end, addressing critical operational pain with high feasibility and strategic impact."
+        },
+        {
+          "use_case": "End-to-end process orchestration spanning IT + business.",
+          "theme": "Orchestration",
+          "score": 5.0,
+          "why": "Seamless orchestration across IT and business processes is strategic to align manufacturing operations and streamline workflows, reducing delays and errors."
+        },
+        {
+          "use_case": "Automate ETL/ELT, ingestion, DataOps, quality gates.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automating data ingestion and quality validation is key to trustworthy manufacturing data pipelines, supporting process automation and operational efficiency."
+        },
+        {
+          "use_case": "Kafka/events/webhooks as triggers.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Using event-driven triggers enables real-time workflow automation and agile response in manufacturing supply chain and quality gates."
+        },
+        {
+          "use_case": "Migrate to cloud/hybrid and operate across estates.",
+          "theme": "Modernization",
+          "score": 3.0,
+          "why": "Modernizing by migrating workflows and automation layers to cloud or hybrid environments increases scalability, agility, and integration capability over 12\u201324 months."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.64,
+        "reason": "Internal manufacturing workflow automation aligns with Ford Blue\u2019s ownership of core vehicle production operations, not EV-only Model e, customer-facing Ford Pro, or finance."
+      }
+    },
+    {
+      "ou": "Ford Infrastructure Efficiency & Optimization",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Cost/right-size, storage optimization, FinOps hooks.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Core to reducing infrastructure costs by automating right-sizing and storage optimization, aligning perfectly with the unit's goal to improve performance and cost efficiency."
+        },
+        {
+          "use_case": "Runbooks, patching, backups, maintenance.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automating operational tasks like patching and backups reduces manual toil and operational risks, improving efficiency and reliability of infrastructure."
+        },
+        {
+          "use_case": "Coordinate workloads across clouds.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Essential for managing hybrid and multi-cloud environments to optimize resource placement and utilization at Ford, supporting infrastructure scalability and flexibility."
+        },
+        {
+          "use_case": "Migrate to cloud/hybrid and operate across estates.",
+          "theme": "Modernization",
+          "score": 4.0,
+          "why": "Supports cloud adoption to modernize infrastructure, enabling enhanced elasticity and cost optimization critical to infrastructure efficiency initiatives."
+        },
+        {
+          "use_case": "APM/logs/traces/SLOs across hybrid.",
+          "theme": "Observability",
+          "score": 3.0,
+          "why": "Visibility into performance and service-level metrics across hybrid environments helps identify optimization opportunities and bottlenecks, improving operational efficiency."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Digital Product Engineering Hub",
+      "row": "Ford Model e",
+      "items": [
+        {
+          "use_case": "CI/CD, IaC, containers, platform engineering.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Continuous integration and delivery pipelines are critical for fast, reliable software delivery for Ford\u2019s digital products. This will reduce operational pain related to release delays and improve deployment quality."
+        },
+        {
+          "use_case": "Artificial intelligence to enhance the software development lifecycle \u2014 from design and coding to testing, deployment, and maintenance. It covers tools and systems that help developers write, optimize, and debug code faster using machine learning and natural language processing.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "AI-augmented software development is key to accelerating delivery and improving the quality of apps and services Ford delivers to customers, dealers, and vehicles. It aligns closely with the unit\u2019s goals for modernization and innovation."
+        },
+        {
+          "use_case": "APM/logs/traces/SLOs across hybrid.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Full-stack observability for hybrid and cloud environments is essential to detect and resolve issues early, ensuring performance and reliability of the digital product ecosystem."
+        },
+        {
+          "use_case": "Migrate to cloud/hybrid and operate across estates.",
+          "theme": "Modernization",
+          "score": 4.0,
+          "why": "Cloud migration is core to modern app architectures powering customer, dealer, and vehicle experiences, enabling scalability, agility, and cost efficiencies."
+        },
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 3.0,
+          "why": "Automating workflows and approvals reduces manual errors and accelerates processes in software engineering and business operations, improving efficiency and responsiveness."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": "medium",
+        "reason": "Central software engineering hub (CI/CD, AI for SDLC, cloud) aligns with Model e\u2019s ownership of digital software platforms and experiences across Ford\u2019s products."
+      }
+    },
+    {
+      "ou": "Ford Platform Reliability Modernization",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "SRE patterns, reliability engineering, toil reduction.",
+          "theme": "Modernization",
+          "score": 5.0,
+          "why": "Core to evolving SRE practices that directly improve platform reliability and reduce manual toil, crucial for system uptime and operational efficiency."
+        },
+        {
+          "use_case": "CI/CD, IaC, containers, platform engineering.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Modern DevOps practices like CI/CD and IaC are essential to enable fast, reliable deployments and infrastructure management aligning with modernization goals."
+        },
+        {
+          "use_case": "Runbooks, patching, backups, maintenance.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automating operational runbooks and maintenance tasks reduces incident response time and manual errors, improving recovery and platform reliability."
+        },
+        {
+          "use_case": "SLO tracking with cost/FinOps telemetry.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Tracking reliability targets (SLOs) with cost telemetry supports balancing reliability improvements within budget constraints, aiding operational decision-making."
+        },
+        {
+          "use_case": "APM/logs/traces/SLOs across hybrid.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Visibility across hybrid environments is key to identifying and resolving incidents promptly, directly enhancing reliability and operational insights."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Mainframe Monitoring Services",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "z/OS, CICS, IMS, DB2 performance/health.",
+          "theme": "Observability",
+          "score": 5.0,
+          "why": "Core to the unit's function, monitoring key mainframe systems with transaction tracing is critical for uptime and performance; existing expertise ensures high feasibility."
+        },
+        {
+          "use_case": "Runbooks, patching, backups, maintenance.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Automating mainframe operational tasks reduces manual toil and errors, improving responsiveness and reliability, with high feasibility leveraging existing process knowledge."
+        },
+        {
+          "use_case": "Batch/workload orchestration (e.g., Control-M).",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Coordinating mainframe batch workloads is vital for performance and SLAs; orchestration offers operational efficiency with realistic adoption in 1-2 years."
+        },
+        {
+          "use_case": "AI anomaly detection, alert reduction, incident response.",
+          "theme": "AI",
+          "score": 4.0,
+          "why": "Utilizing AI for alert noise reduction and incident automation would greatly enhance 24x7 monitoring efficiency, though adoption involves integration complexity."
+        },
+        {
+          "use_case": "SLA/change/operational risk controls & reporting.",
+          "theme": "Risk & Compliance",
+          "score": 3.0,
+          "why": "Ensuring SLA adherence and operational risk tracking is important for service quality and compliance; feasible with current monitoring data and tooling."
+        }
+      ],
+      "mapping_diag": null
+    },
+    {
+      "ou": "Ford Multi-Cloud Workload Orchestrator",
+      "row": "Ford Model e",
+      "items": [
+        {
+          "use_case": "Coordinate workloads across clouds.",
+          "theme": "Orchestration",
+          "score": 5.0,
+          "why": "Core to orchestrating workload scheduling and mobility across AWS, Azure, and on-prem clusters, essential for hybrid cloud efficiency and central to Ford's multi-cloud strategy."
+        },
+        {
+          "use_case": "Batch/workload orchestration (e.g., Control-M).",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Critical for managing batch jobs and workload scheduling, improving operational automation and efficiency in multi-cloud contexts."
+        },
+        {
+          "use_case": "Migrate to cloud/hybrid and operate across estates.",
+          "theme": "Modernization",
+          "score": 4.0,
+          "why": "Supports the hybrid cloud migration and ongoing operations key to workload mobility and multi-cloud orchestration strategies."
+        },
+        {
+          "use_case": "CI/CD, IaC, containers, platform engineering.",
+          "theme": "Automation",
+          "score": 4.0,
+          "why": "Enables automation of platform and development processes essential for scalable multi-cloud workload deployment and management."
+        },
+        {
+          "use_case": "Expose/consume APIs/webhooks to control flows.",
+          "theme": "Orchestration",
+          "score": 3.0,
+          "why": "API/webhook orchestration facilitates flexible integration and real-time control necessary for effective multi-cloud workload scheduling and mobility."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.55,
+        "reason": "Enterprise multi-cloud orchestration likely sits with Ford\u2019s software/digital engineering; Model e leads cloud-native platforms and modernization across products."
+      }
+    },
+    {
+      "ou": "Ford Operational Risk & Controls Office",
+      "row": "Ford Credit",
+      "items": [
+        {
+          "use_case": "Remediate findings, enforce controls, prove adherence.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Core to their function in control design/testing and issues management; critical for compliance and risk mitigation; feasible given existing processes and priorities."
+        },
+        {
+          "use_case": "Model risk mgmt, governance, fairness, compliance.",
+          "theme": "AI",
+          "score": 5.0,
+          "why": "This use case directly supports the core responsibilities of Risk & Controls Office in managing risk assessments, compliance, and governance, which are strategic and operational priorities for Ford's operational risk management. Adoption feasibility is high given established fram"
+        },
+        {
+          "use_case": "SLA/change/operational risk controls & reporting.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Ensures operational risks are monitored and reported accurately; important to maintain governance and continuous oversight within operations and technology."
+        },
+        {
+          "use_case": "Automate data/controls/evidence for CCAR/DFAST/Basel.",
+          "theme": "Risk & Compliance",
+          "score": 4.0,
+          "why": "Automating controls and evidence collection reduces manual effort and errors; applicable to compliance-driven assessments and reporting with moderate feasibility."
+        },
+        {
+          "use_case": "Data quality/lineage/freshness telemetry.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Improves data reliability and trust needed for accurate risk assessments and compliance; helps pinpoint control weaknesses; feasible with mature data monitoring tools."
+        }
+      ],
+      "mapping_diag": {
+        "method": "llm",
+        "confidence": 0.9,
+        "reason": "Risk & Controls Office aligns with Ford Credit\u2019s regulated financial operations; evidence cites CCAR/DFAST/Basel compliance, which applies to Ford Credit, not automotive segments."
+      }
+    },
+    {
+      "ou": "Centralized IT / Operations Shared Services",
+      "row": "Unassigned",
+      "items": [
+        {
+          "use_case": "Automate business/IT workflows, approvals, RPA-like tasks.",
+          "theme": "Automation",
+          "score": 5.0,
+          "why": "Centralized IT operations benefit greatly from automating repetitive workflows to boost efficiency, reduce errors, and lower operational costs with broad feasibility across enterprise shared services."
+        },
+        {
+          "use_case": "Zero Trust, PAM, DR/BCP, policy enforcement.",
+          "theme": "Risk & Compliance",
+          "score": 5.0,
+          "why": "Ensuring cybersecurity, disaster recovery, and policy enforcement is fundamental for enterprise-wide IT shared services to protect critical assets and comply with regulations; urgency and strategic need are very high."
+        },
+        {
+          "use_case": "Migrate to cloud/hybrid and operate across estates.",
+          "theme": "Modernization",
+          "score": 5.0,
+          "why": "Cloud migration is crucial to modernizing shared services, enabling scalability and cost optimization, and is a strategic priority with strong feasibility in a 12-24 month horizon."
+        },
+        {
+          "use_case": "APM/logs/traces/SLOs across hybrid.",
+          "theme": "Observability",
+          "score": 4.0,
+          "why": "Observability of hybrid environments is critical for proactive IT operations and incident prevention in centralized shared services, directly addressing operational pain with mature toolsets available."
+        },
+        {
+          "use_case": "End-to-end process orchestration spanning IT + business.",
+          "theme": "Orchestration",
+          "score": 4.0,
+          "why": "Orchestrating integrated IT and business processes centrally improves operational agility and reduces manual coordination, a strategic capability with moderate complexity but realistic adoption timelines."
+        }
+      ],
+      "mapping_diag": null
+    }
+  ],
+  "unassigned_count": 19
+}
