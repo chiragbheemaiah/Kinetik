@@ -1,0 +1,20 @@
+{
+  "company": "USPS",
+  "success": true,
+  "subsidiaries": [
+    {
+      "name": "United States Postal Service",
+      "jurisdiction": "Washington, D.C., United States"
+    }
+  ],
+  "subsidiary_count": 1,
+  "sources": [
+    "https://about.usps.com/what/financials/10k-reports/fy2024.pdf - USPS FY2024 Annual Report (Form 10-K equivalent) detailing Postal Service operations (no subsidiaries listed)",
+    "https://about.usps.com/publications/sar2015/sar2015/sar2016_doc_057.htm - USPS 2015 Sustainability Report (GRI Content Index) describing USPS structure and confirming single-segment operations",
+    "https://www.law.cornell.edu/uscode/text/39/101 - 39 U.S. Code § 101: Establishes USPS as a government service (independent federal entity with no shareholder ownership)"
+  ],
+  "source_type": "Mixed: Official USPS reports and legal references",
+  "confidence": "Low",
+  "research_notes": "We conducted an extensive search following the provided methodology, focusing on SEC filings, USPS official publications, international registries, and legal databases. USPS is a unique case: as an independent federal agency, it does not file SEC Form 10-K exhibits listing subsidiaries, and our review found no evidence of any separate corporate subsidiaries or joint ventures. U.S. law defines USPS as a single entity providing nationwide service ([about.usps.com](https://about.usps.com/publications/sar2015/sar2015/sar2016_doc_057.htm#:~:text=G4,39)), and USPS itself reports operating as a single segment across all regions ([about.usps.com](https://about.usps.com/publications/sar2015/sar2015/sar2016_doc_057.htm#:~:text=Postal%20Regulatory%20Commission%20,83%2C%20USPS%202015%20FORM%2010K)). We cross-checked multiple sources (USPS annual reports, sustainability reports, and legal references) and none indicate any subsidiaries or controlled affiliates. The USPS’s 10-K equivalent reports and other disclosures did not list any subsidiary entities, confirming that the Postal Service has no separate legal subsidiaries. Our confidence is 'Low' in the sense that few entities were found, but this is due to the nature of USPS; it appears to be a complete result, as USPS by law and practice does not have subsidiaries ([about.usps.com](https://about.usps.com/publications/sar2015/sar2015/sar2016_doc_057.htm#:~:text=organization%E2%80%99s%20size%2C%20structure%2C%20ownership%20or,we%20awarded%202%2C000%20air%20transportation)). We encountered the limitation that typical corporate registries and databases are not applicable here, but coverage across official USPS and regulatory sources consistently showed no subsidiary or affiliate companies. In summary, the USPS itself (Washington, D.C., United States) is the sole legal entity, and no additional affiliated or controlled entities exist based on the information available ([about.usps.com](https://about.usps.com/publications/sar2015/sar2015/sar2016_doc_057.htm#:~:text=organization%E2%80%99s%20size%2C%20structure%2C%20ownership%20or,we%20awarded%202%2C000%20air%20transportation)).",
+  "error": null
+}

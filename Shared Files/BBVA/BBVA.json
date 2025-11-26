@@ -1,0 +1,38 @@
+{
+    "company": "Banco Bilbao Vizcaya Argentaria, S.A. (BBVA)",
+    "period": "FY 2024",
+    "currency": "EUR",
+    "items": [
+        {
+            "tier1": "Spain",
+            "tier2": null,
+            "revenue": 9.49,
+            "yoy_pct": 20.3
+        },
+        {
+            "tier1": "Mexico",
+            "tier2": null,
+            "revenue": 15.337,
+            "yoy_pct": 11.1
+        },
+        {
+            "tier1": "Turkey",
+            "tier2": null,
+            "revenue": 4.212,
+            "yoy_pct": 72.4
+        },
+        {
+            "tier1": "South America",
+            "tier2": null,
+            "revenue": 5.405,
+            "yoy_pct": 30.3
+        },
+        {
+            "tier1": "Rest of Business",
+            "tier2": null,
+            "revenue": 1.458,
+            "yoy_pct": 29.7
+        }
+    ],
+    "notes": "Source: BBVA official reporting. The FY 2024 gross income (segment ‘revenue’) by Business Area is disclosed in the 4Q24 Business Areas report under “Main income statement line items by business area (millions of euros)” and the area pages (which show constant-FX YoY changes): Spain €9,490m; Mexico €15,337m; Turkey €4,212m; South America €5,405m; Rest of Business €1,458m. Constant-FX YoY for gross income shown as: Spain +20.3%; Mexico +11.1%; Turkey +72.4%; South America +30.3%; Rest of Business +29.7%. Figures converted to billions of euros. The segment totals exclude the Corporate Center by BBVA definition. BBVA’s 2024 Annual Report/20‑F confirms the Group’s definition of gross income and the same business‑area structure for segment reporting; the 20‑F also shows consistent per‑area gross income figures (e.g., Turkey, South America, Rest of Business). BBVA does not disclose sub‑segment (business line) gross income within each Business Area in the 2024 annual filings; CIB is presented only as supplementary, cross‑geography pro‑forma information, not as a reportable segment, so Tier 2 is null. Citations: BBVA 4Q24 Business Areas page with the segment table and area YoY metrics, and BBVA Form 20‑F 2024 for consolidated line definitions and segment data consistency. ([shareholdersandinvestors.bbva.com](https://shareholdersandinvestors.bbva.com/informes/4q24-report-business-areas/))"
+}

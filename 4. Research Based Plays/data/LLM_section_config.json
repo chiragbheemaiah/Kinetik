@@ -1,0 +1,1619 @@
+{
+  "schema_version": "2.0",
+  "module": "Buying Center Insights",
+  "deliverable": "8.1 Enterprise Operational & Organizational Profile",
+  "defaults": {
+    "output_language": "en",
+    "narrative_word_count_min": 700,
+    "narrative_word_count_max": 900,
+    "profile_word_count_min": 600,
+    "profile_word_count_max": 900,
+    "top_n_default": 10,
+    "org_chart_levels_default": 3
+  },
+  "sections": [
+    {
+      "id": "1",
+      "title": "Organization vision, mission, strategy, key outcomes, and governance",
+      "description": "Defines enterprise direction, measurable outcomes, major initiatives, tech alignment, and core governance model.",
+      "subsections": [
+        {
+          "id": "1.1",
+          "title": "Mission",
+          "description": "Enterprise mission statement and interpretation.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Summarize the organization's mission. Explain what it implies about priorities, customers, and competitive stance. Use most recent official sources."
+        },
+        {
+          "id": "1.2",
+          "title": "Vision",
+          "description": "Enterprise long-term vision and trajectory.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Summarize the organization's vision. Explain the desired future state and time horizon, with specific references to public statements."
+        },
+        {
+          "id": "1.3",
+          "title": "Strategy",
+          "description": "Current corporate strategy and pillars.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe the current corporate strategy and key pillars. Provide concrete examples of how the strategy is being executed."
+        },
+        {
+          "id": "1.4",
+          "title": "Key outcomes and KPIs",
+          "description": "Outcomes used to measure strategy execution.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Identify the key strategic outcomes and KPIs management uses to measure success. Explain why each is important and how it trends."
+        },
+        {
+          "id": "1.5",
+          "title": "Challenges",
+          "description": "Material business, operational, technology, and market challenges.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Summarize the enterprise\u2019s most material challenges impacting strategy, operations, and technology. Provide evidence and recent examples."
+        },
+        {
+          "id": "1.6",
+          "title": "Strategic initiatives",
+          "description": "Top enterprise strategic initiatives with executive and BU ownership.",
+          "output_type": "table",
+          "constraints": {
+            "max_items": 10
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Initiative Name",
+                "description": "Official or commonly referenced initiative label."
+              },
+              {
+                "name": "Description",
+                "description": "What the initiative is and why it matters."
+              },
+              {
+                "name": "Sponsoring Executive(s)",
+                "description": "Executive(s) accountable."
+              },
+              {
+                "name": "Primary Business Unit(s)",
+                "description": "BU / operating unit most impacted."
+              },
+              {
+                "name": "Target Outcomes / KPIs",
+                "description": "Expected measurable results."
+              },
+              {
+                "name": "Time Horizon",
+                "description": "Planned timeline (e.g., 2024\u20132026)."
+              },
+              {
+                "name": "Current Status",
+                "description": "Planning / pilot / scaling / complete."
+              }
+            ]
+          },
+          "llm_prompt": "Identify the TOP 10 enterprise-level strategic initiatives. Provide a short 200\u2013300 word summary first, then a table using the specified columns."
+        },
+        {
+          "id": "1.7",
+          "title": "Strategic technology initiatives aligned to strategy",
+          "description": "Top technology initiatives linked to business strategy.",
+          "output_type": "table",
+          "constraints": {
+            "max_items": 10
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Technology Initiative Name",
+                "description": "Name of technology initiative or program."
+              },
+              {
+                "name": "Linked Strategic Initiative(s)",
+                "description": "Reference initiative(s) from 1.6."
+              },
+              {
+                "name": "Description",
+                "description": "What is being built/changed."
+              },
+              {
+                "name": "Primary Technology Domain",
+                "description": "E.g., analytics, cloud, mainframe modernization."
+              },
+              {
+                "name": "Sponsoring IT/Business Owner(s)",
+                "description": "Named leaders accountable."
+              },
+              {
+                "name": "Key Vendors/Partners",
+                "description": "Strategic vendors if known."
+              },
+              {
+                "name": "Stage/Status",
+                "description": "Planning / pilot / scaling / complete."
+              }
+            ]
+          },
+          "llm_prompt": "Identify the TOP 10 strategic technology initiatives that support the 1.6 initiatives. Provide a 200\u2013300 word narrative first, then a table."
+        },
+        {
+          "id": "1.8",
+          "title": "Statutory basis (governance)",
+          "description": "Legal/regulatory basis shaping governance.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Explain statutory and regulatory foundations for corporate governance and how they shape oversight and accountability."
+        },
+        {
+          "id": "1.9",
+          "title": "Corporate governance structure",
+          "description": "Board, committees, executive decision forums.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe corporate governance structure including Board, key committees, executive decision bodies, and how major strategic/technology initiatives are approved."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Revenue Reporting",
+      "description": "Enterprise revenue segmentation, line-of-business, geographic mix, and trends.",
+      "subsections": [
+        {
+          "id": "2.1",
+          "title": "Revenue by Business Segment",
+          "description": "Prior fiscal year revenue by reporting segment and LOBs.",
+          "output_type": "table",
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Reporting Segment Name",
+                "description": "Official reporting segment."
+              },
+              {
+                "name": "Line of Business Name",
+                "description": "LOB within the segment."
+              },
+              {
+                "name": "Fiscal Year (YYYY)",
+                "description": "Prior fiscal year label."
+              },
+              {
+                "name": "Line of Business Revenue ($B)",
+                "description": "Revenue amount."
+              },
+              {
+                "name": "Segment Revenue ($B)",
+                "description": "Segment total (use subtotal rows or repeat)."
+              },
+              {
+                "name": "% of Segment Revenue",
+                "description": "LOB share of segment."
+              },
+              {
+                "name": "% of Total Enterprise Revenue",
+                "description": "LOB share of enterprise."
+              }
+            ]
+          },
+          "llm_prompt": "Using latest public financials, provide prior fiscal year revenue by reporting segment and lines of business. Ensure correct rollups. Provide a brief narrative (200\u2013300 words) before the table."
+        },
+        {
+          "id": "2.2",
+          "title": "Revenue by Line of Business within each Segment",
+          "description": "Granular LOB revenue rollups within segments.",
+          "output_type": "table",
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Reporting Segment Name",
+                "description": "Official reporting segment."
+              },
+              {
+                "name": "Line of Business Name",
+                "description": "LOB within the segment."
+              },
+              {
+                "name": "Fiscal Year (YYYY)",
+                "description": "Prior fiscal year label."
+              },
+              {
+                "name": "Line of Business Revenue ($B)",
+                "description": "Revenue amount."
+              },
+              {
+                "name": "Segment Revenue ($B)",
+                "description": "Segment total."
+              },
+              {
+                "name": "% of Segment Revenue",
+                "description": "LOB share of segment."
+              },
+              {
+                "name": "% of Total Enterprise Revenue",
+                "description": "LOB share of enterprise."
+              }
+            ]
+          },
+          "llm_prompt": "Provide a detailed revenue breakdown of all lines of business within each segment for the prior fiscal year, with correct rollups. Include a short narrative first."
+        },
+        {
+          "id": "2.3",
+          "title": "Revenue by Geography",
+          "description": "Prior fiscal year revenue by region and operating unit.",
+          "output_type": "table",
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Geography/Region",
+                "description": "Region/country."
+              },
+              {
+                "name": "Operating Unit/Segment",
+                "description": "Operating unit if available."
+              },
+              {
+                "name": "Fiscal Year (YYYY)",
+                "description": "Prior fiscal year."
+              },
+              {
+                "name": "Revenue ($B)",
+                "description": "Revenue amount."
+              },
+              {
+                "name": "% of Total Revenue",
+                "description": "Share of enterprise."
+              }
+            ]
+          },
+          "llm_prompt": "Provide prior fiscal year revenue by geography and operating unit. Ensure totals match enterprise revenue. Include a short narrative first."
+        },
+        {
+          "id": "2.4",
+          "title": "Revenue Growth Trends",
+          "description": "Recent growth trends and drivers.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe revenue growth trends over the last 2\u20133 years and the drivers behind them."
+        },
+        {
+          "id": "2.5",
+          "title": "Key Revenue Drivers",
+          "description": "What materially drives revenue and margin.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Identify key revenue drivers and explain their importance to the business model."
+        },
+        {
+          "id": "2.6",
+          "title": "Revenue Forecasts",
+          "description": "Management and analyst forward expectations.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Summarize management and analyst revenue outlook for the next 12\u201324 months."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "title": "Organizational structure",
+      "description": "Enterprise operating model, hierarchy, and leadership profiling.",
+      "subsections": [
+        {
+          "id": "3.1",
+          "title": "Top-level structure",
+          "description": "Enterprise functional and reporting structure.",
+          "output_type": "org_chart",
+          "org_chart_definition": {
+            "levels": 3,
+            "include_names": true,
+            "include_titles": true
+          },
+          "llm_prompt": "Produce a tree-style org chart showing C-Suite leader(s), their direct reports (Level 2), and Level 3 leaders. Include org/unit names, person names, and titles. Add a 200\u2013300 word narrative summary."
+        },
+        {
+          "id": "3.2",
+          "title": "Executive leadership and C-Suite",
+          "description": "Executive hierarchy inclusive of L2/L3.",
+          "output_type": "org_chart",
+          "org_chart_definition": {
+            "levels": 3,
+            "include_names": true,
+            "include_titles": true
+          },
+          "llm_prompt": "Provide an enterprise executive org chart including C-Suite, Level 2, and Level 3 leaders. Include names and titles and a short summary first."
+        },
+        {
+          "id": "3.3",
+          "title": "Group subsidiaries and regional organizations",
+          "description": "Major subsidiary/regional org structures.",
+          "output_type": "org_chart",
+          "org_chart_definition": {
+            "levels": 3,
+            "include_names": true,
+            "include_titles": true
+          },
+          "llm_prompt": "Provide org charts for major subsidiaries and regional organizations down to Level 3 reporting depth. Include names, titles, and org/unit names."
+        },
+        {
+          "id": "3.4",
+          "title": "Technology and operations organization",
+          "description": "High-detail operating model for tech/ops.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "llm_prompt": "Describe technology and operations organization structure, including functional responsibilities and reporting relationships."
+        },
+        {
+          "id": "3.5",
+          "title": "Operating capabilities",
+          "description": "Core capabilities enabling business model.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe the enterprise\u2019s critical operating capabilities and how they support strategy."
+        },
+        {
+          "id": "3.6",
+          "title": "Operating principles",
+          "description": "Guiding principles for operations.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Summarize enterprise operating principles and how they influence execution."
+        },
+        {
+          "id": "3.7",
+          "title": "Leadership snapshots",
+          "description": "Deep profiles for top enterprise leaders.",
+          "output_type": "leadership_profiles",
+          "constraints": {
+            "max_items": 100
+          },
+          "leadership_profile_schema": {
+            "fields": [
+              "Full Name",
+              "Current Title",
+              "Organizational Unit",
+              "Reports To",
+              "Boards Served On",
+              "Educational Background",
+              "Hobbies / Personal Interests",
+              "Charities / Non-profits Involvement",
+              "Notable Career Milestones",
+              "Narrative Bio (300\u2013400 words)"
+            ],
+            "profile_word_count_min": 600,
+            "profile_word_count_max": 900
+          },
+          "llm_prompt": "Generate structured leadership profiles for the TOP 50\u2013100 executives (C-Suite, L2, L3). Follow the provided profile schema for each leader."
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "title": "Workforce and Location",
+      "description": "Merged workforce scale/composition with location footprint; focuses on global hubs.",
+      "subsections": [
+        {
+          "id": "4.1",
+          "title": "Global scale and composition",
+          "description": "Total workforce and high-level composition.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Summarize enterprise workforce size, composition, and trends."
+        },
+        {
+          "id": "4.2",
+          "title": "Organizational distribution",
+          "description": "Workforce distribution across BUs/functions.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe workforce distribution by business units and functions."
+        },
+        {
+          "id": "4.3",
+          "title": "Workforce composition by function",
+          "description": "Functional mix of employees.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe workforce composition by function and how it supports operations."
+        },
+        {
+          "id": "4.4",
+          "title": "Capability development and learning",
+          "description": "Training, upskilling, talent investment.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe capability development programs, learning platforms, and priorities."
+        },
+        {
+          "id": "4.5",
+          "title": "Culture and employee engagement",
+          "description": "Culture statements and engagement mechanisms.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe culture and engagement approach, using recent evidence where available."
+        },
+        {
+          "id": "4.6",
+          "title": "Workforce transformation",
+          "description": "Major workforce changes tied to strategy.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe workforce transformation initiatives and skills shifts underway."
+        },
+        {
+          "id": "4.7",
+          "title": "Global hubs",
+          "description": "Top global site locations and functions.",
+          "output_type": "table",
+          "constraints": {
+            "max_items": 20
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Location (City, Country)",
+                "description": "Primary hub location."
+              },
+              {
+                "name": "Region",
+                "description": "Global region."
+              },
+              {
+                "name": "Major Departments/Functions",
+                "description": "Main orgs present."
+              },
+              {
+                "name": "Approx. Employees",
+                "description": "Estimated headcount."
+              },
+              {
+                "name": "Notes",
+                "description": "HQ/RHQ/R&D/etc."
+              }
+            ]
+          },
+          "llm_prompt": "List TOP 20 global hubs/locations with the specified columns. Provide a 200\u2013300 word narrative summary first."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "title": "Strategic Technology Partners",
+      "description": "Key partners by category; includes new mainframe systems software subsection.",
+      "subsections": [
+        {
+          "id": "5.0",
+          "title": "Overview",
+          "description": "Top strategic partners overall and initiatives they deploy.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Summarize the TOP 3\u20135 strategic technology partners overall across 5.1\u20135.7 and their most important initiatives."
+        },
+        {
+          "id": "5.1",
+          "title": "Global Outsourcing and Infrastructure Partners",
+          "description": "Outsourcing and infra partners with initiative mapping.",
+          "output_type": "table",
+          "constraints": {
+            "max_items": 5
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Partner Name",
+                "description": "Vendor/partner name."
+              },
+              {
+                "name": "Category",
+                "description": "5.1."
+              },
+              {
+                "name": "Key Initiatives / Projects",
+                "description": "Major programs they support."
+              },
+              {
+                "name": "Business Units Supported",
+                "description": "Primary BUs/functions."
+              },
+              {
+                "name": "Strategic Importance / Role",
+                "description": "Why they matter."
+              },
+              {
+                "name": "Notable Technologies / Products",
+                "description": "Key offerings in use."
+              }
+            ]
+          },
+          "llm_prompt": "Identify TOP 5 partners in this category and populate the table. Provide a brief narrative first."
+        },
+        {
+          "id": "5.2",
+          "title": "Systems Integration and Application Partners",
+          "description": "SI/app partners and initiative mapping.",
+          "output_type": "table",
+          "constraints": {
+            "max_items": 5
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Partner Name",
+                "description": "Vendor/partner name."
+              },
+              {
+                "name": "Category",
+                "description": "5.2."
+              },
+              {
+                "name": "Key Initiatives / Projects",
+                "description": "Major programs they support."
+              },
+              {
+                "name": "Business Units Supported",
+                "description": "Primary BUs/functions."
+              },
+              {
+                "name": "Strategic Importance / Role",
+                "description": "Why they matter."
+              },
+              {
+                "name": "Notable Technologies / Products",
+                "description": "Key offerings in use."
+              }
+            ]
+          },
+          "llm_prompt": "Identify TOP 5 partners in this category and populate the table."
+        },
+        {
+          "id": "5.3",
+          "title": "Hyperscaler Partnerships",
+          "description": "Cloud hyperscaler partners.",
+          "output_type": "table",
+          "constraints": {
+            "max_items": 5
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Partner Name",
+                "description": "Hyperscaler name."
+              },
+              {
+                "name": "Category",
+                "description": "5.3."
+              },
+              {
+                "name": "Key Initiatives / Projects",
+                "description": "Major programs they support."
+              },
+              {
+                "name": "Business Units Supported",
+                "description": "Primary BUs/functions."
+              },
+              {
+                "name": "Strategic Importance / Role",
+                "description": "Why they matter."
+              },
+              {
+                "name": "Notable Technologies / Products",
+                "description": "Cloud products in use."
+              }
+            ]
+          },
+          "llm_prompt": "Identify TOP 5 hyperscaler partners and populate the table."
+        },
+        {
+          "id": "5.4",
+          "title": "Consulting and Strategic Advisory",
+          "description": "Advisory partners supporting strategy and tech programs.",
+          "output_type": "table",
+          "constraints": {
+            "max_items": 5
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Partner Name",
+                "description": "Consulting/advisory firm."
+              },
+              {
+                "name": "Category",
+                "description": "5.4."
+              },
+              {
+                "name": "Key Initiatives / Projects",
+                "description": "Major programs they support."
+              },
+              {
+                "name": "Business Units Supported",
+                "description": "Primary BUs/functions."
+              },
+              {
+                "name": "Strategic Importance / Role",
+                "description": "Why they matter."
+              },
+              {
+                "name": "Notable Technologies / Products",
+                "description": "Notable methodologies/tools."
+              }
+            ]
+          },
+          "llm_prompt": "Identify TOP 5 consulting/advisory partners and populate the table."
+        },
+        {
+          "id": "5.5",
+          "title": "Fintech and Startup Ecosystem",
+          "description": "Startups/fintech partners relevant to strategy.",
+          "output_type": "table",
+          "constraints": {
+            "max_items": 5
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Partner Name",
+                "description": "Fintech/startup name."
+              },
+              {
+                "name": "Category",
+                "description": "5.5."
+              },
+              {
+                "name": "Key Initiatives / Projects",
+                "description": "Major programs they support."
+              },
+              {
+                "name": "Business Units Supported",
+                "description": "Primary BUs/functions."
+              },
+              {
+                "name": "Strategic Importance / Role",
+                "description": "Why they matter."
+              },
+              {
+                "name": "Notable Technologies / Products",
+                "description": "Key offerings."
+              }
+            ]
+          },
+          "llm_prompt": "Identify TOP 5 fintech/startup ecosystem partners and populate the table."
+        },
+        {
+          "id": "5.6",
+          "title": "Vendor Management Model",
+          "description": "How strategic vendors are governed and managed.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe the vendor management model for strategic partners, including governance, sourcing, and KPIs."
+        },
+        {
+          "id": "5.7",
+          "title": "Mainframe Systems Software Partners",
+          "description": "Mainframe software partners, products, and initiatives.",
+          "output_type": "table",
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Partner Name",
+                "description": "Mainframe software partner."
+              },
+              {
+                "name": "Key Mainframe Software Product(s)",
+                "description": "Products in use."
+              },
+              {
+                "name": "Use Cases / Initiatives Supported",
+                "description": "Major programs enabled."
+              },
+              {
+                "name": "Mainframe Platform(s) Used",
+                "description": "z/OS, etc."
+              },
+              {
+                "name": "Notes / Integrations",
+                "description": "Key integration context."
+              }
+            ]
+          },
+          "llm_prompt": "List primary mainframe systems software partners (e.g., BMC, IBM, Broadcom, others) using the specified columns."
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "title": "IT Infrastructure and Applications",
+      "description": "Merged IT infrastructure + application landscape.",
+      "subsections": [
+        {
+          "id": "7.0",
+          "title": "Overview",
+          "description": "Integrated summary of infra/app landscape.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "llm_prompt": "Provide an integrated overview of IT infrastructure and applications. Reference subsections 7.1\u20137.9."
+        },
+        {
+          "id": "7.1",
+          "title": "Strategic IT Architecture",
+          "description": "Definition of strategic architecture including mainframe/cloud layers.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 800,
+            "word_count_max": 1500
+          },
+          "llm_prompt": "Provide a specific definition of strategic IT architecture. Explicitly include data processing layers, mainframe roles, infra components, and interoperability."
+        },
+        {
+          "id": "7.2",
+          "title": "Cloud Strategy",
+          "description": "Cloud adoption and platform strategy.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe cloud strategy, platform choices, operating model, and key initiatives."
+        },
+        {
+          "id": "7.3",
+          "title": "Security and Cyber Resilience",
+          "description": "Security architecture and resilience priorities.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Summarize security/cyber resilience stack and major investments."
+        },
+        {
+          "id": "7.4",
+          "title": "Innovation and Emerging Technologies",
+          "description": "Emerging tech themes and experiments.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe innovation and emerging tech areas being pursued."
+        },
+        {
+          "id": "7.5",
+          "title": "IT Operations and Performance",
+          "description": "Operational management of infra and apps.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe IT operations model, SRE/ITSM, SLAs, and performance priorities."
+        },
+        {
+          "id": "7.6",
+          "title": "Core Systems / ERP / Transaction Platforms",
+          "description": "Foundational transaction platforms.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe core ERP/transaction platforms and their fit within strategic architecture."
+        },
+        {
+          "id": "7.7",
+          "title": "Customer Experience and Digital Channels",
+          "description": "Customer-facing apps and channels.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe major digital/customer channel platforms and priorities."
+        },
+        {
+          "id": "7.8",
+          "title": "Risk, Compliance, and Control Applications",
+          "description": "Risk/compliance systems stack.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe risk, compliance, and control application landscape and integrations."
+        },
+        {
+          "id": "7.9",
+          "title": "Analytics, BI, AI, and Performance Platforms",
+          "description": "Analytics and AI platforms with mainframe-cloud data flow.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe analytics/BI/AI platforms, including how data flows between mainframe and cloud."
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "title": "Data Management",
+      "description": "Data governance, platforms, and analytics/AI priorities.",
+      "subsections": [
+        {
+          "id": "9.1",
+          "title": "Data Governance",
+          "description": "Policies, ownership, and governance model.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe data governance model, ownership, and key policies."
+        },
+        {
+          "id": "9.2",
+          "title": "Data Platforms and Architecture",
+          "description": "Platforms and interoperability between mainframe/cloud.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe data platforms in use and initiatives enabling seamless data availability between cloud and mainframe."
+        },
+        {
+          "id": "9.5",
+          "title": "Analytics, AI, and Data Science",
+          "description": "Analytics/AI capabilities and concrete initiatives.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 1200,
+            "word_count_max": 2000
+          },
+          "llm_prompt": "Detail analytics and AI capabilities and SPECIFIC initiatives underway, including objectives, technologies, data dependencies, and alignment to strategy."
+        },
+        {
+          "id": "9.6",
+          "title": "Open Data and Ecosystem Sharing",
+          "description": "External data sharing strategy.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe open data, APIs, and ecosystem data-sharing approaches."
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "title": "IT Organization",
+      "description": "IT leadership, operating model, centralization, shared services, and BU-aligned IT.",
+      "subsections": [
+        {
+          "id": "10.0",
+          "title": "Overview",
+          "description": "High-level IT org summary.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "llm_prompt": "Provide a high-level overview of the IT organization and its role in strategy."
+        },
+        {
+          "id": "10.1",
+          "title": "Global IT Leadership",
+          "description": "Profiles of top IT executives.",
+          "output_type": "leadership_profiles",
+          "constraints": {
+            "max_items": 50
+          },
+          "leadership_profile_schema": {
+            "fields": [
+              "Full Name",
+              "Current Title",
+              "Organizational Unit",
+              "Reports To",
+              "Boards Served On",
+              "Educational Background",
+              "Hobbies / Personal Interests",
+              "Charities / Non-profits Involvement",
+              "Notable Career Milestones",
+              "Narrative Bio (300\u2013400 words)"
+            ],
+            "profile_word_count_min": 600,
+            "profile_word_count_max": 900
+          },
+          "llm_prompt": "Identify TOP 50 IT executives and produce detailed profiles using the provided schema."
+        },
+        {
+          "id": "10.2",
+          "title": "Organizational Model",
+          "description": "How IT is structured functionally.",
+          "output_type": "text_narrative",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Describe the IT organizational model, major functions, and reporting structure."
+        },
+        {
+          "id": "10.6",
+          "title": "Centralized IT vs. Decentralized IT",
+          "description": "Centralization model across functions.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1500,
+            "word_count_max": 2500
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Department / Function",
+                "description": "IT function or dept."
+              },
+              {
+                "name": "Centralized/Decentralized/Hybrid",
+                "description": "Operating model type."
+              },
+              {
+                "name": "Primary Location (if centralized)",
+                "description": "Where centralized work occurs."
+              },
+              {
+                "name": "Key Responsibilities",
+                "description": "Scope of work."
+              }
+            ]
+          },
+          "llm_prompt": "Explain centralized vs decentralized IT operating model. Provide narrative plus a detailed table."
+        },
+        {
+          "id": "10.7",
+          "title": "Centralized IT and Shared Services Departments and Functions",
+          "description": "Shared services scope and location.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1500,
+            "word_count_max": 2500
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Department / Function",
+                "description": "Central/shared service function."
+              },
+              {
+                "name": "Central/Shared Service Location",
+                "description": "Primary delivery location(s)."
+              },
+              {
+                "name": "Scope of Work",
+                "description": "Work performed."
+              },
+              {
+                "name": "Supported Business Units",
+                "description": "BUs served."
+              }
+            ]
+          },
+          "llm_prompt": "Detail centralized IT/shared services and where work occurs. Provide narrative plus the table."
+        },
+        {
+          "id": "10.8",
+          "title": "Business Unit Aligned IT Departments and Functions",
+          "description": "BU-aligned IT scope per operating unit.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1500,
+            "word_count_max": 2500
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Business Unit / Operating Unit",
+                "description": "BU name."
+              },
+              {
+                "name": "IT Department / Function",
+                "description": "Embedded IT group."
+              },
+              {
+                "name": "Key Responsibilities / Operations",
+                "description": "Work performed."
+              },
+              {
+                "name": "Relationship to Central IT",
+                "description": "Governance and dependency."
+              }
+            ]
+          },
+          "llm_prompt": "Describe BU-aligned IT departments and operations. Provide narrative plus the table."
+        }
+      ]
+    },
+    {
+      "id": "11",
+      "title": "IT Organization Innovation Themes and Strategic Initiatives",
+      "description": "Innovation themes with initiative-level tables.",
+      "subsections": [
+        {
+          "id": "11.1",
+          "title": "Data and AI",
+          "description": "Theme initiatives.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Initiative Name",
+                "description": "Program/initiative name."
+              },
+              {
+                "name": "Theme",
+                "description": "11.1."
+              },
+              {
+                "name": "Lead Executive(s)",
+                "description": "Named accountable leaders."
+              },
+              {
+                "name": "Current Key Actions",
+                "description": "Work underway."
+              },
+              {
+                "name": "Key Challenges / Risks",
+                "description": "Risks/issues."
+              },
+              {
+                "name": "Expected Outcomes",
+                "description": "Target results."
+              }
+            ]
+          },
+          "llm_prompt": "Provide narrative plus a table of all initiatives under Data & AI using the specified columns."
+        },
+        {
+          "id": "11.2",
+          "title": "Modernization",
+          "description": "Theme initiatives.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Initiative Name",
+                "description": "Program/initiative name."
+              },
+              {
+                "name": "Theme",
+                "description": "11.2."
+              },
+              {
+                "name": "Lead Executive(s)",
+                "description": "Named accountable leaders."
+              },
+              {
+                "name": "Current Key Actions",
+                "description": "Work underway."
+              },
+              {
+                "name": "Key Challenges / Risks",
+                "description": "Risks/issues."
+              },
+              {
+                "name": "Expected Outcomes",
+                "description": "Target results."
+              }
+            ]
+          },
+          "llm_prompt": "Provide narrative plus a table of all initiatives under Modernization."
+        },
+        {
+          "id": "11.3",
+          "title": "Observability",
+          "description": "Theme initiatives.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Initiative Name",
+                "description": "Program/initiative name."
+              },
+              {
+                "name": "Theme",
+                "description": "11.3."
+              },
+              {
+                "name": "Lead Executive(s)",
+                "description": "Named accountable leaders."
+              },
+              {
+                "name": "Current Key Actions",
+                "description": "Work underway."
+              },
+              {
+                "name": "Key Challenges / Risks",
+                "description": "Risks/issues."
+              },
+              {
+                "name": "Expected Outcomes",
+                "description": "Target results."
+              }
+            ]
+          },
+          "llm_prompt": "Provide narrative plus a table of all initiatives under Observability."
+        },
+        {
+          "id": "11.4",
+          "title": "Security, Risk and Compliance",
+          "description": "Theme initiatives.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Initiative Name",
+                "description": "Program/initiative name."
+              },
+              {
+                "name": "Theme",
+                "description": "11.4."
+              },
+              {
+                "name": "Lead Executive(s)",
+                "description": "Named accountable leaders."
+              },
+              {
+                "name": "Current Key Actions",
+                "description": "Work underway."
+              },
+              {
+                "name": "Key Challenges / Risks",
+                "description": "Risks/issues."
+              },
+              {
+                "name": "Expected Outcomes",
+                "description": "Target results."
+              }
+            ]
+          },
+          "llm_prompt": "Provide narrative plus a table of all initiatives under Security/Risk/Compliance."
+        },
+        {
+          "id": "11.5",
+          "title": "Cloud Computing",
+          "description": "Theme initiatives.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Initiative Name",
+                "description": "Program/initiative name."
+              },
+              {
+                "name": "Theme",
+                "description": "11.5."
+              },
+              {
+                "name": "Lead Executive(s)",
+                "description": "Named accountable leaders."
+              },
+              {
+                "name": "Current Key Actions",
+                "description": "Work underway."
+              },
+              {
+                "name": "Key Challenges / Risks",
+                "description": "Risks/issues."
+              },
+              {
+                "name": "Expected Outcomes",
+                "description": "Target results."
+              }
+            ]
+          },
+          "llm_prompt": "Provide narrative plus a table of all initiatives under Cloud Computing."
+        },
+        {
+          "id": "11.6",
+          "title": "Agile and DevOps",
+          "description": "Theme initiatives.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Initiative Name",
+                "description": "Program/initiative name."
+              },
+              {
+                "name": "Theme",
+                "description": "11.6."
+              },
+              {
+                "name": "Lead Executive(s)",
+                "description": "Named accountable leaders."
+              },
+              {
+                "name": "Current Key Actions",
+                "description": "Work underway."
+              },
+              {
+                "name": "Key Challenges / Risks",
+                "description": "Risks/issues."
+              },
+              {
+                "name": "Expected Outcomes",
+                "description": "Target results."
+              }
+            ]
+          },
+          "llm_prompt": "Provide narrative plus a table of all initiatives under Agile & DevOps."
+        },
+        {
+          "id": "11.7",
+          "title": "Automation and Orchestration",
+          "description": "Theme initiatives.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Initiative Name",
+                "description": "Program/initiative name."
+              },
+              {
+                "name": "Theme",
+                "description": "11.7."
+              },
+              {
+                "name": "Lead Executive(s)",
+                "description": "Named accountable leaders."
+              },
+              {
+                "name": "Current Key Actions",
+                "description": "Work underway."
+              },
+              {
+                "name": "Key Challenges / Risks",
+                "description": "Risks/issues."
+              },
+              {
+                "name": "Expected Outcomes",
+                "description": "Target results."
+              }
+            ]
+          },
+          "llm_prompt": "Provide narrative plus a table of all initiatives under Automation & Orchestration."
+        },
+        {
+          "id": "11.8",
+          "title": "Mainframe Evolution",
+          "description": "Theme initiatives.",
+          "output_type": "text_narrative_and_table",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Initiative Name",
+                "description": "Program/initiative name."
+              },
+              {
+                "name": "Theme",
+                "description": "11.8."
+              },
+              {
+                "name": "Lead Executive(s)",
+                "description": "Named accountable leaders."
+              },
+              {
+                "name": "Current Key Actions",
+                "description": "Work underway."
+              },
+              {
+                "name": "Key Challenges / Risks",
+                "description": "Risks/issues."
+              },
+              {
+                "name": "Expected Outcomes",
+                "description": "Target results."
+              }
+            ]
+          },
+          "llm_prompt": "Provide narrative plus a table of all initiatives under Mainframe Evolution."
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "title": "Earnings and Analysts Comments and Transcripts",
+      "description": "Transcript and analyst-report based view of recent strategy and tech initiatives.",
+      "subsections": [
+        {
+          "id": "12.0",
+          "title": "Overview",
+          "description": "High-level synthesis of recent transcripts/reports.",
+          "output_type": "transcript_analysis",
+          "constraints": {
+            "lookback_days": 180
+          },
+          "llm_prompt": "Analyze most recent earnings call transcripts and analyst reports (\u224860 days post-earnings). Summarize key strategic and IT initiatives raised."
+        },
+        {
+          "id": "12.1",
+          "title": "Technology and Innovation",
+          "description": "Initiatives and analyst/management commentary on tech.",
+          "output_type": "transcript_analysis_and_table",
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Source Type",
+                "description": "Earnings Call / Analyst Report."
+              },
+              {
+                "name": "Date",
+                "description": "Source date."
+              },
+              {
+                "name": "Key Topic / Initiative",
+                "description": "Topic or initiative discussed."
+              },
+              {
+                "name": "Analyst Concern / Question",
+                "description": "If applicable."
+              },
+              {
+                "name": "Management Response Summary",
+                "description": "Concise answer."
+              },
+              {
+                "name": "Implications for Strategy / IT",
+                "description": "Why it matters."
+              }
+            ]
+          },
+          "llm_prompt": "Extract recent technology/innovation remarks, analyst questions, and management responses. Provide a table using the specified columns plus narrative synthesis."
+        },
+        {
+          "id": "12.2",
+          "title": "Analyst remarks on technology initiatives",
+          "description": "Analyst focus areas and management replies.",
+          "output_type": "transcript_analysis_and_table",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "table_definition": {
+            "columns": [
+              {
+                "name": "Source Type",
+                "description": "Earnings Call / Analyst Report."
+              },
+              {
+                "name": "Date",
+                "description": "Source date."
+              },
+              {
+                "name": "Key Topic / Initiative",
+                "description": "Topic or initiative discussed."
+              },
+              {
+                "name": "Analyst Concern / Question",
+                "description": "If applicable."
+              },
+              {
+                "name": "Management Response Summary",
+                "description": "Concise answer."
+              },
+              {
+                "name": "Implications for Strategy / IT",
+                "description": "Why it matters."
+              }
+            ]
+          },
+          "llm_prompt": "Focus on analyst questions and concerns about technology initiatives and management responses. Provide narrative plus table."
+        },
+        {
+          "id": "12.3",
+          "title": "Cybersecurity and Resilience",
+          "description": "Security investment remarks in transcripts/reports.",
+          "output_type": "transcript_analysis",
+          "constraints": {
+            "word_count_min": 700,
+            "word_count_max": 900
+          },
+          "llm_prompt": "Extract and synthesize cybersecurity/resilience remarks from recent transcripts and analyst reports."
+        },
+        {
+          "id": "12.4",
+          "title": "Executive perspective on technology initiatives from Earnings Calls",
+          "description": "Management-led tech initiative narrative.",
+          "output_type": "transcript_analysis",
+          "constraints": {
+            "word_count_min": 1100,
+            "word_count_max": 1400
+          },
+          "llm_prompt": "Extract executive commentary on strategic technology initiatives and alignment to enterprise strategy. Provide structured synthesis."
+        }
+      ]
+    },
+    {
+      "id": "14",
+      "title": "Organizational Structure Charts and Diagrams",
+      "description": "Function-specific org charts (3 levels deep).",
+      "subsections": [
+        {
+          "id": "14.1",
+          "title": "C-Suite and Direct Reports",
+          "description": "Enterprise leadership chart.",
+          "output_type": "org_chart",
+          "org_chart_definition": {
+            "levels": 3,
+            "include_names": true,
+            "include_titles": true
+          },
+          "llm_prompt": "Produce a 3-level tree org chart for C-Suite and direct reports."
+        },
+        {
+          "id": "14.2",
+          "title": "CIO Office",
+          "description": "CIO org chart.",
+          "output_type": "org_chart",
+          "org_chart_definition": {
+            "levels": 3,
+            "include_names": true,
+            "include_titles": true
+          },
+          "llm_prompt": "Produce a 3-level tree org chart for the CIO organization."
+        },
+        {
+          "id": "14.3",
+          "title": "Chief Procurement Office",
+          "description": "Procurement org chart.",
+          "output_type": "org_chart",
+          "org_chart_definition": {
+            "levels": 3,
+            "include_names": true,
+            "include_titles": true
+          },
+          "llm_prompt": "Produce a 3-level tree org chart for Procurement."
+        },
+        {
+          "id": "14.4",
+          "title": "Data Processing Organization",
+          "description": "Data processing org chart.",
+          "output_type": "org_chart",
+          "org_chart_definition": {
+            "levels": 3,
+            "include_names": true,
+            "include_titles": true
+          },
+          "llm_prompt": "Produce a 3-level tree org chart for Data Processing."
+        },
+        {
+          "id": "14.5",
+          "title": "Centralized Mainframe Operations",
+          "description": "Mainframe ops org chart.",
+          "output_type": "org_chart",
+          "org_chart_definition": {
+            "levels": 3,
+            "include_names": true,
+            "include_titles": true
+          },
+          "llm_prompt": "Produce a 3-level tree org chart for Centralized Mainframe Operations."
+        },
+        {
+          "id": "14.6",
+          "title": "Business Unit Embedded Departments and Functions",
+          "description": "BU embedded IT org chart.",
+          "output_type": "org_chart",
+          "org_chart_definition": {
+            "levels": 3,
+            "include_names": true,
+            "include_titles": true
+          },
+          "llm_prompt": "Produce a 3-level tree org chart for BU-embedded departments and functions."
+        }
+      ]
+    }
+  ]
+}
