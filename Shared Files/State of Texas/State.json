@@ -1,0 +1,416 @@
+{
+    "company": "State of Texas",
+    "period": "FY 2024",
+    "currency": "USD",
+    "items": [
+        {
+            "tier1": "General Fund",
+            "tier2": "Taxes",
+            "revenue": 70.368911,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "General Fund",
+            "tier2": "Federal",
+            "revenue": 63.078115,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "General Fund",
+            "tier2": "Licenses, Fees and Permits",
+            "revenue": 3.684543,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "General Fund",
+            "tier2": "Sales of Goods and Services",
+            "revenue": 8.212094,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "General Fund",
+            "tier2": "Interest and Other Investment Income",
+            "revenue": 3.485139,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "General Fund",
+            "tier2": "Land Income",
+            "revenue": 0.017009,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "General Fund",
+            "tier2": "Settlement of Claims",
+            "revenue": 0.83405,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "General Fund",
+            "tier2": "Other Revenues",
+            "revenue": 11.736701,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "State Highway Fund",
+            "tier2": "Taxes",
+            "revenue": 5.97885,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "State Highway Fund",
+            "tier2": "Federal",
+            "revenue": 5.057866,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "State Highway Fund",
+            "tier2": "Licenses, Fees and Permits",
+            "revenue": 2.083687,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "State Highway Fund",
+            "tier2": "Sales of Goods and Services",
+            "revenue": 0.02083,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "State Highway Fund",
+            "tier2": "Interest and Other Investment Income",
+            "revenue": 0.535042,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "State Highway Fund",
+            "tier2": "Land Income",
+            "revenue": 0.03007,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "State Highway Fund",
+            "tier2": "Settlement of Claims",
+            "revenue": 0.050153,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "State Highway Fund",
+            "tier2": "Other Revenues",
+            "revenue": 0.019915,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Permanent School Fund",
+            "tier2": "Taxes",
+            "revenue": 0.0,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Permanent School Fund",
+            "tier2": "Federal",
+            "revenue": 0.066851,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Permanent School Fund",
+            "tier2": "Licenses, Fees and Permits",
+            "revenue": 0.002958,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Permanent School Fund",
+            "tier2": "Sales of Goods and Services",
+            "revenue": 0.055078,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Permanent School Fund",
+            "tier2": "Interest and Other Investment Income",
+            "revenue": -0.835853,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Permanent School Fund",
+            "tier2": "Land Income",
+            "revenue": 1.608182,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Permanent School Fund",
+            "tier2": "Settlement of Claims",
+            "revenue": 0.0,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Permanent School Fund",
+            "tier2": "Other Revenues",
+            "revenue": 0.003854,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Governmental Funds",
+            "tier2": "Taxes",
+            "revenue": 5.498314,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Governmental Funds",
+            "tier2": "Federal",
+            "revenue": 0.0,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Governmental Funds",
+            "tier2": "Licenses, Fees and Permits",
+            "revenue": 0.874074,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Governmental Funds",
+            "tier2": "Sales of Goods and Services",
+            "revenue": 1.311028,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Governmental Funds",
+            "tier2": "Interest and Other Investment Income",
+            "revenue": 1.737189,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Governmental Funds",
+            "tier2": "Land Income",
+            "revenue": 0.005849,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Governmental Funds",
+            "tier2": "Settlement of Claims",
+            "revenue": 0.000401,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Governmental Funds",
+            "tier2": "Other Revenues",
+            "revenue": 5.312181,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Hospital Revenue — Pledged",
+            "revenue": 27.723622,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Discounts and Allowances (Hospital)",
+            "revenue": -16.867676,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Tuition Revenue",
+            "revenue": 0.147666,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Tuition Revenue — Pledged",
+            "revenue": 8.401793,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Discounts and Allowances (Tuition)",
+            "revenue": -2.602783,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Professional Fees",
+            "revenue": 10.897807,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Discounts and Allowances (Professional Fees)",
+            "revenue": -7.816522,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Auxiliary Enterprises",
+            "revenue": 0.00149,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Auxiliary Enterprises — Pledged",
+            "revenue": 2.080851,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Discounts and Allowances (Auxiliary)",
+            "revenue": -0.152657,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Other Sales of Goods and Services",
+            "revenue": 0.027755,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Other Sales of Goods and Services — Pledged",
+            "revenue": 1.289698,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Discounts and Allowances (Other Sales)",
+            "revenue": -0.011173,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Interest and Investment Income",
+            "revenue": 0.00076,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Interest and Investment Income — Pledged",
+            "revenue": 0.001813,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Federal Revenue",
+            "revenue": 3.749565,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "State Grant Revenue",
+            "revenue": 0.027504,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Other Operating Grant Revenue",
+            "revenue": 1.306704,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Other Operating Grant Revenue — Pledged",
+            "revenue": 2.037802,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Other Revenues",
+            "revenue": 0.207951,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Colleges and Universities (Enterprise Fund)",
+            "tier2": "Other Revenues — Pledged",
+            "revenue": 1.052811,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Unemployment Trust Fund (Enterprise Fund)",
+            "tier2": "Unemployment Taxes",
+            "revenue": 1.927358,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Unemployment Trust Fund (Enterprise Fund)",
+            "tier2": "Other Revenues",
+            "revenue": 0.16426,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Lottery Fund (Enterprise Fund)",
+            "tier2": "Lottery Collections",
+            "revenue": 8.390208,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Lottery Fund (Enterprise Fund)",
+            "tier2": "Other Revenues",
+            "revenue": 0.001134,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Water Development Board Funds (Enterprise Fund)",
+            "tier2": "Interest and Investment Income",
+            "revenue": 0.455095,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Water Development Board Funds (Enterprise Fund)",
+            "tier2": "Interest and Investment Income — Pledged",
+            "revenue": 0.013194,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Water Development Board Funds (Enterprise Fund)",
+            "tier2": "Other Revenues",
+            "revenue": 0.004812,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Enterprise Funds",
+            "tier2": "Professional Fees — Pledged",
+            "revenue": 0.030387,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Enterprise Funds",
+            "tier2": "Auxiliary Enterprises — Pledged",
+            "revenue": 0.120161,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Enterprise Funds",
+            "tier2": "Other Sales of Goods and Services",
+            "revenue": 0.01197,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Enterprise Funds",
+            "tier2": "Other Sales of Goods and Services — Pledged",
+            "revenue": 0.777209,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Enterprise Funds",
+            "tier2": "Discounts and Allowances (Sales/Other)",
+            "revenue": -0.042961,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Enterprise Funds",
+            "tier2": "Interest and Investment Income",
+            "revenue": 0.306613,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Enterprise Funds",
+            "tier2": "Federal Revenue",
+            "revenue": 0.061863,
+            "yoy_pct": null
+        },
+        {
+            "tier1": "Nonmajor Enterprise Funds",
+            "tier2": "Other Revenues",
+            "revenue": 0.105423,
+            "yoy_pct": null
+        }
+    ],
+    "notes": "Source: State of Texas Annual Comprehensive Financial Report (ACFR) for the fiscal year ended August 31, 2024. Governmental funds revenue by source (General Fund, State Highway Fund, Permanent School Fund, Nonmajor Governmental Funds) taken from the Basic Financial Statements: Statement of Revenues, Expenditures and Changes in Fund Balances: Governmental Funds. Enterprise fund operating revenues by line taken from the Statement of Revenues, Expenses and Changes in Net Position: Proprietary Funds. All figures are reported in the ACFR as 'Amounts in Thousands'; values here are converted to billions (thousands ÷ 1,000,000). YoY growth by segment/sub-segment was not disclosed in these statements; therefore yoy_pct is set to null. Excluded from items: segment totals, eliminations, and non-operating amounts; internal service fund columns are ignored. Official access page: Texas Comptroller (FY 2024 ACFR landing). Specific statement pages used: Governmental Funds revenue table (p.45) and Proprietary Funds operating revenue table (p.49). Citations: State of Texas ACFR 2024 landing page; Governmental Funds revenue table (p.45); Proprietary Funds operating revenues (p.49). "
+}
