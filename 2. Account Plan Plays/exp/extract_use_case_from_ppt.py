@@ -25,6 +25,7 @@ import lilypad
 from openai import OpenAI
 from pydantic import BaseModel
 from pptx import Presentation
+from rank_bm25 import BM25Okapi
 
 logger = logging.getLogger("extract_use_case")
 logger.setLevel(logging.DEBUG)
@@ -64,8 +65,8 @@ class UseCaseList(BaseModel):
     use_cases: List[UseCase]
 
 
-def extract_ppt_text(ppt_path: Path) -> str:
-    """Flatten PPT text slide-by-slide into a single string."""
+def extract_ppt_text(ppt_path: Path) -> list[str]:
+    """Flatten PPT text slide-by-slide into a string. Returns list of slide strings"""
     prs = Presentation(str(ppt_path))
     logger.debug("Presentation accessed successfully!")
     slide_chunks: List[str] = []
@@ -82,12 +83,11 @@ def extract_ppt_text(ppt_path: Path) -> str:
                     shape_texts.append(text)
         if shape_texts:
             slide_chunks.append(f"Slide {i}:\n" + "\n".join(shape_texts))
-
-    return "\n\n".join(slide_chunks)
+            # slide_chunks.append("\n".join(shape_texts))
+    return slide_chunks
 
 @lilypad.trace(versioning="automatic") 
 def extract_use_cases(system_prompt: str, user_prompt: str):
-
     logger.debug("Initiating Open AI API call.")
     response = client.responses.parse(
         model=model_name,
@@ -103,13 +103,48 @@ def extract_use_cases(system_prompt: str, user_prompt: str):
     logger.debug("Completed Open AI API call.")
     return response.output_parsed
 
+class BM25Search:
+    def __init__(self, documents):
+        self.documents = documents
+        self.tokenized_documents = []
+
+    def tokenize(self, document):
+        return document.lower().split()
+
+    def tokenize_documents(self):
+        for document in self.documents:
+            tokenized_text = self.tokenize(document)
+            self.tokenized_documents.append(tokenized_text)
+
+    def search(self, query, top_n) -> dict:
+        self.bm25 = BM25Okapi(self.tokenized_documents)
+        query_tokens = self.tokenize(query)
+        scores = self.bm25.get_scores(query_tokens)
+        ranked_indices = sorted(
+            range(len(scores)),
+            key=lambda i: scores[i],
+            reverse=True
+        )[:top_n]
+
+        relevant_documents = {"documents" : []}
+        for rank, i in enumerate(ranked_indices, start=1):
+            document = {
+                "rank" : rank,
+                "slide": i + 1,
+                "score" : f"{scores[i]:.4f}",
+                "document" : self.documents[i]
+            }
+            relevant_documents["documents"].append(document)
+        return relevant_documents
+
+
 def main() -> None:
     data_dir = Path(os.getenv("DATA_DIR", "data"))
     logger.debug(f"Data Path - {data_dir}")
+
     ppt_filename = os.getenv(
         "ACCOUNT_PLAN_PPT", "Citigroup FY26 Account Plan Full.pptx"
     )
-
     ppt_path = data_dir / ppt_filename
     logger.debug(f"PPT Path - {ppt_path}")
 
@@ -121,9 +156,30 @@ def main() -> None:
 
     logger.debug(f"Model Name - {model_name}")
 
-    print(f"Reading PPT from: {ppt_path}")
-    ppt_text = extract_ppt_text(ppt_path)
-    logger.debug("PPT extraction complete.")
+    logger.info("Extract documents from pptx")
+    documents = extract_ppt_text(ppt_path)
+    logger.debug(f"PPT text extracted - {documents}")
+
+    # TODO: Add BM25 based retrieval logic
+    # Split the text(per slide basis) into chunks as documents
+    # Based on the query retrieve relevant chunks
+    # Create the prompt and send it across
+
+    logger.info("Performing BM25")
+    bm25 = BM25Search(documents)
+    bm25.tokenize_documents()
+
+    query = "technology use case business problem solution architecture workflow requirement opportunity"
+    retrieved_documents = []
+    retrievals = bm25.search(query, 5)
+
+    for retrieval in retrievals["documents"]:
+        retrieved_documents.append(retrieval["document"])
+
+    logger.debug(f"Relevant Documents Retrieved are: {retrieved_documents}")
+
+    context = "\n\n".join(retrieved_documents)
+    logger.debug(f"Retrieved context: {context}")
 
     system_prompt = (
         "You are extracting business and IT 'use cases' from a PowerPoint "
@@ -159,10 +215,14 @@ def main() -> None:
         "  ]\n"
         "}\n\n"
         "Account plan text follows:\n\n"
-        f"{ppt_text}"
+        f"{context}"
     )
 
-    parsed: UseCaseList = extract_use_cases(system_prompt, user_prompt)
+    parsed: UseCaseList | None = extract_use_cases(system_prompt, user_prompt)
+    if parsed is None:
+        print("Open AI API not reachable, please try again later")
+        return
+    
     logger.debug("Writing generated JSON to disk")
     records = []
     for idx, uc in enumerate(parsed.use_cases, start=1):
