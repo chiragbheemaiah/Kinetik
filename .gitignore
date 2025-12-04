@@ -143,6 +143,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+/home/blitz/Desktop/Kinetik/code/chapter-100-experiments/2. Account Plan Plays/exp/setup_env_var.sh
 
 # Spyder project settings
 .spyderproject
