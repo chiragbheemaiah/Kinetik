@@ -58,9 +58,10 @@ lilypad.configure(
 )
 
 client = OpenAI()
-model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")          # for extraction
+model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")         
 EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-large")
-RERANK_MODEL = os.getenv("OPENAI_RERANK_MODEL", "gpt-4o-mini")       # for reranking
+RERANK_MODEL = os.getenv("OPENAI_RERANK_MODEL", "gpt-4o-mini") 
+QUERY_GENERATION_MODEL = os.getenv("QUERY_GENERATION_MODEL", "gpt-4o-mini")      
 
 # -------------------------------------------------------------------
 # Pydantic models for structured output
@@ -214,13 +215,28 @@ def openai_rerank(model: str, prompt: str) -> float:
             input=prompt,
         )
         text = response.output_text.strip()
+        logger.debug(f"Returned relevance score - {text}")
         score = float(text)
         return score
     except Exception as e:
         logger.error("openai_call failed: %s", e)
         return 0.0
 
-
+def openai_multi_query_generator(model: str, prompt: str) -> list[str]:
+    ''' Call OpenAI to generate multiple queries for the a given prompt'''
+    try:
+        response = client.responses.create(
+            model = model,
+            input = prompt
+        )
+        query_response = response.output_text
+        queries = json.loads(query_response)
+        logger.debug(f"Generated query: {queries}")
+        return queries["queries"]
+    
+    except Exception as e:
+        logger.error("Open AI call failed: %s", e)
+        return []
 # -------------------------------------------------------------------
 # LLM-based reranking
 # -------------------------------------------------------------------
@@ -266,6 +282,7 @@ def llm_rerank(
     reranked.sort(key=lambda c: c.get("rerank_score", 0.0), reverse=True)
 
     # Filter by threshold
+    # TODO: What if no documents rank above 6?
     filtered = [c for c in reranked if c.get("rerank_score", 0.0) >= thresh]
 
     # If everything got filtered out, fall back to top few reranked
@@ -300,7 +317,32 @@ def extract_use_cases(system_prompt: str, user_prompt: str) -> Optional[UseCaseL
         logger.error("extract_use_cases failed: %s", e)
         return None
 
+def retrieval_reranking_pipeline(retrieval_query, embed_search : EmbeddingSearch, top_n: int = 5) -> list[dict]:
+      # Retrieve a reasonably large candidate set (e.g., 80% of slides, min 5, max all)
+    TOP_N = min(len(embed_search.documents), top_n)
+    retrievals = embed_search.search(retrieval_query, top_n=TOP_N)
+    candidates = retrievals["documents"]
 
+    logger.debug("Embedding retrieval returned %d candidates", len(candidates))
+
+    # 2) LLM reranking
+    logger.info("Performing LLM-based reranking")
+    reranked_documents = llm_rerank(retrieval_query, candidates)
+
+    logger.debug(
+        "After reranking, %d documents selected", len(reranked_documents)
+    )
+
+    context = []
+    for doc in reranked_documents:
+        context.append(doc)
+    # Build context from reranked docs
+    # context = "\n\n".join(
+    #     f"\n{doc['document']}"
+    #     for doc in reranked_documents
+    # )
+
+    return context
 # -------------------------------------------------------------------
 # Main pipeline
 # -------------------------------------------------------------------
@@ -334,7 +376,9 @@ def main() -> None:
     embed_search = EmbeddingSearch(documents)
     embed_search.build_index()
 
-    # Retrieval query should be keyword-heavy, not the whole system prompt
+
+    # Multi query approach
+    MULTI_QUERY_CNT = 3
     retrieval_query = (
        '''
         Find the slides that describe concrete technology-driven scenarios, 
@@ -347,26 +391,55 @@ def main() -> None:
         '''
     )
 
-    # Retrieve a reasonably large candidate set (e.g., 80% of slides, min 5, max all)
-    TOP_N = min(len(documents), max(5, int(len(documents) * 0.8)))
-    retrievals = embed_search.search(retrieval_query, top_n=TOP_N)
-    candidates = retrievals["documents"]
+    # # Retrieve a reasonably large candidate set (e.g., 80% of slides, min 5, max all)
+    # TOP_N = min(len(documents), max(5, int(len(documents) * 0.8)))
+    # retrievals = embed_search.search(retrieval_query, top_n=TOP_N)
+    # candidates = retrievals["documents"]
 
-    logger.debug("Embedding retrieval returned %d candidates", len(candidates))
+    # logger.debug("Embedding retrieval returned %d candidates", len(candidates))
 
-    # 2) LLM reranking
-    logger.info("Performing LLM-based reranking")
-    reranked_documents = llm_rerank(retrieval_query, candidates)
+    # # 2) LLM reranking
+    # logger.info("Performing LLM-based reranking")
+    # reranked_documents = llm_rerank(retrieval_query, candidates)
 
-    logger.debug(
-        "After reranking, %d documents selected", len(reranked_documents)
+    # logger.debug(
+    #     "After reranking, %d documents selected", len(reranked_documents)
+    # )
+
+    # # Build context from reranked docs
+    # context = "\n\n".join(
+    #     f"\n{doc['document']}"
+    #     for doc in reranked_documents
+    # )
+
+    relevant_documents = set()
+    query_generation_prompt = (
+        f"Given the retrieval prompt: '{retrieval_query}', generate "
+        f"{MULTI_QUERY_CNT} alternative search queries. Each must preserve the "
+        "meaning of the original prompt while varying phrasing and including all "
+        "major subject angles. Output valid JSON only, using the schema:\n"
+        "{\n"
+        '  "queries": ["query1", "query2", ...]\n'
+        "}\n"
+        "Do not include anything outside the JSON object."
     )
 
-    # Build context from reranked docs
-    context = "\n\n".join(
-        f"\n{doc['document']}"
-        for doc in reranked_documents
-    )
+    retrieval_queries : list[str] = openai_multi_query_generator(QUERY_GENERATION_MODEL, query_generation_prompt)
+    
+    retrieval_queries.append(retrieval_query)
+    # generate query
+    for retrieval_query in retrieval_queries:
+        # Retrieve relevant document indexes
+        retrieved_docs = retrieval_reranking_pipeline(retrieval_query, embed_search)
+        for doc in retrieved_docs:
+            doc_id = doc['slide']
+            relevant_documents.add(doc_id)
+            
+    context = ""
+    for doc_id in relevant_documents:
+        logger.debug(f"Retrieving document with id - {doc_id -1}")
+        content = documents[doc_id - 1]
+        context = context + f"\n\n {content}"
 
 
     logger.debug("Retrieved context length: %d characters - %s", len(context), context)
