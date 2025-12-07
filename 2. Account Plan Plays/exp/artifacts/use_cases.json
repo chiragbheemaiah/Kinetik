@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "use_case_title": "COBOL Mainframe Application Modernization and Replatforming",
+    "description": "State of Texas agencies are modernizing COBOL-based mainframe applications and, where appropriate, moving these workloads to other platforms using mainframe modernization tools and approaches. This reduces reliance on aging legacy stacks and keeps critical systems sustainable and aligned with current IT standards.",
+    "slide_numbers": [
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 2,
+    "use_case_title": "Mitigating Mainframe Skills Gaps with AMI DevX",
+    "description": "Agencies use AMI DevX to modernize the mainframe developer experience, giving staff more intuitive tools for working with COBOL and other mainframe code. This helps mitigate mainframe skills gaps and accelerates maintenance and enhancement of mission‑critical applications.",
+    "slide_numbers": [
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 3,
+    "use_case_title": "Meeting DIR Security, Resiliency, and Disaster Recovery Mandates",
+    "description": "To satisfy cybersecurity and compliance requirements, agencies strengthen security controls, resiliency, and disaster recovery capabilities in line with DIR mandates. Technology investments focus on protecting sensitive data and ensuring continuity of services across mainframe and related environments.",
+    "slide_numbers": [
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 4,
+    "use_case_title": "Mainframe Cost Optimization and Transparency with AMI Ops and AMI Storage",
+    "description": "Agencies deploy AMI Ops, AMI Ops Automation, and AMI Storage to gain better visibility into mainframe resource consumption and to automate operational management. This enables budget optimization and cost transparency, allowing IT organizations to deliver more capacity and service with fewer resources.",
+    "slide_numbers": [
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 5,
+    "use_case_title": "Hybrid Cloud Integration of Mainframe Workloads with AMI Cloud, AMI Data, and Control-M SaaS",
+    "description": "State of Texas agencies integrate mainframe platforms with cloud environments using AMI Cloud and AMI Data for mainframe modernization, while leveraging Control-M SaaS and its unified view to orchestrate workloads across on‑premises and cloud resources. This supports hybrid architectures that preserve mainframe reliability while adopting cloud-based capabilities.",
+    "slide_numbers": [
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  }
+]

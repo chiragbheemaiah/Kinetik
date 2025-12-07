@@ -57,7 +57,7 @@ lilypad.configure(
     auto_llm=True,
 )
 
-model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")
+MODEL_NAME = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")
 EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-large")
 RERANK_MODEL = os.getenv("OPENAI_RERANK_MODEL", "gpt-4o-mini")
 QUERY_GENERATION_MODEL = os.getenv("QUERY_GENERATION_MODEL", "gpt-4o-mini")
@@ -253,7 +253,7 @@ def llm_rerank(
     query: str,
     candidates: list[dict],
     model: str = RERANK_MODEL,
-    thresh: float = 6.0,
+    thresh: float = 5.0,
 ) -> List[dict] | None:
     """
     Rerank candidate slides using an LLM. Each candidate is a dict:
@@ -314,7 +314,7 @@ def extract_use_cases(system_prompt: str, user_prompt: str) -> Optional[UseCaseL
     logger.debug("Initiating OpenAI API call for use-case extraction.")
     try:
         response = client.responses.parse(
-            model=model_name,
+            model=MODEL_NAME,
             input=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
@@ -338,6 +338,7 @@ def retrieval_reranking_pipeline(
     candidates = retrievals["documents"]
 
     logger.debug("Embedding retrieval returned %d candidates", len(candidates))
+    logger.debug(f"The candidates are: {candidates}")
 
     # 2) LLM reranking
     logger.info("Performing LLM-based reranking")
@@ -345,17 +346,6 @@ def retrieval_reranking_pipeline(
     if not reranked_documents:
         return None
     logger.debug("After reranking, %d documents selected", len(reranked_documents))
-
-    # context = []
-    # reasoning = []
-    # for doc in reranked_documents:
-    #     context.append(doc)
-
-    # Build context from reranked docs
-    # context = "\n\n".join(
-    #     f"\n{doc['document']}"
-    #     for doc in reranked_documents
-    # )
 
     return reranked_documents
 
@@ -373,13 +363,10 @@ def main() -> None:
     ppt_path = data_dir / ppt_filename
     logger.debug("PPT Path - %s", ppt_path)
 
-    output_json = data_dir / os.getenv("OUTPUT_JSON", "use_cases_raw.json")
-    logger.debug("Output JSON Path - %s", output_json)
-
     if not ppt_path.exists():
         raise FileNotFoundError(f"Account plan PPT not found: {ppt_path}")
 
-    logger.debug("Model Name - %s", model_name)
+    logger.debug("Model Name - %s", MODEL_NAME)
 
     # 1) Extract slide texts
     logger.info("Extract documents from pptx")
@@ -405,27 +392,6 @@ def main() -> None:
         structure, budgeting, or internal strategy.
         """
 
-    # # Retrieve a reasonably large candidate set (e.g., 80% of slides, min 5, max all)
-    # TOP_N = min(len(documents), max(5, int(len(documents) * 0.8)))
-    # retrievals = embed_search.search(retrieval_query, top_n=TOP_N)
-    # candidates = retrievals["documents"]
-
-    # logger.debug("Embedding retrieval returned %d candidates", len(candidates))
-
-    # # 2) LLM reranking
-    # logger.info("Performing LLM-based reranking")
-    # reranked_documents = llm_rerank(retrieval_query, candidates)
-
-    # logger.debug(
-    #     "After reranking, %d documents selected", len(reranked_documents)
-    # )
-
-    # # Build context from reranked docs
-    # context = "\n\n".join(
-    #     f"\n{doc['document']}"
-    #     for doc in reranked_documents
-    # )
-
     relevant_documents = set()
     query_generation_prompt = (
         f"Given the retrieval prompt: '{retrieval_query}', generate "
@@ -443,7 +409,6 @@ def main() -> None:
     )
 
     retrieval_queries.append(retrieval_query)
-    # generate query
     for retrieval_query in retrieval_queries:
         # Retrieve relevant document indexes
         retrieved_docs = retrieval_reranking_pipeline(retrieval_query, embed_search)
@@ -458,7 +423,6 @@ def main() -> None:
     context = ""
 
     for doc_id in relevant_documents:
-        # find the matching document
         context_doc = None
         for retr_doc in retrieved_docs:
             if retr_doc["slide_id"] == doc_id:
@@ -584,8 +548,17 @@ def main() -> None:
             }
         )
 
-    output_json.parent.mkdir(parents=True, exist_ok=True)
-    with output_json.open("w", encoding="utf-8") as f:
+    ARTIFACTS_PATH = "/home/blitz/Desktop/Kinetik/code/chapter-100-experiments/2. Account Plan Plays/exp/artifacts"
+    output_json = os.path.join(ARTIFACTS_PATH, "use_cases.json")
+
+    logger.debug("Output JSON Path - %s", output_json)
+
+    # Create directory if it does not exist
+    output_dir = os.path.dirname(output_json)
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Write file
+    with open(output_json, "w", encoding="utf-8") as f:
         json.dump(records, f, indent=2, ensure_ascii=False)
 
     logger.debug("Writing completed.")
