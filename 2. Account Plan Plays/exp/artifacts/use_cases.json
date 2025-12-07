@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "use_case_title": "Mainframe COBOL modernization for legacy state systems",
+    "description": "Texas agencies modernize COBOL-based mainframe applications that underpin core government services to make them easier to maintain and adapt. By applying mainframe modernization approaches to these legacy systems, they improve performance and agility while supporting new digital service delivery for residents. This reduces technical risk and shortens time-to-change for critical programs.",
+    "slide_numbers": [
+      3,
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 2,
+    "use_case_title": "Mainframe developer experience and skills-gap mitigation with AMI DevX",
+    "description": "To address mainframe skills gaps, agencies adopt AMI DevX to provide modern IDEs, debugging, and automation for COBOL and other mainframe development. This tooling allows less-experienced staff to work productively on legacy codebases and streamlines mainframe CI/CD practices. The result is higher developer productivity and reduced dependency on a shrinking pool of mainframe specialists.",
+    "slide_numbers": [
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 3,
+    "use_case_title": "Enterprise security, resiliency, and disaster recovery aligned to DIR mandates",
+    "description": "Under DIR mandates for security, resiliency, and disaster recovery, agencies strengthen cybersecurity controls and continuity plans across mainframe and hybrid environments. They implement capabilities that support compliance, hardened infrastructure, and rapid recovery from outages or cyber incidents. This improves statewide risk posture and ensures critical services remain available during disruptions.",
+    "slide_numbers": [
+      3,
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 4,
+    "use_case_title": "Mainframe operations cost optimization and transparency with AMI Ops and AMI Storage",
+    "description": "Facing budget pressure, agencies use AMI Ops, AMI Ops Automation, and AMI Storage to gain visibility into mainframe resource consumption and automate routine operations. These tools help tune performance, optimize storage, and reduce manual effort so agencies can \"do more with less.\" The outcome is lower operating costs, deferred capacity upgrades, and more efficient use of IT budgets.",
+    "slide_numbers": [
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 5,
+    "use_case_title": "Hybrid cloud integration and application migration for mainframe workloads",
+    "description": "As multiple Texas agencies adopt AWS and Azure, they leverage AMI Cloud and AMI Data to integrate mainframe data and processes with cloud platforms and to support moving applications to other environments. This enables hybrid architectures where mainframe systems-of-record can securely participate in cloud-native workflows and gradual application migration. Benefits include increased agility, better use of cloud services, and improved digital experiences without disrupting critical legacy systems.",
+    "slide_numbers": [
+      3,
+      6
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 6,
+    "use_case_title": "SaaS-based workload automation and unified scheduling with Control-M",
+    "description": "Agencies such as TxDOT, the Comptroller of Public Accounts, HHSC, and the Railroad Commission are migrating batch and data workloads from legacy schedulers (including ActiveBatch) to Control-M SaaS. This provides a unified, cloud-based view and control of jobs running across mainframe and distributed platforms, simplifying operations and standardizing scheduling. The result is higher reliability, easier onboarding of new workloads, and more consistent SLA adherence for critical state services.",
+    "slide_numbers": [
+      6,
+      14
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  }
+]

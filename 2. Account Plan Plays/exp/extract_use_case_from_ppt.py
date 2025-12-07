@@ -58,15 +58,17 @@ lilypad.configure(
 )
 
 client = OpenAI()
-model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")          # for extraction
+model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")  # for extraction
 EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-large")
-RERANK_MODEL = os.getenv("OPENAI_RERANK_MODEL", "gpt-4o-mini")       # for reranking
+RERANK_MODEL = os.getenv("OPENAI_RERANK_MODEL", "gpt-4o-mini")  # for reranking
+
 
 # -------------------------------------------------------------------
 # Pydantic models for structured output
 # -------------------------------------------------------------------
 class UseCase(BaseModel):
     """Schema for one extracted use case (LLM output)."""
+
     use_case_title: str
     description: str
     slide_numbers: List[int]
@@ -74,6 +76,7 @@ class UseCase(BaseModel):
 
 class UseCaseList(BaseModel):
     """Wrapper so we can parse a list of use cases."""
+
     use_cases: List[UseCase]
 
 
@@ -144,11 +147,13 @@ class EmbeddingSearch:
         self.embeddings = [item.embedding for item in response.data]
 
         if self.embeddings:
-            logger.debug("Embedding index built. Dimensions: %d", len(self.embeddings[0]))
+            logger.debug(
+                "Embedding index built. Dimensions: %d", len(self.embeddings[0])
+            )
         else:
             logger.warning("No embeddings returned from API")
 
-    def search(self, query: str, top_n: int = 5) -> dict:
+    def search(self, query: str, top_n: int = 20) -> dict:
         """
         Returns top_n most similar documents for the query.
         Structure:
@@ -191,7 +196,7 @@ class EmbeddingSearch:
         for rank, i in enumerate(ranked_indices, start=1):
             document = {
                 "rank": rank,
-                "slide": i + 1,  
+                "slide": i + 1,
                 "score": f"{similarities[i]:.4f}",
                 "document": self.documents[i],
             }
@@ -228,7 +233,7 @@ def llm_rerank(
     query: str,
     candidates: List[dict],
     model: str = RERANK_MODEL,
-    thresh: float = 6.0,
+    thresh: float = 2.0,
 ) -> List[dict]:
     """
     Rerank candidate slides using an LLM. Each candidate is a dict:
@@ -253,7 +258,7 @@ def llm_rerank(
         Slide Text:
         {slide_text}
 
-        Rate how relevant this slide is to the query from 1 (irrelevant)
+        Rate how relevant the slide text is to the query provided from 1 (irrelevant)
         to 10 (highly relevant). Output ONLY the number.
         """.strip()
 
@@ -261,6 +266,7 @@ def llm_rerank(
         cand = cand.copy()
         cand["rerank_score"] = score
         reranked.append(cand)
+        logger.debug(f"Slide text: {slide_text}, Rerank Score: {score}")
 
     # Sort by rerank_score descending (higher = more relevant)
     reranked.sort(key=lambda c: c.get("rerank_score", 0.0), reverse=True)
@@ -314,8 +320,8 @@ def main() -> None:
     ppt_path = data_dir / ppt_filename
     logger.debug("PPT Path - %s", ppt_path)
 
-    output_json = data_dir / os.getenv("OUTPUT_JSON", "use_cases_raw.json")
-    logger.debug("Output JSON Path - %s", output_json)
+    # output_json = data_dir / os.getenv("OUTPUT_JSON", "use_cases_raw.json")
+    # logger.debug("Output JSON Path - %s", output_json)
 
     if not ppt_path.exists():
         raise FileNotFoundError(f"Account plan PPT not found: {ppt_path}")
@@ -335,8 +341,7 @@ def main() -> None:
     embed_search.build_index()
 
     # Retrieval query should be keyword-heavy, not the whole system prompt
-    retrieval_query = (
-       '''
+    retrieval_query = """
         Find the slides that describe concrete technology-driven scenarios, 
         problems, or opportunities. Focus on any part of the deck that explains 
         how an agency or organization uses technology to improve operations, 
@@ -344,8 +349,7 @@ def main() -> None:
         developer experience, improve data reliability, or support regulatory 
         and reporting needs. Ignore slides about sales motions, organizational 
         structure, budgeting, or internal strategy.
-        '''
-    )
+        """
 
     # Retrieve a reasonably large candidate set (e.g., 80% of slides, min 5, max all)
     TOP_N = min(len(documents), max(5, int(len(documents) * 0.8)))
@@ -356,24 +360,34 @@ def main() -> None:
 
     # 2) LLM reranking
     logger.info("Performing LLM-based reranking")
-    reranked_documents = llm_rerank(retrieval_query, candidates)
+    reranking_query = """
+        Rank passages by how well they describe a concrete technology use case.
 
-    logger.debug(
-        "After reranking, %d documents selected", len(reranked_documents)
-    )
+        A relevant passage should:
+        - State a specific problem or need.
+        - Describe a technology-based solution or workflow.
+        - Describe a clear outcome or improvement.
+
+        Competitive content is relevant only if it explains a migration or replacement that includes a real technical workflow.
+
+        Downrank passages that focus on sales strategy, procurement mechanics, generic value statements, or organizational details.
+
+        Give the highest score to passages containing all three elements:
+        problem + technology approach + outcome.
+
+
+    """
+    reranked_documents = llm_rerank(reranking_query, candidates)
+
+    logger.debug("After reranking, %d documents selected", len(reranked_documents))
 
     # Build context from reranked docs
-    context = "\n\n".join(
-        f"\n{doc['document']}"
-        for doc in reranked_documents
-    )
-
+    context = "\n\n".join(f"\n{doc['document']}" for doc in reranked_documents)
 
     logger.debug("Retrieved context length: %d characters - %s", len(context), context)
 
-
     # 3) System + user prompts for extraction
-    system_prompt = '''You are an expert public-sector solutions architect analyzing an account plan
+    system_prompt = """You are an expert public-sector solutions architect analyzing an account plan
     PowerPoint for the State of Texas. Your job is to extract concrete business and IT
     *use cases* where State of Texas agencies apply technology to achieve a specific
     public-sector outcome.
@@ -434,7 +448,7 @@ def main() -> None:
     - A 1–3 sentence description.
     - All slide numbers where the use case appears.
     - Only include real technology scenarios; ignore sales strategy content.
-    '''
+    """
 
     user_prompt = (
         "Extract all distinct use cases from the following account plan text.\n\n"
@@ -474,12 +488,27 @@ def main() -> None:
             }
         )
 
-    output_json.parent.mkdir(parents=True, exist_ok=True)
-    with output_json.open("w", encoding="utf-8") as f:
+    ARTIFACTS_PATH = "/home/blitz/Desktop/Kinetik/code/chapter-100-experiments/2. Account Plan Plays/exp/artifacts"
+    output_json = os.path.join(ARTIFACTS_PATH, "use_cases.json")
+
+    logger.debug("Output JSON Path - %s", output_json)
+
+    # Create directory if it does not exist
+    output_dir = os.path.dirname(output_json)
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Write file
+    with open(output_json, "w", encoding="utf-8") as f:
         json.dump(records, f, indent=2, ensure_ascii=False)
 
     logger.debug("Writing completed.")
     print(f"Wrote {len(records)} use cases → {output_json}")
+    # output_json.parent.mkdir(parents=True, exist_ok=True)
+    # with output_json.open("w", encoding="utf-8") as f:
+    #     json.dump(records, f, indent=2, ensure_ascii=False)
+
+    # logger.debug("Writing completed.")
+    # print(f"Wrote {len(records)} use cases → {output_json}")
 
 
 if __name__ == "__main__":
