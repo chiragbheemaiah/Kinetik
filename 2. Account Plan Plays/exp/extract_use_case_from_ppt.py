@@ -22,7 +22,7 @@ import os
 import math
 import logging
 from pathlib import Path
-from typing import List, Optional
+from typing import Any, List, Optional
 
 import lilypad
 from openai import OpenAI
@@ -57,17 +57,20 @@ lilypad.configure(
     auto_llm=True,
 )
 
-client = OpenAI()
-model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")         
+model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")
 EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-large")
-RERANK_MODEL = os.getenv("OPENAI_RERANK_MODEL", "gpt-4o-mini") 
-QUERY_GENERATION_MODEL = os.getenv("QUERY_GENERATION_MODEL", "gpt-4o-mini")      
+RERANK_MODEL = os.getenv("OPENAI_RERANK_MODEL", "gpt-4o-mini")
+QUERY_GENERATION_MODEL = os.getenv("QUERY_GENERATION_MODEL", "gpt-4o-mini")
+
+client = OpenAI()
+
 
 # -------------------------------------------------------------------
 # Pydantic models for structured output
 # -------------------------------------------------------------------
 class UseCase(BaseModel):
     """Schema for one extracted use case (LLM output)."""
+
     use_case_title: str
     description: str
     slide_numbers: List[int]
@@ -75,7 +78,13 @@ class UseCase(BaseModel):
 
 class UseCaseList(BaseModel):
     """Wrapper so we can parse a list of use cases."""
+
     use_cases: List[UseCase]
+
+
+class RerankingModel(BaseModel):
+    score: float
+    relevance_reasoning: str
 
 
 # -------------------------------------------------------------------
@@ -96,11 +105,10 @@ def extract_ppt_text(ppt_path: Path) -> List[str]:
         shape_texts: List[str] = []
         for shape in slide.shapes:
             if hasattr(shape, "text"):
-                text = (shape.text or "").strip()
+                text = (shape.text or "").strip()  # type: ignore
                 if text:
                     shape_texts.append(text)
         if shape_texts:
-            # Include slide number inside the text for extra context
             slide_chunks.append(f"Slide {i}:\n" + "\n".join(shape_texts))
 
     logger.debug("Extracted text from %d slides", len(slide_chunks))
@@ -141,11 +149,12 @@ class EmbeddingSearch:
             input=self.documents,
         )
 
-        # response.data is a list of objects with .embedding
         self.embeddings = [item.embedding for item in response.data]
 
         if self.embeddings:
-            logger.debug("Embedding index built. Dimensions: %d", len(self.embeddings[0]))
+            logger.debug(
+                "Embedding index built. Dimensions: %d", len(self.embeddings[0])
+            )
         else:
             logger.warning("No embeddings returned from API")
 
@@ -156,12 +165,11 @@ class EmbeddingSearch:
         {
             "documents": [
                 {
+                    "slide_id" : int
                     "rank": int,
-                    "slide": int,
-                    "score": str,
+                    "similarity_score": str,
                     "document": str,
-                },
-                ...
+                },...
             ]
         }
         """
@@ -191,66 +199,66 @@ class EmbeddingSearch:
         relevant_documents = {"documents": []}
         for rank, i in enumerate(ranked_indices, start=1):
             document = {
+                "slide_id": i + 1,
                 "rank": rank,
-                "slide": i + 1,  
-                "score": f"{similarities[i]:.4f}",
+                "similarity_score": f"{similarities[i]:.4f}",
                 "document": self.documents[i],
             }
             relevant_documents["documents"].append(document)
-
         return relevant_documents
 
 
 # -------------------------------------------------------------------
 # Simple OpenAI call for reranking scores
 # -------------------------------------------------------------------
-def openai_rerank(model: str, prompt: str) -> float:
+def openai_rerank(model: str, prompt: str) -> RerankingModel | None:
     """
-    Call OpenAI with a prompt that is supposed to return a single number.
+    Call OpenAI with a prompt that is supposed to return a single number along with reasoning as to why the document is relevant.
     Returns 0.0 on failure so reranking can still proceed.
     """
     try:
-        response = client.responses.create(
-            model=model,
-            input=prompt,
+        response = client.responses.parse(
+            model=model, input=prompt, text_format=RerankingModel
         )
-        text = response.output_text.strip()
-        logger.debug(f"Returned relevance score - {text}")
-        score = float(text)
-        return score
+        rerank_relevance = response.output_parsed
+        if not rerank_relevance:
+            return None
+        logger.debug(
+            f"Returned relevance score - {rerank_relevance.score}, with reasoning - {rerank_relevance.relevance_reasoning}"
+        )
+        return rerank_relevance
     except Exception as e:
         logger.error("openai_call failed: %s", e)
-        return 0.0
+        return None
+
 
 def openai_multi_query_generator(model: str, prompt: str) -> list[str]:
-    ''' Call OpenAI to generate multiple queries for the a given prompt'''
+    """Call OpenAI to generate multiple queries for the a given prompt"""
     try:
-        response = client.responses.create(
-            model = model,
-            input = prompt
-        )
+        response = client.responses.create(model=model, input=prompt)
         query_response = response.output_text
         queries = json.loads(query_response)
         logger.debug(f"Generated query: {queries}")
         return queries["queries"]
-    
+
     except Exception as e:
         logger.error("Open AI call failed: %s", e)
         return []
+
+
 # -------------------------------------------------------------------
 # LLM-based reranking
 # -------------------------------------------------------------------
 def llm_rerank(
     query: str,
-    candidates: List[dict],
+    candidates: list[dict],
     model: str = RERANK_MODEL,
     thresh: float = 6.0,
-) -> List[dict]:
+) -> List[dict] | None:
     """
     Rerank candidate slides using an LLM. Each candidate is a dict:
     {
         "rank": int,
-        "slide": int,
         "score": str,        # embedding similarity as string
         "document": str,     # slide text
     }
@@ -260,8 +268,8 @@ def llm_rerank(
     """
     reranked: List[dict] = []
 
-    for cand in candidates:
-        slide_text = cand["document"]
+    for candidate in candidates:
+        slide_text = candidate["document"]
 
         prompt = f"""
         Query: {query}
@@ -270,19 +278,22 @@ def llm_rerank(
         {slide_text}
 
         Rate how relevant this slide is to the query from 1 (irrelevant)
-        to 10 (highly relevant). Output ONLY the number.
+        to 10 (highly relevant) Add the reasoning as to why this document is relevant to the query as well.
         """.strip()
 
-        score = openai_rerank(model, prompt)
-        cand = cand.copy()
-        cand["rerank_score"] = score
-        reranked.append(cand)
+        relevance = openai_rerank(model, prompt)
+        if not relevance:
+            return None
+
+        candidate = candidate.copy()
+        candidate["rerank_score"] = relevance.score
+        candidate["reasoning"] = relevance.relevance_reasoning
+        reranked.append(candidate)
 
     # Sort by rerank_score descending (higher = more relevant)
     reranked.sort(key=lambda c: c.get("rerank_score", 0.0), reverse=True)
 
     # Filter by threshold
-    # TODO: What if no documents rank above 6?
     filtered = [c for c in reranked if c.get("rerank_score", 0.0) >= thresh]
 
     # If everything got filtered out, fall back to top few reranked
@@ -317,8 +328,11 @@ def extract_use_cases(system_prompt: str, user_prompt: str) -> Optional[UseCaseL
         logger.error("extract_use_cases failed: %s", e)
         return None
 
-def retrieval_reranking_pipeline(retrieval_query, embed_search : EmbeddingSearch, top_n: int = 5) -> list[dict]:
-      # Retrieve a reasonably large candidate set (e.g., 80% of slides, min 5, max all)
+
+def retrieval_reranking_pipeline(
+    retrieval_query, embed_search: EmbeddingSearch, top_n: int = 5
+) -> list[dict] | None:
+    # Retrieve a reasonably large candidate set (e.g., 80% of slides, min 5, max all)
     TOP_N = min(len(embed_search.documents), top_n)
     retrievals = embed_search.search(retrieval_query, top_n=TOP_N)
     candidates = retrievals["documents"]
@@ -328,21 +342,24 @@ def retrieval_reranking_pipeline(retrieval_query, embed_search : EmbeddingSearch
     # 2) LLM reranking
     logger.info("Performing LLM-based reranking")
     reranked_documents = llm_rerank(retrieval_query, candidates)
+    if not reranked_documents:
+        return None
+    logger.debug("After reranking, %d documents selected", len(reranked_documents))
 
-    logger.debug(
-        "After reranking, %d documents selected", len(reranked_documents)
-    )
+    # context = []
+    # reasoning = []
+    # for doc in reranked_documents:
+    #     context.append(doc)
 
-    context = []
-    for doc in reranked_documents:
-        context.append(doc)
     # Build context from reranked docs
     # context = "\n\n".join(
     #     f"\n{doc['document']}"
     #     for doc in reranked_documents
     # )
 
-    return context
+    return reranked_documents
+
+
 # -------------------------------------------------------------------
 # Main pipeline
 # -------------------------------------------------------------------
@@ -376,11 +393,9 @@ def main() -> None:
     embed_search = EmbeddingSearch(documents)
     embed_search.build_index()
 
-
     # Multi query approach
     MULTI_QUERY_CNT = 3
-    retrieval_query = (
-       '''
+    retrieval_query = """
         Find the slides that describe concrete technology-driven scenarios, 
         problems, or opportunities. Focus on any part of the deck that explains 
         how an agency or organization uses technology to improve operations, 
@@ -388,8 +403,7 @@ def main() -> None:
         developer experience, improve data reliability, or support regulatory 
         and reporting needs. Ignore slides about sales motions, organizational 
         structure, budgeting, or internal strategy.
-        '''
-    )
+        """
 
     # # Retrieve a reasonably large candidate set (e.g., 80% of slides, min 5, max all)
     # TOP_N = min(len(documents), max(5, int(len(documents) * 0.8)))
@@ -424,29 +438,52 @@ def main() -> None:
         "Do not include anything outside the JSON object."
     )
 
-    retrieval_queries : list[str] = openai_multi_query_generator(QUERY_GENERATION_MODEL, query_generation_prompt)
-    
+    retrieval_queries: list[str] = openai_multi_query_generator(
+        QUERY_GENERATION_MODEL, query_generation_prompt
+    )
+
     retrieval_queries.append(retrieval_query)
     # generate query
     for retrieval_query in retrieval_queries:
         # Retrieve relevant document indexes
         retrieved_docs = retrieval_reranking_pipeline(retrieval_query, embed_search)
-        for doc in retrieved_docs:
-            doc_id = doc['slide']
-            relevant_documents.add(doc_id)
-            
-    context = ""
-    for doc_id in relevant_documents:
-        logger.debug(f"Retrieving document with id - {doc_id -1}")
-        content = documents[doc_id - 1]
-        context = context + f"\n\n {content}"
 
+        if not retrieved_docs:
+            logger.error("Relevant documents could not be retrieved. ")
+            return None
+        for document in retrieved_docs:
+            doc_id = document["slide_id"]
+            relevant_documents.add(doc_id)
+
+    context = ""
+
+    for doc_id in relevant_documents:
+        # find the matching document
+        context_doc = None
+        for retr_doc in retrieved_docs:
+            if retr_doc["slide_id"] == doc_id:
+                context_doc = retr_doc
+                break
+
+        logger.debug(f"Retrieving document with id - {doc_id - 1}")
+
+        if context_doc is None:
+            logger.warning(f"No retrieved document found for slide_id={doc_id}")
+            continue
+
+        document_content = context_doc.get("document", "")
+        document_reasoning = context_doc.get("reasoning", "")
+
+        # Add both content and reasoning into the context string
+        context += (
+            f"\n\n[CONTENT - SLIDE {doc_id}]\n{document_content}"
+            f"\n\n[REASONING - SLIDE {doc_id}]\n{document_reasoning}"
+        )
 
     logger.debug("Retrieved context length: %d characters - %s", len(context), context)
 
-
     # 3) System + user prompts for extraction
-    system_prompt = '''You are an expert public-sector solutions architect analyzing an account plan
+    system_prompt = """You are an expert public-sector solutions architect analyzing an account plan
     PowerPoint for the State of Texas. Your job is to extract concrete business and IT
     *use cases* where State of Texas agencies apply technology to achieve a specific
     public-sector outcome.
@@ -507,10 +544,10 @@ def main() -> None:
     - A 1–3 sentence description.
     - All slide numbers where the use case appears.
     - Only include real technology scenarios; ignore sales strategy content.
-    '''
+    """
 
     user_prompt = (
-        "Extract all distinct use cases from the following account plan text.\n\n"
+        "Extract all distinct use cases from the following account plan text. \n\n"
         "Return JSON ONLY, conforming to this structure:\n"
         "{\n"
         '  "use_cases": [\n'
