@@ -1,0 +1,265 @@
+[
+  {
+    "id": 1,
+    "use_case_title": "Hybrid Mainframe COBOL Modernization and Cloud Integration",
+    "description": "Modernize COBOL-based mainframe applications while integrating them with AWS and Azure, using AMI Cloud and AMI Data to offload data, expose services, and move selected workloads to modern platforms without disrupting critical state services across agencies.",
+    "slide_numbers": [
+      3,
+      4,
+      6,
+      8,
+      9,
+      13
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 2,
+    "use_case_title": "AMI DevX for Mainframe Skills Gaps and Modern Developer Experience",
+    "description": "Use BMC AMI DevX to address mainframe skills gaps by providing modern IDEs, automated testing, and CI/CD pipelines for COBOL and other mainframe applications, enabling state developers and system integrators to work productively on z/OS.",
+    "slide_numbers": [
+      6,
+      8
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 3,
+    "use_case_title": "Mainframe Operations, Storage, and Cost Optimization",
+    "description": "Deploy AMI Ops, AMI Ops Automation, AMI Storage, and AMI Cloud to automate mainframe operations, optimize capacity and storage utilization, and deliver budget optimization and cost transparency for DIR’s statewide technology account and hosted agencies.",
+    "slide_numbers": [
+      4,
+      6,
+      8,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 4,
+    "use_case_title": "Mainframe Security, Resiliency, Disaster Recovery, and Compliance",
+    "description": "Replace legacy IBM and Broadcom/CA security tooling with BMC AMI Security and related solutions to harden mainframe cybersecurity, meet DIR mandates for security, resiliency, and disaster recovery, and support agency-specific compliance and audit requirements.",
+    "slide_numbers": [
+      3,
+      4,
+      6,
+      8,
+      12,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 5,
+    "use_case_title": "DIR Statewide Data Center Consolidation and Shared Mainframe Services",
+    "description": "Support DIR’s shared technology services and data center consolidation by standardizing on BMC mainframe tooling in partnership with Atos, enabling centralized operations, security, storage, and automation for multiple agencies under the statewide technology account.",
+    "slide_numbers": [
+      4,
+      6,
+      8,
+      9,
+      11,
+      12,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 6,
+    "use_case_title": "Control-M SaaS Migration and Unified Hybrid Workload Orchestration",
+    "description": "Migrate existing on-premise Control-M deployments at agencies such as TxDOT, CPA, and HHSC to Control-M SaaS, providing a unified, cloud-based view to orchestrate workloads across mainframe, on-prem servers, and public cloud environments.",
+    "slide_numbers": [
+      6,
+      8,
+      14
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 7,
+    "use_case_title": "Competitive Workload Automation Takeouts and Standardization on Control-M",
+    "description": "Replace competing schedulers like Broadcom/CA JobTrac and ActiveBatch with Control-M at agencies including the Railroad Commission and DIR/HHS, and win back Control-M footprints lost through Accenture-led decisions, creating a standardized enterprise workload automation platform.",
+    "slide_numbers": [
+      11,
+      12,
+      14
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 8,
+    "use_case_title": "ITSM Modernization with BMC Helix and Embedded Workload Orchestration",
+    "description": "Replace ServiceNow at DIR with BMC Helix ITSM and embed Control-M as the standard workload orchestration engine so incidents, changes, and service requests are directly linked to batch and workflow automation for faster resolution and higher service reliability.",
+    "slide_numbers": [
+      8,
+      11
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 9,
+    "use_case_title": "End-to-End Workflow Observability and File Transfer Analytics with Control-M",
+    "description": "Deploy Control-M Workflow Insights and Managed File Transfer add-ons at agencies like CPA, TxDOT, and HHSC to provide end-to-end visibility, SLA monitoring, and performance analytics for batch workflows and file transfers across heterogeneous platforms.",
+    "slide_numbers": [
+      8,
+      13,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 10,
+    "use_case_title": "Virtual Tape Library and Tape Management Replacement with AMI Cloud",
+    "description": "Replace IBM-based Virtual Tape Library and tape management systems at the CPA and in Atos-operated DIR environments with AMI Cloud-backed VTL leveraging S3/object storage, cutting mainframe storage costs while improving backup, archival, and cross-agency data sharing.",
+    "slide_numbers": [
+      4,
+      6,
+      12,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 11,
+    "use_case_title": "Mainframe Observability and AIOps with AMI Ops Insights",
+    "description": "Introduce AMI Ops Insights to deliver AI-driven anomaly detection, performance analytics, and predictive insights for mainframe workloads, reducing manual troubleshooting and improving availability for high-volume state applications.",
+    "slide_numbers": [
+      6,
+      8,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 12,
+    "use_case_title": "Comptroller Tax Platform Modernization with Compliance and Fraud Analytics",
+    "description": "Modernize the Comptroller of Public Accounts’ tax platforms using workload automation, mainframe modernization, and advanced analytics to support fraud detection, regulatory compliance, and rapid implementation of law-driven tax changes.",
+    "slide_numbers": [
+      3,
+      6,
+      8,
+      9,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 13,
+    "use_case_title": "Medicaid Enterprise Modernization and Automated Claims/Fraud Analytics (HHSC)",
+    "description": "Modernize HHSC’s Medicaid Enterprise by expanding beyond the current CAPS-only Control-M usage, automating end-to-end claims workflows, and enabling fraud and eligibility analytics across mainframe and distributed data, including replacement of legacy schedulers like ActiveBatch.",
+    "slide_numbers": [
+      6,
+      8,
+      9,
+      13,
+      14,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 14,
+    "use_case_title": "Resilient Workforce/Unemployment Claims Automation and Federal Reporting (TWC)",
+    "description": "Enhance TWC’s post-COVID resilience by automating unemployment and workforce claims processing with Control-M and modernized back-end systems, while implementing DataOps-driven reporting pipelines to meet stringent federal reporting and compliance obligations.",
+    "slide_numbers": [
+      3,
+      6,
+      8,
+      9
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 15,
+    "use_case_title": "Driver License System Modernization with Real-Time Compliance and Secure Identity (DPS)",
+    "description": "Support DPS in modernizing its driver license systems and sunsetting its mainframe by automating real-time compliance checks and integrating secure identity services, ensuring a controlled transition of legacy IZOT workloads to modern platforms.",
+    "slide_numbers": [
+      3,
+      6,
+      8,
+      9,
+      13
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 16,
+    "use_case_title": "Pension System Modernization with Forecasting and Risk/Compliance Analytics (TRS)",
+    "description": "Modernize the Teacher Retirement System’s pension platforms by orchestrating batch and analytics workloads that deliver forecasting, risk modeling, and compliance reporting across mainframe and hybrid data sources.",
+    "slide_numbers": [
+      6,
+      8,
+      9
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 17,
+    "use_case_title": "Benefits Administration Modernization and Compliance Reporting (ERS)",
+    "description": "Upgrade ERS benefits administration systems with automated workflows, mainframe modernization, and reporting pipelines that streamline benefits processing while satisfying evolving compliance and audit requirements.",
+    "slide_numbers": [
+      6,
+      8,
+      9
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 18,
+    "use_case_title": "Public Health Data Modernization and Analytics for Crisis Response (DSHS)",
+    "description": "Modernize DSHS public health data systems and analytics pipelines so the state can rapidly ingest, process, and analyze epidemiological data across mainframe and cloud platforms, improving readiness and response to future pandemics and health crises.",
+    "slide_numbers": [
+      3,
+      6,
+      8,
+      9
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 19,
+    "use_case_title": "Transportation Financial and Project Systems Modernization and Automation (TxDOT)",
+    "description": "Extend and migrate TxDOT’s existing Control-M (currently focused on PeopleSoft) to Control-M SaaS to modernize financial and project systems, automating complex funding, forecasting, and construction project workflows with improved observability and MFT integration.",
+    "slide_numbers": [
+      6,
+      8,
+      9,
+      13,
+      14,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 20,
+    "use_case_title": "Digital Motor Vehicle and Licensing Services Automation with Embedded Compliance (TxDMV)",
+    "description": "Modernize TxDMV systems to deliver automated digital services for vehicle registration and licensing, using workload automation and mainframe/cloud integration to enforce risk and compliance checks in real time for citizens and businesses.",
+    "slide_numbers": [
+      3,
+      6,
+      8,
+      9
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  }
+]

@@ -224,8 +224,8 @@ def main() -> None:
     ppt_path = data_dir / ppt_filename
     logger.debug(f"PPT Path - {ppt_path}")
 
-    output_json = data_dir / os.getenv("OUTPUT_JSON", "use_cases_raw.json")
-    logger.debug(f"Output JSON Path - {output_json}")
+    # output_json = data_dir / os.getenv("OUTPUT_JSON", "use_cases_raw.json")
+    # logger.debug(f"Output JSON Path - {output_json}")
 
     if not ppt_path.exists():
         raise FileNotFoundError(f"Account plan PPT not found: {ppt_path}")
@@ -294,12 +294,27 @@ def main() -> None:
             }
         )
 
-    output_json.parent.mkdir(parents=True, exist_ok=True)
-    with output_json.open("w", encoding="utf-8") as f:
+    # output_json.parent.mkdir(parents=True, exist_ok=True)
+    # with output_json.open("w", encoding="utf-8") as f:
+    #     json.dump(records, f, indent=2, ensure_ascii=False)
+
+    # logger.debug("Writing completed.")
+
+    # print(f"Wrote {len(records)} use cases → {output_json}")
+    ARTIFACTS_PATH = "/home/blitz/Desktop/Kinetik/code/chapter-100-experiments/2. Account Plan Plays/exp/artifacts"
+    output_json = os.path.join(ARTIFACTS_PATH, "use_cases.json")
+
+    logger.debug("Output JSON Path - %s", output_json)
+
+    # Create directory if it does not exist
+    output_dir = os.path.dirname(output_json)
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Write file
+    with open(output_json, "w", encoding="utf-8") as f:
         json.dump(records, f, indent=2, ensure_ascii=False)
 
     logger.debug("Writing completed.")
-
     print(f"Wrote {len(records)} use cases → {output_json}")
 
 
