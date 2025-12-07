@@ -1,0 +1,139 @@
+[
+  {
+    "id": 1,
+    "use_case_title": "Mainframe COBOL Modernization and Developer Productivity with AMI DevX",
+    "description": "Modernize COBOL-based mainframe applications while addressing skills gaps by adopting AMI DevX tooling, enabling faster, safer code changes and improved developer productivity. This also supports structured migration of selected workloads to other platforms as agencies like Texas DPS plan to sunset mainframe footprints.",
+    "slide_numbers": [
+      3,
+      6,
+      9,
+      13
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 2,
+    "use_case_title": "Mainframe Security, Resiliency, and Compliance for DIR Mandates",
+    "description": "Enhance mainframe cybersecurity posture, resiliency, and disaster recovery to meet DIR mandates by replacing legacy IBM security tools with BMC AMI Security and standardizing controls across DIR, Texas CPA, and Atos-managed environments. This reduces risk and helps agencies comply with statewide security and audit requirements.",
+    "slide_numbers": [
+      3,
+      4,
+      6,
+      9,
+      11,
+      12,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 3,
+    "use_case_title": "Mainframe Operations Automation and Cost Optimization with AMI Ops",
+    "description": "Automate and optimize mainframe operations using BMC AMI Ops and AMI Ops Automation to improve performance, capacity utilization, and cost transparency on shared mainframe services. The goal is to \"do more with less\" by reducing manual effort and avoiding unnecessary infrastructure spend.",
+    "slide_numbers": [
+      4,
+      6,
+      9
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 4,
+    "use_case_title": "AI-Driven Mainframe Observability and Anomaly Detection with AMI Ops Insights",
+    "description": "Deploy AMI Ops Insights to provide AI/ML-driven observability for mainframe operations at agencies such as Texas CPA, enabling proactive anomaly detection, faster incident resolution, and continuous performance optimization. This aligns observability investments with the state’s AI and automation priorities.",
+    "slide_numbers": [
+      9,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 5,
+    "use_case_title": "Hybrid Cloud Integration and Mainframe Data Modernization with AMI Cloud, AMI Data, and Control-M",
+    "description": "Use AMI Cloud and AMI Data to integrate mainframe data and services with public cloud platforms like AWS and Azure, enabling modern analytics, DataOps, and governance across agencies. Orchestrate these hybrid workloads end-to-end with Control-M to provide a unified operational view spanning mainframe and cloud environments.",
+    "slide_numbers": [
+      3,
+      4,
+      6,
+      9
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 6,
+    "use_case_title": "Broadcom/CA and IBM Mainframe Toolchain Takeout and Consolidation at DIR",
+    "description": "Consolidate Broadcom/CA and IBM mainframe management tools under the BMC AMI/IZOT suite within DIR and Atos-run environments, simplifying the toolchain and vendor landscape. This takeout reduces licensing and support costs while delivering a more modern, integrated mainframe operations platform.",
+    "slide_numbers": [
+      11,
+      12
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 7,
+    "use_case_title": "Mainframe Storage and Virtual Tape Modernization with AMI Cloud and S3 Storage",
+    "description": "Modernize mainframe storage, virtual tape libraries, and tape management at Texas CPA and DIR (via Atos) by replacing IBM storage and VTL solutions with AMI Cloud-backed, S3-compatible storage architectures. This improves scalability, resilience, and cost efficiency for backup, archival, and recovery workloads on the mainframe.",
+    "slide_numbers": [
+      6,
+      12,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 8,
+    "use_case_title": "Legacy Workload Scheduler Replacement and Standardization on Control-M",
+    "description": "Standardize enterprise workload automation on Control-M across state agencies by displacing legacy schedulers such as Broadcom/CA JobTrac at the Texas Railroad Commission and ActiveBatch at Texas HHS, and by reclaiming Control-M in Accenture-managed environments. This delivers consistent orchestration, governance, and reliability for cross-agency batch and data workflows.",
+    "slide_numbers": [
+      9,
+      11,
+      12,
+      13,
+      14
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 9,
+    "use_case_title": "Control-M SaaS Migration and Onboarding of New SaaS-Orchestrated Workloads",
+    "description": "Migrate existing on-premises Control-M deployments at TxDOT, Texas CPA, and Texas HHS to Control-M SaaS while onboarding new workloads for the Texas Railroad Commission and DIR/HHS. The SaaS model provides cloud-managed upgrades, elastic scaling, and improved support for hybrid cloud job orchestration.",
+    "slide_numbers": [
+      2,
+      3,
+      6,
+      9,
+      14
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 10,
+    "use_case_title": "ITSM Modernization with BMC Helix Integrated with Control-M Workload Orchestration",
+    "description": "Replace ServiceNow with BMC Helix ITSM at DIR and embed Control-M as the standard workload orchestration tool so that incidents, changes, and service requests can automatically trigger and monitor underlying jobs. This creates closed-loop automation between service management and batch or workflow execution.",
+    "slide_numbers": [
+      11
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  },
+  {
+    "id": 11,
+    "use_case_title": "Control-M Workflow Insights and Managed File Transfer Analytics",
+    "description": "Leverage Control-M Workflow Insights together with Managed File Transfer at Texas CPA, TxDOT, and HHS to gain end-to-end visibility, SLA tracking, and performance analytics on critical batch and file-transfer workflows. These insights enable continuous optimization of data delivery and faster detection of bottlenecks or failures.",
+    "slide_numbers": [
+      9,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT"
+  }
+]

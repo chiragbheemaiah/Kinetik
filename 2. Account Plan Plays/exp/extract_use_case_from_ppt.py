@@ -52,8 +52,10 @@ lilypad.configure(
 client = OpenAI()
 model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")
 
+
 class UseCase(BaseModel):
     """Schema for one extracted use case (LLM output)."""
+
     use_case_title: str
     description: str
     slide_numbers: List[int]
@@ -61,6 +63,7 @@ class UseCase(BaseModel):
 
 class UseCaseList(BaseModel):
     """Wrapper so we can parse a list of use cases."""
+
     use_cases: List[UseCase]
 
 
@@ -85,7 +88,8 @@ def extract_ppt_text(ppt_path: Path) -> str:
 
     return "\n\n".join(slide_chunks)
 
-@lilypad.trace(versioning="automatic") 
+
+@lilypad.trace(versioning="automatic")
 def extract_use_cases(system_prompt: str, user_prompt: str):
 
     logger.debug("Initiating Open AI API call.")
@@ -95,13 +99,12 @@ def extract_use_cases(system_prompt: str, user_prompt: str):
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_prompt},
         ],
-        reasoning= {
-            "effort": "high"
-        },
+        reasoning={"effort": "high"},
         text_format=UseCaseList,
     )
     logger.debug("Completed Open AI API call.")
     return response.output_parsed
+
 
 def main() -> None:
     data_dir = Path(os.getenv("DATA_DIR", "data"))
@@ -113,8 +116,8 @@ def main() -> None:
     ppt_path = data_dir / ppt_filename
     logger.debug(f"PPT Path - {ppt_path}")
 
-    output_json = data_dir / os.getenv("OUTPUT_JSON", "use_cases_raw.json")
-    logger.debug(f"Output JSON Path - {output_json}")
+    # output_json = data_dir / os.getenv("OUTPUT_JSON", "use_cases_raw.json")
+    # logger.debug(f"Output JSON Path - {output_json}")
 
     if not ppt_path.exists():
         raise FileNotFoundError(f"Account plan PPT not found: {ppt_path}")
@@ -177,13 +180,28 @@ def main() -> None:
             }
         )
 
-    output_json.parent.mkdir(parents=True, exist_ok=True)
-    with output_json.open("w", encoding="utf-8") as f:
+    ARTIFACTS_PATH = "/home/blitz/Desktop/Kinetik/code/chapter-100-experiments/2. Account Plan Plays/exp/artifacts"
+    output_json = os.path.join(ARTIFACTS_PATH, "use_cases.json")
+
+    logger.debug("Output JSON Path - %s", output_json)
+
+    # Create directory if it does not exist
+    output_dir = os.path.dirname(output_json)
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Write file
+    with open(output_json, "w", encoding="utf-8") as f:
         json.dump(records, f, indent=2, ensure_ascii=False)
 
     logger.debug("Writing completed.")
-
     print(f"Wrote {len(records)} use cases → {output_json}")
+    # output_json.parent.mkdir(parents=True, exist_ok=True)
+    # with output_json.open("w", encoding="utf-8") as f:
+    #     json.dump(records, f, indent=2, ensure_ascii=False)
+
+    # logger.debug("Writing completed.")
+
+    # print(f"Wrote {len(records)} use cases → {output_json}")
 
 
 if __name__ == "__main__":
