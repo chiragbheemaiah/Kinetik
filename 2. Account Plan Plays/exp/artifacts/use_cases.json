@@ -1,12 +1,11 @@
 [
   {
     "id": 1,
-    "use_case_title": "COBOL Mainframe Modernization and Developer Experience Improvement",
-    "description": "The State of Texas is modernizing COBOL-based mainframe applications by addressing mainframe skills gaps with AMI DevX tools and progressively moving applications to other platforms. This improves developer productivity and maintainability of legacy systems and reduces operational risk as agencies like Texas DPS plan to sunset mainframes while preserving critical functionality.",
+    "use_case_title": "Mainframe COBOL Modernization and DevX Improvement",
+    "description": "DIR and multiple agencies modernize aging COBOL-based mainframe applications and mitigate COBOL skills gaps by using tools like AMI DevX and moving selected applications to other platforms. This improves developer productivity, accelerates change delivery on critical systems, and supports long-term mainframe modernization goals.",
     "slide_numbers": [
       3,
       6,
-      9,
       13
     ],
     "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
@@ -14,11 +13,10 @@
   },
   {
     "id": 2,
-    "use_case_title": "Statewide Mainframe and Hybrid Security, Compliance, and Disaster Recovery",
-    "description": "Under DIR mandates for security, resiliency, and disaster recovery, agencies are strengthening cybersecurity across mainframe and hybrid environments by enhancing statewide security services and considering replacements for existing IBM and Broadcom/CA security stacks with solutions such as AMI Security. This helps agencies like the Comptroller of Public Accounts and DIR‑hosted environments meet compliance requirements, protect sensitive data, and improve recoverability for systems including Texas.gov and mainframe-hosted workloads.",
+    "use_case_title": "Mainframe Security, Resiliency, and Disaster Recovery Compliance",
+    "description": "To meet DIR mandates on security, resiliency, and disaster recovery, agencies such as the Texas Comptroller of Public Accounts and DIR-managed mainframe environments replace or augment IBM security solutions with offerings like AMI Security. Strengthening mainframe cybersecurity improves compliance, reduces audit risk, and protects mission-critical state systems.",
     "slide_numbers": [
       3,
-      4,
       6,
       9,
       12,
@@ -29,10 +27,9 @@
   },
   {
     "id": 3,
-    "use_case_title": "Mainframe Operations Observability and Cost Optimization with AMI Ops",
-    "description": "DIR and its customer agencies are targeting better budget optimization and cost transparency for shared mainframe and data center operations by adopting or expanding AMI Ops, AMI Ops Automation, AMI Storage, and AMI Ops Insights. These tools provide observability, automation, and capacity analytics that allow organizations such as the Texas Comptroller of Public Accounts to improve performance, meet SLAs, and \"do more with less\" from the centrally funded Statewide Technology Account.",
+    "use_case_title": "Mainframe Operations Cost Optimization and Performance Insight",
+    "description": "Agencies address budget constraints and the need for cost transparency by adopting AMI Ops, AMI Ops Automation, AMI Storage, and AMI Ops Insights for mainframe monitoring and automation. These tools help them do more with less by optimizing capacity, automating routine operations, and improving visibility into performance and resource consumption.",
     "slide_numbers": [
-      4,
       6,
       9,
       15
@@ -42,11 +39,10 @@
   },
   {
     "id": 4,
-    "use_case_title": "Hybrid Cloud Integration of Mainframe Workloads and Data",
-    "description": "Texas agencies are integrating legacy mainframe platforms with public clouds such as AWS and Azure using AMI Cloud, AMI Data, Control‑M SaaS, and NTT Data’s Public Cloud Manager. This hybrid approach modernizes mainframe-based services, enables DataOps and orchestration across on‑premise and cloud environments, and preserves system-of-record stability while supporting new cloud-native applications and analytics.",
+    "use_case_title": "Hybrid Cloud–Mainframe Integration for Digital Services",
+    "description": "State agencies modernize legacy systems and enhance digital service delivery for over 30 million residents by integrating mainframe data and processing with applications running on AWS and Azure, using capabilities such as AMI Cloud, AMI Data, and Control-M SaaS. This hybrid approach preserves mainframe systems of record while enabling more agile, cloud-based citizen services and unified workload visibility.",
     "slide_numbers": [
       3,
-      4,
       6,
       9
     ],
@@ -55,25 +51,23 @@
   },
   {
     "id": 5,
-    "use_case_title": "Enterprise Workload Automation and Orchestration with Control‑M",
-    "description": "Multiple agencies (including TxDOT, the Comptroller of Public Accounts, HHS, the Railroad Commission, and DIR) are standardizing and modernizing batch, application, and file-transfer workflows by expanding use of Control‑M, migrating to Control‑M SaaS, and replacing legacy schedulers such as Broadcom/CA Job Trac and ActiveBatch. Control‑M and its Workflow Insights add‑on provide a unified, cross‑platform view of jobs and MFT flows, improving reliability, SLA management, troubleshooting, and operational efficiency across agency portfolios.",
+    "use_case_title": "Enterprise Workload Automation Standardization with Control-M SaaS",
+    "description": "Texas agencies including TxDOT, the Comptroller of Public Accounts, Health and Human Services, the Railroad Commission, and DIR-run HHS systems replace disparate schedulers such as JobTrac and ActiveBatch and migrate existing Control-M deployments to Control-M SaaS. Control-M orchestrates critical application workloads—such as TxDOT’s PeopleSoft processes and HHSC’s CAPS application—improving reliability of batch and data pipelines, simplifying cross-platform orchestration, and providing a unified operational view.",
     "slide_numbers": [
       6,
       9,
       12,
       13,
-      14,
-      15
+      14
     ],
     "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
     "source": "Account Plan PPT"
   },
   {
     "id": 6,
-    "use_case_title": "Mainframe Virtual Tape Library Modernization and Cloud Storage Offload",
-    "description": "The Texas Comptroller of Public Accounts and DIR-managed mainframe environments are evaluating replacement of IBM virtual tape library and tape management solutions with AMI Cloud–based VTL integrated with Dell or other S3-compatible storage, operated in partnership with ATOS for DIR’s mainframe. This modernizes backup and archival by reducing mainframe storage costs, improving disaster recovery flexibility, and enabling DIR to provide scalable, cloud-backed tape services to agencies such as HHS and the Railroad Commission.",
+    "use_case_title": "Cloud-Based Virtual Tape Library Modernization for Mainframe Backup",
+    "description": "The Texas Comptroller of Public Accounts and DIR-managed agencies such as Health and Human Services and the Railroad Commission replace IBM virtual tape libraries and tape management with AMI Cloud VTL and ATOS-hosted VTL solutions that leverage S3-compatible storage. This modernizes mainframe backup and archival, improving disaster recovery resilience while reducing storage and infrastructure costs.",
     "slide_numbers": [
-      6,
       12,
       15
     ],
@@ -82,12 +76,10 @@
   },
   {
     "id": 7,
-    "use_case_title": "Cloud-based Digital Government Services for Texas Residents",
-    "description": "DIR is enhancing digital service delivery for over 30 million residents by modernizing Texas.gov operations and other citizen-facing applications and running them on scalable cloud platforms such as AWS and Azure, supported by shared telecommunications, security, and application infrastructure. This statewide transformation of government IT services improves availability, performance, and reach of online government services while leveraging centralized investments from the Statewide Technology Account.",
+    "use_case_title": "Batch and File-Transfer Observability with Control-M Workflow Insights",
+    "description": "Agencies such as the Texas Comptroller of Public Accounts, TxDOT, and Health and Human Services extend their managed file transfer environments by adding Control-M Workflow Insights. This provides deeper analytics and visibility into end-to-end workflows, enabling proactive issue detection, SLA management, and optimization of critical batch and data-movement processes.",
     "slide_numbers": [
-      3,
-      4,
-      9
+      15
     ],
     "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
     "source": "Account Plan PPT"
