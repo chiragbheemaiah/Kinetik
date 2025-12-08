@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "use_case_title": "COBOL Mainframe Modernization and Developer Experience Improvement",
+    "description": "The State of Texas is modernizing COBOL-based mainframe applications by addressing mainframe skills gaps with AMI DevX tools and progressively moving applications to other platforms. This improves developer productivity and maintainability of legacy systems and reduces operational risk as agencies like Texas DPS plan to sunset mainframes while preserving critical functionality.",
+    "slide_numbers": [
+      3,
+      6,
+      9,
+      13
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 2,
+    "use_case_title": "Statewide Mainframe and Hybrid Security, Compliance, and Disaster Recovery",
+    "description": "Under DIR mandates for security, resiliency, and disaster recovery, agencies are strengthening cybersecurity across mainframe and hybrid environments by enhancing statewide security services and considering replacements for existing IBM and Broadcom/CA security stacks with solutions such as AMI Security. This helps agencies like the Comptroller of Public Accounts and DIR‑hosted environments meet compliance requirements, protect sensitive data, and improve recoverability for systems including Texas.gov and mainframe-hosted workloads.",
+    "slide_numbers": [
+      3,
+      4,
+      6,
+      9,
+      12,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 3,
+    "use_case_title": "Mainframe Operations Observability and Cost Optimization with AMI Ops",
+    "description": "DIR and its customer agencies are targeting better budget optimization and cost transparency for shared mainframe and data center operations by adopting or expanding AMI Ops, AMI Ops Automation, AMI Storage, and AMI Ops Insights. These tools provide observability, automation, and capacity analytics that allow organizations such as the Texas Comptroller of Public Accounts to improve performance, meet SLAs, and \"do more with less\" from the centrally funded Statewide Technology Account.",
+    "slide_numbers": [
+      4,
+      6,
+      9,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 4,
+    "use_case_title": "Hybrid Cloud Integration of Mainframe Workloads and Data",
+    "description": "Texas agencies are integrating legacy mainframe platforms with public clouds such as AWS and Azure using AMI Cloud, AMI Data, Control‑M SaaS, and NTT Data’s Public Cloud Manager. This hybrid approach modernizes mainframe-based services, enables DataOps and orchestration across on‑premise and cloud environments, and preserves system-of-record stability while supporting new cloud-native applications and analytics.",
+    "slide_numbers": [
+      3,
+      4,
+      6,
+      9
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 5,
+    "use_case_title": "Enterprise Workload Automation and Orchestration with Control‑M",
+    "description": "Multiple agencies (including TxDOT, the Comptroller of Public Accounts, HHS, the Railroad Commission, and DIR) are standardizing and modernizing batch, application, and file-transfer workflows by expanding use of Control‑M, migrating to Control‑M SaaS, and replacing legacy schedulers such as Broadcom/CA Job Trac and ActiveBatch. Control‑M and its Workflow Insights add‑on provide a unified, cross‑platform view of jobs and MFT flows, improving reliability, SLA management, troubleshooting, and operational efficiency across agency portfolios.",
+    "slide_numbers": [
+      6,
+      9,
+      12,
+      13,
+      14,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 6,
+    "use_case_title": "Mainframe Virtual Tape Library Modernization and Cloud Storage Offload",
+    "description": "The Texas Comptroller of Public Accounts and DIR-managed mainframe environments are evaluating replacement of IBM virtual tape library and tape management solutions with AMI Cloud–based VTL integrated with Dell or other S3-compatible storage, operated in partnership with ATOS for DIR’s mainframe. This modernizes backup and archival by reducing mainframe storage costs, improving disaster recovery flexibility, and enabling DIR to provide scalable, cloud-backed tape services to agencies such as HHS and the Railroad Commission.",
+    "slide_numbers": [
+      6,
+      12,
+      15
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT",
+    "chessboard_row": "Infrastructure & Operations"
+  },
+  {
+    "id": 7,
+    "use_case_title": "Cloud-based Digital Government Services for Texas Residents",
+    "description": "DIR is enhancing digital service delivery for over 30 million residents by modernizing Texas.gov operations and other citizen-facing applications and running them on scalable cloud platforms such as AWS and Azure, supported by shared telecommunications, security, and application infrastructure. This statewide transformation of government IT services improves availability, performance, and reach of online government services while leveraging centralized investments from the Statewide Technology Account.",
+    "slide_numbers": [
+      3,
+      4,
+      9
+    ],
+    "ppt_source_file": "FY26 State of Texas 10X Mindset - Jeff Ebbrecht AM 08292025.pptx",
+    "source": "Account Plan PPT",
+    "chessboard_row": "Infrastructure & Operations"
+  }
+]

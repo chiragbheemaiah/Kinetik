@@ -175,15 +175,21 @@ def main() -> None:
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
+            reasoning={"effort": "high"},
             text_format=ThemeAssignments,
         )
     except Exception as e:
-        logger.error("Open AI call to classify use cases into taxonomy failed!")
+        logger.error(
+            f"Open AI call to classify use cases into taxonomy failed! - Error: {e}"
+        )
         return
 
-    parsed: ThemeAssignments = response.output_parsed
+    parsed: ThemeAssignments | None = response.output_parsed
 
     # Build lookup {id -> ThemeAssignment}
+    if not parsed:
+        return
+
     theme_by_id = {a.id: a for a in parsed.assignments}
 
     # Merge themes back into the original records
