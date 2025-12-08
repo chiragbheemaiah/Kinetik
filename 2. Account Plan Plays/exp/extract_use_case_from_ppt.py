@@ -22,12 +22,14 @@ import os
 import math
 import logging
 from pathlib import Path
-from typing import Any, List, Optional
+from typing import List, Optional
 
 import lilypad
 from openai import OpenAI
 from pydantic import BaseModel
 from pptx import Presentation
+from langsmith.run_helpers import traceable
+
 
 # -------------------------------------------------------------------
 # Logging setup
@@ -87,9 +89,14 @@ class RerankingModel(BaseModel):
     relevance_reasoning: str
 
 
+class QueryList(BaseModel):
+    queries: List[str]
+
+
 # -------------------------------------------------------------------
 # PPT text extraction
 # -------------------------------------------------------------------
+@traceable(name="extract_ppt_text")
 def extract_ppt_text(ppt_path: Path) -> List[str]:
     """
     Flatten PPT text slide-by-slide into a string.
@@ -138,6 +145,7 @@ class EmbeddingSearch:
             return 0.0
         return dot / (math.sqrt(norm1) * math.sqrt(norm2))
 
+    @traceable(name="embedding_build_index")
     def build_index(self) -> None:
         """
         Calls the embeddings API once for all documents and stores the vectors.
@@ -158,6 +166,7 @@ class EmbeddingSearch:
         else:
             logger.warning("No embeddings returned from API")
 
+    @traceable(name="embedding_search")
     def search(self, query: str, top_n: int = 5) -> dict:
         """
         Returns top_n most similar documents for the query.
@@ -211,6 +220,7 @@ class EmbeddingSearch:
 # -------------------------------------------------------------------
 # Simple OpenAI call for reranking scores
 # -------------------------------------------------------------------
+@traceable(name="openai_rerank")
 def openai_rerank(model: str, prompt: str) -> RerankingModel | None:
     """
     Call OpenAI with a prompt that is supposed to return a single number along with reasoning as to why the document is relevant.
@@ -224,36 +234,46 @@ def openai_rerank(model: str, prompt: str) -> RerankingModel | None:
         if not rerank_relevance:
             return None
         logger.debug(
-            f"Returned relevance score - {rerank_relevance.score}, with reasoning - {rerank_relevance.relevance_reasoning}"
+            "Returned relevance score - %s, with reasoning - %s",
+            rerank_relevance.score,
+            rerank_relevance.relevance_reasoning,
         )
         return rerank_relevance
     except Exception as e:
-        logger.error("openai_call failed: %s", e)
+        logger.error("openai_rerank failed: %s", e)
         return None
 
 
+@traceable(name="openai_multi_query_generator")
 def openai_multi_query_generator(model: str, prompt: str) -> list[str]:
-    """Call OpenAI to generate multiple queries for the a given prompt"""
+    """Call OpenAI to generate multiple queries for the a given prompt."""
     try:
-        response = client.responses.create(model=model, input=prompt)
-        query_response = response.output_text
-        queries = json.loads(query_response)
-        logger.debug(f"Generated query: {queries}")
-        return queries["queries"]
+        response = client.responses.parse(
+            model=model,
+            input=prompt,
+            text_format=QueryList,
+        )
+        query_obj: QueryList | None = response.output_parsed
+        if not query_obj:
+            logger.error("No queries parsed from OpenAI response")
+            return []
+        logger.debug("Generated queries: %s", query_obj.queries)
+        return query_obj.queries
 
     except Exception as e:
-        logger.error("Open AI call failed: %s", e)
+        logger.error("openai_multi_query_generator failed: %s", e)
         return []
 
 
 # -------------------------------------------------------------------
 # LLM-based reranking
 # -------------------------------------------------------------------
+@traceable(name="llm_rerank")
 def llm_rerank(
     query: str,
     candidates: list[dict],
     model: str = RERANK_MODEL,
-    thresh: float = 5.0,
+    thresh: float = 2.0,
 ) -> List[dict] | None:
     """
     Rerank candidate slides using an LLM. Each candidate is a dict:
@@ -278,7 +298,7 @@ def llm_rerank(
         {slide_text}
 
         Rate how relevant this slide is to the query from 1 (irrelevant)
-        to 10 (highly relevant) Add the reasoning as to why this document is relevant to the query as well.
+        to 10 (highly relevant). Add the reasoning as to why this document is relevant to the query as well.
         """.strip()
 
         relevance = openai_rerank(model, prompt)
@@ -309,6 +329,7 @@ def llm_rerank(
 # -------------------------------------------------------------------
 # LLM use-case extraction
 # -------------------------------------------------------------------
+@traceable(name="extract_use_cases")
 @lilypad.trace(versioning="automatic")
 def extract_use_cases(system_prompt: str, user_prompt: str) -> Optional[UseCaseList]:
     logger.debug("Initiating OpenAI API call for use-case extraction.")
@@ -329,16 +350,18 @@ def extract_use_cases(system_prompt: str, user_prompt: str) -> Optional[UseCaseL
         return None
 
 
+@traceable(name="retrieval_reranking_pipeline")
 def retrieval_reranking_pipeline(
-    retrieval_query, embed_search: EmbeddingSearch, top_n: int = 5
+    retrieval_query: str, embed_search: EmbeddingSearch, top_n: int = 5
 ) -> list[dict] | None:
-    # Retrieve a reasonably large candidate set (e.g., 80% of slides, min 5, max all)
-    TOP_N = min(len(embed_search.documents), top_n)
-    retrievals = embed_search.search(retrieval_query, top_n=TOP_N)
+    # Retrieve a reasonably large candidate set (e.g., 80 percent of slides, min 5, max all)
+    top_n = min(len(embed_search.documents), top_n)
+
+    retrievals = embed_search.search(retrieval_query, top_n=top_n)
     candidates = retrievals["documents"]
 
     logger.debug("Embedding retrieval returned %d candidates", len(candidates))
-    logger.debug(f"The candidates are: {candidates}")
+    logger.debug("The candidates are: %s", candidates)
 
     # 2) LLM reranking
     logger.info("Performing LLM-based reranking")
@@ -353,6 +376,7 @@ def retrieval_reranking_pipeline(
 # -------------------------------------------------------------------
 # Main pipeline
 # -------------------------------------------------------------------
+@traceable(name="extract_use_cases_from_ppt_main")
 def main() -> None:
     data_dir = Path(os.getenv("DATA_DIR", "data"))
     logger.debug("Data Path - %s", data_dir)
@@ -393,29 +417,30 @@ def main() -> None:
         """
 
     relevant_documents = set()
-    query_generation_prompt = (
-        f"Given the retrieval prompt: '{retrieval_query}', generate "
-        f"{MULTI_QUERY_CNT} alternative search queries. Each must preserve the "
-        "meaning of the original prompt while varying phrasing and including all "
-        "major subject angles. Output valid JSON only, using the schema:\n"
-        "{\n"
-        '  "queries": ["query1", "query2", ...]\n'
-        "}\n"
-        "Do not include anything outside the JSON object."
-    )
+    query_generation_prompt = f"""
+        Generate {MULTI_QUERY_CNT} alternative search queries based on the retrieval prompt below.
+        The meaning must stay the same but the phrasing should vary. Cover all major subject angles.
+        Return ONLY a JSON object that matches this schema:
+        {{
+          "queries": [string, string, ...]
+        }}
 
-    retrieval_queries: list[str] = openai_multi_query_generator(
+        Retrieval prompt:
+        {retrieval_query}
+        """.strip()
+
+    retrieval_queries: List[str] = openai_multi_query_generator(
         QUERY_GENERATION_MODEL, query_generation_prompt
     )
 
     retrieval_queries.append(retrieval_query)
     for retrieval_query in retrieval_queries:
         # Retrieve relevant document indexes
-        retrieved_docs = retrieval_reranking_pipeline(retrieval_query, embed_search)
+        retrieved_docs = retrieval_reranking_pipeline(retrieval_query, embed_search, 15)
 
         if not retrieved_docs:
-            logger.error("Relevant documents could not be retrieved. ")
-            return None
+            logger.error("Relevant documents could not be retrieved.")
+            return
         for document in retrieved_docs:
             doc_id = document["slide_id"]
             relevant_documents.add(doc_id)
@@ -429,10 +454,10 @@ def main() -> None:
                 context_doc = retr_doc
                 break
 
-        logger.debug(f"Retrieving document with id - {doc_id - 1}")
+        logger.debug("Retrieving document with id - %s", doc_id - 1)
 
         if context_doc is None:
-            logger.warning(f"No retrieved document found for slide_id={doc_id}")
+            logger.warning("No retrieved document found for slide_id=%s", doc_id)
             continue
 
         document_content = context_doc.get("document", "")
@@ -444,7 +469,7 @@ def main() -> None:
             f"\n\n[REASONING - SLIDE {doc_id}]\n{document_reasoning}"
         )
 
-    logger.debug("Retrieved context length: %d characters - %s", len(context), context)
+    logger.debug("Retrieved context length: %d characters", len(context))
 
     # 3) System + user prompts for extraction
     system_prompt = """You are an expert public-sector solutions architect analyzing an account plan
@@ -535,7 +560,7 @@ def main() -> None:
 
     logger.debug("Writing generated JSON to disk")
 
-    records = []
+    records: List[dict] = []
     for idx, uc in enumerate(parsed.use_cases, start=1):
         records.append(
             {
