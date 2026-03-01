@@ -99,14 +99,10 @@ class ThemeAssignments(BaseModel):
 
 
 def main() -> None:
-    # input_path = Path(os.getenv("INPUT_JSON", "data/use_cases_raw.json"))
-    # output_path = Path(os.getenv("OUTPUT_JSON", "data/use_cases_with_themes.json"))
-
     ARTIFACTS_PATH = Path(
-        "/home/blitz/Desktop/Kinetik/code/chapter-100-experiments/2. Account Plan Plays/exp/artifacts"
+        os.getenv("ARTIFACTS_DIR", str(Path(__file__).parent / "artifacts"))
     )
-    INPUT_FILENAME = "use_cases.json"
-    input_path = ARTIFACTS_PATH / INPUT_FILENAME
+    input_path = Path(os.getenv("INPUT_JSON", str(ARTIFACTS_PATH / "use_cases.json")))
 
     model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")
 
@@ -200,8 +196,7 @@ def main() -> None:
             uc["tier_1"] = assignment.tier_1
             uc["tier_2"] = assignment.tier_2
 
-    OUTPUT_FILENAME = "taxonomy.json"
-    output_path = ARTIFACTS_PATH / OUTPUT_FILENAME
+    output_path = Path(os.getenv("TAXONOMY_JSON", str(ARTIFACTS_PATH / "taxonomy.json")))
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with output_path.open("w", encoding="utf-8") as f:
         json.dump(use_cases, f, indent=2, ensure_ascii=False)
