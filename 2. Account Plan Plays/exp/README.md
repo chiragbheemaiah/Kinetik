@@ -13,8 +13,8 @@ PPTX → python-pptx (text only)
      → Results merged & deduplicated
      → LLM reranker scores each slide + explains relevance in natural language
      → Top slides → GPT-4o → structured use_cases.json
-     → map_chessboard.py → chessboard.json
      → map_innovation_themes.py → taxonomy.json
+     → map_chessboard.py → chessboard.json
 ```
 
 ### Key Design Decisions
@@ -23,7 +23,7 @@ PPTX → python-pptx (text only)
 | **Multi-query** | LLM generates 3 paraphrased variants of the retrieval query to improve slide recall |
 | **Reasoned reranker** | Returns `{score: float, relevance_reasoning: str}` — more reliable than score-only |
 | **Tracing** | Lilypad (LLM calls) + LangSmith (`@traceable` decorators) |
-| **Full pipeline** | Only branch with all 3 scripts + `runner.sh` orchestrator |
+| **Full pipeline** | All 3 scripts + `runner.sh` orchestrator (shared across all branches) |
 
 ---
 
@@ -40,8 +40,8 @@ source setup_env_var.sh
 ```bash
 # Step by step
 uv run extract_use_case_from_ppt.py   # → artifacts/use_cases.json
-uv run map_chessboard.py              # → artifacts/chessboard.json
 uv run map_innovation_themes.py       # → artifacts/taxonomy.json
+uv run map_chessboard.py              # → artifacts/chessboard.json
 
 # Or full pipeline
 bash runner.sh

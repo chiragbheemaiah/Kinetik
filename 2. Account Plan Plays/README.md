@@ -22,9 +22,7 @@ uv sync
 | Branch | Extra dependency vs. base |
 |---|---|
 | `bm25` | `rank-bm25` |
-| `multi-query-rag` | `langsmith` |
-| `multi-query-rag-with-relevance-reasoning` | `langsmith` |
-| `base_implementation`, `rag_embedding_implementation`, `ppt_processing_llm` | *(base only)* |
+| all other branches | *(base: openai, pydantic, python-pptx, lilypad, langsmith)* |
 
 ---
 
@@ -122,9 +120,9 @@ uv run extract_use_case_from_ppt.py
 ---
 
 ### `multi-query-rag-with-relevance-reasoning`
-**Approach:** Extends the embedding approach with two improvements: (1) an LLM generates 3 reformulated versions of the retrieval query, each is used independently to retrieve slides, results are merged and deduplicated; (2) the reranker returns both a relevance score and a natural-language reasoning string explaining why each slide is or isn't relevant. Also includes the full downstream pipeline: `map_chessboard.py`, `map_innovation_themes.py`, and a `runner.sh` orchestration script.
+**Approach:** Extends the embedding approach with two improvements: (1) an LLM generates 3 reformulated versions of the retrieval query, each is used independently to retrieve slides, results are merged and deduplicated; (2) the reranker returns both a relevance score and a natural-language reasoning string explaining why each slide is or isn't relevant.
 
-**Strengths:** Best retrieval architecture. Multi-query covers more of the slide deck. Reasoned reranker is more reliable than score-only. Full end-to-end pipeline available.  
+**Strengths:** Best retrieval architecture. Multi-query covers more of the slide deck. Reasoned reranker is more reliable than score-only.  
 **Weaknesses:** Most expensive to run (multiple LLM + embedding calls). Still text-only PPT parsing.
 
 **Run (step by step):**
@@ -134,8 +132,8 @@ cd exp/
 uv sync
 source setup_env_var.sh
 uv run extract_use_case_from_ppt.py   # → artifacts/use_cases.json
-uv run map_chessboard.py              # → artifacts/chessboard.json
 uv run map_innovation_themes.py       # → artifacts/taxonomy.json
+uv run map_chessboard.py              # → artifacts/chessboard.json
 ```
 
 **Run (full pipeline):**
@@ -161,7 +159,7 @@ bash runner.sh
 **Approach:** Converts the PPTX to PDF using LibreOffice, uploads the PDF to the OpenAI Files API, then prompts `gpt-4o-mini` to read the PDF slide-by-slide and produce a structured text representation — including summaries of any images, charts, or tables it sees. The resulting slide strings are then sent to the main model for use case extraction.
 
 **Strengths:** Only approach that sees visual content (charts, tables, diagrams). Produces 20 use cases including per-agency breakdowns that are entirely invisible to text-only parsers. Highest coverage.  
-**Weaknesses:** Requires LibreOffice installed on the machine. Two-step LLM call adds latency. No downstream pipeline scripts (extraction only).
+**Weaknesses:** Requires LibreOffice installed on the machine. Two-step LLM call adds latency.
 
 **System dependency:**
 ```bash
@@ -170,12 +168,16 @@ sudo apt install libreoffice   # Ubuntu/Debian
 brew install --cask libreoffice  # macOS
 ```
 
-**Run:**
+**Run (full pipeline):**
 ```bash
 git checkout ppt_processing_llm
 cd exp/
-uv sync
-source setup_env_var.sh
+uv sync && source setup_env_var.sh
+bash runner.sh
+```
+
+**Run (extract only):**
+```bash
 uv run extract_use_case_from_ppt.py
 ```
 
