@@ -140,10 +140,9 @@ def classify_use_cases_with_llm(
 )
 def main() -> None:
     ARTIFACTS_PATH = Path(
-        "/home/blitz/Desktop/Kinetik/code/chapter-100-experiments/2. Account Plan Plays/exp/artifacts"
+        os.getenv("ARTIFACTS_DIR", str(Path(__file__).parent / "artifacts"))
     )
-    INPUT_FILENAME = "use_cases.json"
-    input_path = ARTIFACTS_PATH / INPUT_FILENAME
+    input_path = Path(os.getenv("INPUT_JSON", str(ARTIFACTS_PATH / "use_cases.json")))
 
     model_name = os.getenv("OPENAI_MODEL", "gpt-4o-2024-08-06")
 
@@ -208,8 +207,7 @@ def main() -> None:
         if uc_id in chessboard_by_id:
             uc["chessboard_row"] = chessboard_by_id[uc_id]
 
-    OUTPUT_FILENAME = "chessboard.json"
-    output_path = ARTIFACTS_PATH / OUTPUT_FILENAME
+    output_path = Path(os.getenv("CHESSBOARD_JSON", str(ARTIFACTS_PATH / "chessboard.json")))
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with output_path.open("w", encoding="utf-8") as f:
